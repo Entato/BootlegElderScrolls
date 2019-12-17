@@ -1,57 +1,19 @@
-public class Hero{
+public class Archer extends Hero{
     //fields
-    private int health;
-    private int defence;
-    private int magicResist;
-    private int evasion;
-    private int speed;
-    private String name;
+    private int poison;
     
-    //Hero constructor
-    public Hero(int health, int defence, int magicResist, int evasion, int speed, String name){
-        this.health = health;
-        this.defence = defence;
-        this.magicResist = magicResist;
-        this.evasion = evasion;
-        this.speed = speed;
-        this.name = name;
+    //constructor
+    public Archer(int health, int defence, int magicResist, int evasion, int speed, String name, int arrows){
+        super(health, defence, magicResist, evasion, speed, name);
+        this.poison = poison;
     }
-    //getters and setters
-    public int getHealth(){
-        return this.health;
-    }
-    public void setHealth(int health){
-        this.health = health;
-    }
-    public int getDefence(){
-        return this.defence;
-    }
-    public String getName(){
-        return this.name;
-    }
-    
-    //attack method
-    public void attack(Hero hero, int damage){
-        int trueDamage;
-        trueDamage = damage - defence/2;
-        if(trueDamage <= 0){
-            trueDamage = 1;
-        }
-        System.out.println(this.name + " did " + trueDamage + " damage to " + hero.getName());
-        hero.setHealth(hero.getHealth() - trueDamage);
-    }
+
     //use item
     public void useItem(Item item){
-        switch(item.getItemType()){
-            case HEALING:
-                this.health += 250;
-                break;
-            case DEFENCE:
-                this.defence += 50;
+        super.useItem(item);
+
+        if (item.getItemType() == Item.ItemType.ATTACK) {
+            poison += 20;
         }
     }
-    
-   
-    
-    
 }
