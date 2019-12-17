@@ -5,15 +5,17 @@ public class Item{
         ATTACK,
         DEFENCE;
     }
+
     private ItemType itemType;
-   
-   public Item(ItemType itemType){
-       switch(itemType){
-           case HEALING:
-               break;
-       }
-   }
-   public void useItem(){
-      
-   }
+
+    public Item(ItemType itemType){
+       this.itemType = itemType;
+    }
+    public ItemType getItemType() {
+        return itemType;
+    }
+
+
+
+
 }
