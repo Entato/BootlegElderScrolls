@@ -18,7 +18,7 @@ public class Healer extends Hero{
         if(item.getItemType() == Item.ItemType.ATTACK){
             healing += 50;
         }
-        else if(item.getItemType() == Item.ItemType.ATTACK){
+        else if(item.getItemType() == Item.ItemType.MANA){
             mana += 50;
         }
     }
