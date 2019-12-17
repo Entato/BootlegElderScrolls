@@ -1,0 +1,11 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - Battle",
+            "request": "launch",
+            "mainClass": "Battle",
+            "projectName": "BootlegElderScrolls_f24a2dd"
+        }
+    ]
+}

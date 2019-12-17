@@ -4,11 +4,10 @@ public class Knight extends Hero{
     private int honour;
     
     //constructor
-    public Knight(int health, int defence, int magicResist, int evasion, int speed, String name, int armour,
-                  int honour){
-        super(health, defence, magicResist, evasion, speed, name);
-        this.armour = armour;
-        this.honour = honour;
+    public Knight(String name){
+        super(200, 999999, 999999, 100, 100, name);
+        this.armour = 999999;
+        this.honour = 999999;
     }
     //use item
     public void useItem(Item item){
