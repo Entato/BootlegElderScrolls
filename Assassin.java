@@ -3,9 +3,9 @@ public class Assassin extends Hero{
     private int lethality;
     
     //constructor
-    public Assassin(int health, int defence, int magicResist, int evasion, int speed, String name, int lethality){
-        super(health, defence, magicResist, evasion, speed, name);
-        this.lethality = lethality;
+    public Assassin(String name){
+        super(100, 50, 50, 10, 50, name);
+        this.lethality = 50;
     }
 
     //useItem
