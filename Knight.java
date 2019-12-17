@@ -10,4 +10,14 @@ public class Knight extends Hero{
         this.armour = armour;
         this.honour = honour;
     }
+    //use item
+    public void useItem(Item item){
+        super.useItem(item);
+
+        if(item.getItemType() == Item.ItemType.ATTACK){
+            this.honour += 50;
+        }
+    }
+
+
 }
