@@ -7,6 +7,15 @@ public class Assassin extends Hero{
         super(health, defence, magicResist, evasion, speed, name);
         this.lethality = lethality;
     }
+
+    //useItem
+    public void useItem(Item item){
+        super.useItem(item);
+
+        if (item.getItemType() == Item.ItemType.ATTACK) {
+            this.lethality += 50;
+        }
+    }
    
     
 }
