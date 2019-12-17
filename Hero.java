@@ -34,11 +34,21 @@ public class Hero{
     public void attack(Hero hero, int damage){
         int trueDamage;
         trueDamage = damage - defence/2;
-        if(trueDamage < 0){
-            trueDamage = 0;
+        if(trueDamage <= 0){
+            trueDamage = 1;
         }
         System.out.println(this.name + " did " + trueDamage + " damage to " + hero.getName());
         hero.setHealth(hero.getHealth() - trueDamage);
+    }
+    //use item
+    public void useItem(Item item){
+        switch(item.getItemType()){
+            case HEALING:
+                this.health += 250;
+                break;
+            case DEFENCE:
+                this.defence += 50;
+        }
     }
     
    
