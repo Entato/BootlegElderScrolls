@@ -3,9 +3,9 @@ public class Archer extends Hero{
     private int poison;
     
     //constructor
-    public Archer(int health, int defence, int magicResist, int evasion, int speed, String name, int arrows){
-        super(health, defence, magicResist, evasion, speed, name);
-        this.poison = poison;
+    public Archer(String name){
+        super(100, 50, 50, 10, 50, name);
+        this.poison = 20;
     }
 
     //use item

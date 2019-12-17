@@ -4,11 +4,10 @@ public class Wizard extends Hero{
     private int spellPower;
     
     //constructor
-    public Wizard(int health, int defence, int magicResist, int evasion, int speed, String name, int mana,
-                  int spellPower){
-        super(health, defence, magicResist, evasion, speed, name);
-        this.mana = mana;
-        this.spellPower = spellPower;
+    public Wizard(String name){
+        super(100, 50, 50, 10, 50, name);
+        this.mana = 100;
+        this.spellPower = 75;
     }
 
     public int getMana() {

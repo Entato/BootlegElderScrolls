@@ -4,11 +4,10 @@ public class Healer extends Hero{
     private int mana;
     
     //constructor
-    public Healer(int health, int defence, int magicResist, int evasion, int speed, String name, int healing, 
-                  int mana){
-        super(health, defence, magicResist, evasion, speed, name);
-        this.healing = healing;
-        this.mana = mana;
+    public Healer(String name){
+        super(100, 50, 50, 10, 50, name);
+        this.healing = 50;
+        this.mana = 100;
     }
 
     //get item
