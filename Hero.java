@@ -29,11 +29,11 @@ public class Hero{
     public String getName(){
         return this.name;
     }
-    
+
     //attack method
     public void attack(Hero hero, int damage){
         int trueDamage;
-        trueDamage = damage - defence/2;
+        trueDamage = damage - hero.defence/2;
         if(trueDamage <= 0){
             trueDamage = 1;
         }
@@ -50,8 +50,8 @@ public class Hero{
                 this.defence += 50;
         }
     }
-    
-   
+
+
     
     
 }
