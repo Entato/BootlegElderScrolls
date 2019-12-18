@@ -1,3 +1,5 @@
+package BootlegElderScrolls;
+
 public class Assassin extends Hero{
     //fields
     private int lethality;

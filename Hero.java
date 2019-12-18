@@ -1,3 +1,5 @@
+package BootlegElderScrolls;
+
 public class Hero{
     //fields
     private int health;

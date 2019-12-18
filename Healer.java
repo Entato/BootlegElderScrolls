@@ -1,3 +1,5 @@
+package BootlegElderScrolls;
+
 public class Healer extends Hero{
     //fields
     private int healing;

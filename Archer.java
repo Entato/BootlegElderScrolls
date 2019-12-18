@@ -1,3 +1,5 @@
+package BootlegElderScrolls;
+
 public class Archer extends Hero{
     //fields
     private int poison;

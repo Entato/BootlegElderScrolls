@@ -1,3 +1,5 @@
+package BootlegElderScrolls;
+
 public class Wizard extends Hero{
     //fields
     private int mana;

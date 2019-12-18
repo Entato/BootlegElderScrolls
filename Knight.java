@@ -1,3 +1,5 @@
+package BootlegElderScrolls;
+
 public class Knight extends Hero{
     //fields
     private int armour;

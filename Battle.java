@@ -1,3 +1,5 @@
+package BootlegElderScrolls;
+
 import java.util.Random;
 
 class Battle{
@@ -12,13 +14,13 @@ class Battle{
 
         Hero[] team1 = {hero1, hero2, hero3};
         Hero[] team2 = {hero4, hero5, hero6};
-        /*
+
         Random random = new Random(3);
         for (int i = 0; i < 3; i++){
             int rand = random.nextInt(3);
             team1[i].attack(team2[rand], 500);
         }
-        */
+
         Item item = new Item(Item.ItemType.HEALING);
 
 
