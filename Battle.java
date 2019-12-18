@@ -16,6 +16,7 @@ class Battle{
             team1[i] = selectHero();
             team2[i] = AIPick(i);
         }
+        action(team1, team2);
 
     }
     public static Hero selectHero(){
@@ -77,6 +78,29 @@ class Battle{
         }
 
         return hero;
+    }
+
+    public static void action(Hero[] team1, Hero[] team2){
+        Scanner ints = new Scanner(System.in);
+        for(int i = 0; i < 3; i++){
+            System.out.println("What would you like to do with " + team1[i].getName() + "?");
+            String action = reader.nextLine();
+
+            if(action.equalsIgnoreCase("Guard")){
+                if(Guard.containsGuardable(team1[i])){
+                    System.out.println("You cannot guard twice in a row!");
+                    i--;
+                    continue;
+                }
+            }
+            else if(action.equalsIgnoreCase("Attack")){
+                System.out.println("Who do you want to attack?");
+                int x = ints.nextInt();
+
+            }
+
+        }
+
     }
 
 
