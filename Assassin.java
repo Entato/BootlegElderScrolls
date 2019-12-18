@@ -6,7 +6,7 @@ public class Assassin extends Hero{
     
     //constructor
     public Assassin(String name){
-        super(100, 50, 50, 10, 50, name);
+        super(100, 100, 50, 50, 10, 50, name);
         this.lethality = 50;
     }
 

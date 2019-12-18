@@ -7,9 +7,9 @@ public class Knight extends Hero{
     
     //constructor
     public Knight(String name){
-        super(200, 999999, 999999, 100, 100, name);
-        this.armour = 999999;
-        this.honour = 999999;
+        super(100, 200, 100, 25, 10, 50, name);
+        this.armour = 50;
+        this.honour = 0;
     }
     //use item
     public void useItem(Item item){

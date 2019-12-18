@@ -6,7 +6,7 @@ public class Archer extends Hero{
     
     //constructor
     public Archer(String name){
-        super(100, 50, 50, 10, 50, name);
+        super(100, 100, 50, 50, 10, 50, name);
         this.poison = 20;
     }
 
