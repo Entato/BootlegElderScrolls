@@ -36,6 +36,10 @@ public class Hero{
         return magicResist;
     }
 
+    public int getSpeed(){
+        return speed;
+    }
+
     //attack method
     public void attack(Hero hero, int damage){
         int trueDamage;
