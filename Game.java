@@ -16,7 +16,7 @@ public class Game {
             if(attacker.getSpeed() > attackList.get(i)[0].getSpeed()){
                 attackList.add(i, heroes);
             }
-            else if(i = attackList.size()-1){
+            else if(i == attackList.size()-1){
                 attackList.add(heroes);
             }
         }

@@ -41,9 +41,9 @@ public class Hero{
     }
 
     //attack method
-    public void attack(Hero hero, int damage){
+    public void attack(Hero hero){
         int trueDamage;
-        trueDamage = damage - hero.defence/2;
+        trueDamage = this.attack - hero.defence/2;
         if(trueDamage <= 0){
             trueDamage = 1;
         }
@@ -59,6 +59,10 @@ public class Hero{
             case DEFENCE:
                 this.defence += 50;
         }
+    }
+
+    public String toString(){
+        return "Hero Type: " + this.getClass() + "\nHero Name: " + this.name;
     }
 
 

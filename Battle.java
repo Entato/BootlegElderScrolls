@@ -7,6 +7,7 @@ import java.util.*;
 class Battle{
     static Scanner reader = new Scanner(System.in);
     public static void main(String[] args){
+        
         Hero[] team1 = new Hero[3];
         Hero[] team2 = new Hero[3];
 
@@ -15,6 +16,7 @@ class Battle{
         for(int i = 0; i < 3; i++){
             team1[i] = selectHero();
             team2[i] = AIPick(i);
+            System.out.println(team2[i].toString());
         }
         action(team1, team2);
 
@@ -96,7 +98,7 @@ class Battle{
             else if(action.equalsIgnoreCase("Attack")){
                 System.out.println("Who do you want to attack?");
                 int x = ints.nextInt();
-
+                Game.addAttack(team1[i], team2[x]);
             }
 
         }
