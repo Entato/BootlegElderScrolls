@@ -11,7 +11,17 @@ public class Game {
         heroes[0] = attacker;
         heroes[1] = defender;
 
-        attackList.add(heroes);
+
+        for(int i = 0; i < attackList.size(); i++){
+            if(attacker.getSpeed() > attackList.get(i)[0].getSpeed()){
+                attackList.add(i, heroes);
+            }
+            else if(i = attackList.size()-1){
+                attackList.add(heroes);
+            }
+        }
+
+        
     }
 
     //clears attack list
