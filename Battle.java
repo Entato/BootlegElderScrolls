@@ -93,12 +93,18 @@ class Battle{
                     System.out.println("You cannot guard twice in a row!");
                     i--;
                     continue;
+                } else {
+                    Guard.addGuardable(team1[i]);
+                    Guard.addImmune(team1[i]);
                 }
             }
             else if(action.equalsIgnoreCase("Attack")){
                 System.out.println("Who do you want to attack?");
                 int x = ints.nextInt();
                 Game.addAttack(team1[i], team2[x]);
+            }
+            else if(action.equalsIgnoreCase("Item")){
+                System.out.println("What item do you want to use");
             }
 
         }
