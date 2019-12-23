@@ -62,7 +62,7 @@ public class Hero{
     }
 
     public String toString(){
-        return "Hero Type: " + this.getClass() + "\nHero Name: " + this.name;
+        return "Hero Type: " + this.getClass() + "\nHero Name: " + this.name + "\nHealth: " + this.health;
     }
 
 

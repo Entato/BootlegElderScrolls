@@ -1,5 +1,6 @@
 package BootlegElderScrolls;
 
+import java.lang.reflect.Array;
 import java.util.*;
 
 
@@ -10,14 +11,16 @@ class Battle{
         
         Hero[] team1 = new Hero[3];
         Hero[] team2 = new Hero[3];
+        ArrayList<Integer> picks = new ArrayList<Integer>();
 
         System.out.println("Choose your heroes");
 
         for(int i = 0; i < 3; i++){
             team1[i] = selectHero();
-            team2[i] = AIPick(i);
+            team2[i] = AIPick(i, picks);
             System.out.println(team2[i].toString());
         }
+        printBattleField(team1, team2);
         action(team1, team2);
 
     }
@@ -64,10 +67,17 @@ class Battle{
         return name;
     }
 
-    public static Hero AIPick(int i){
+    public static Hero AIPick(int i, ArrayList<Integer> picks){
 
         Random rand = new Random();
-        int r = rand.nextInt(5);
+        int r;
+        while(true) {
+            r = rand.nextInt(5);
+            if(!picks.contains(r)){
+                picks.add(r);
+                break;
+            }
+        }
         Hero hero = null;
         String name = "AI " + i;
 
@@ -119,6 +129,17 @@ class Battle{
 
         }
 
+    }
+
+    public static void printBattleField(Hero[] team1, Hero[] team2){
+        System.out.println("Team 1:");
+        for(Hero h : team1){
+            System.out.println(h.toString());
+        }
+        System.out.println("\nTeam 2:");
+        for(Hero h : team2){
+            System.out.println(h.toString());
+        }
     }
 
 
