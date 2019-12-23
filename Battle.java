@@ -22,27 +22,37 @@ class Battle{
 
     }
     public static Hero selectHero(){
-        System.out.println("Select your class");
-        String input = reader.nextLine();
+        boolean valid = false;
         Hero hero = null;
+        while(!valid) {
+            System.out.println("Select your class");
+            String input = reader.nextLine();
 
-        //Switch statement
-        switch(input){
-            case "Wizard":
-                hero = new Wizard(askName());
-                break;
-            case "Archer":
-                hero = new Archer(askName());
-                break;
-            case "Knight":
-                hero = new Knight(askName());
-                break;
-            case "Assassin":
-                hero = new Assassin(askName());
-                break;
-            case "Healer":
-                hero = new Healer(askName());
-                break;
+            //Switch statement
+            switch (input) {
+                case "Wizard":
+                    hero = new Wizard(askName());
+                    valid = true;
+                    break;
+                case "Archer":
+                    hero = new Archer(askName());
+                    valid = true;
+                    break;
+                case "Knight":
+                    hero = new Knight(askName());
+                    valid = true;
+                    break;
+                case "Assassin":
+                    hero = new Assassin(askName());
+                    valid = true;
+                    break;
+                case "Healer":
+                    hero = new Healer(askName());
+                    valid = true;
+                    break;
+                default:
+                    System.out.println("Invalid Name");
+            }
         }
 
         return hero;
