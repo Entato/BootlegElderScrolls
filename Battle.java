@@ -23,6 +23,7 @@ class Battle{
         }
         while(true) {
             System.out.println("\n========================\nIt is now turn " + turn);
+            Guard.clearImmune();
             Game.clearAttacks();
             printBattleField(team1, team2);
             action(team1, team2);
