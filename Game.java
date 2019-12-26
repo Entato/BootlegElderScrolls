@@ -40,6 +40,17 @@ public class Game {
     public static void commitAttacks(){
         for(Hero[] h : attackList){
             h[0].attack(h[1]);
+
+            //if attacker has died, removes that hero's attack
+            if(h[1].getHealth() <= 0){
+                for(Hero[] dead : attackList){
+                    if(dead[0] == h[1]){
+                        attackList.remove(dead);
+                    }
+                }
+            }
+
         }
     }
+
 }

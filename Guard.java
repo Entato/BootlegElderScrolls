@@ -29,4 +29,8 @@ class Guard{
     public static boolean containsUnGuardable(Hero hero){
         return unGuardable.contains(hero);
     }
+
+    public static void clearImmune(){
+        immune.clear();
+    }
 }
