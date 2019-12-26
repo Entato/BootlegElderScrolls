@@ -12,13 +12,20 @@ public class Game {
         heroes[1] = defender;
 
 
-        for(int i = 0; i < attackList.size(); i++){
-            if(attacker.getSpeed() > attackList.get(i)[0].getSpeed()){
-                attackList.add(i, heroes);
+        //slots attack according to speed
+        if(attackList.size() != 0) {
+            for (int i = 0; i < attackList.size(); i++) {
+                if (attacker.getSpeed() > attackList.get(i)[0].getSpeed()) {
+                    attackList.add(i, heroes);
+                    break;
+                } else if (i == attackList.size() - 1) {
+                    attackList.add(heroes);
+                    break;
+                }
             }
-            else if(i == attackList.size()-1){
-                attackList.add(heroes);
-            }
+        }
+        else{
+            attackList.add(heroes);
         }
 
         
@@ -27,5 +34,12 @@ public class Game {
     //clears attack list
     public static void clearAttacks(){
         attackList.clear();
+    }
+
+    //performs the attacks
+    public static void commitAttacks(){
+        for(Hero[] h : attackList){
+            h[0].attack(h[1]);
+        }
     }
 }

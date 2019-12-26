@@ -22,6 +22,7 @@ class Battle{
         }
         printBattleField(team1, team2);
         action(team1, team2);
+        Game.commitAttacks();
 
     }
     public static Hero selectHero(){
@@ -132,7 +133,7 @@ class Battle{
     }
 
     public static void printBattleField(Hero[] team1, Hero[] team2){
-        System.out.println("Team 1:");
+        System.out.println("\nTeam 1:");
         for(Hero h : team1){
             System.out.println(h.toString());
         }
@@ -141,6 +142,8 @@ class Battle{
             System.out.println(h.toString());
         }
     }
+
+
 
 
 }
