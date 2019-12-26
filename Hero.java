@@ -47,8 +47,13 @@ public class Hero{
         if(trueDamage <= 0){
             trueDamage = 1;
         }
-        System.out.println(this.name + " did " + trueDamage + " damage to " + hero.getName());
-        hero.setHealth(hero.getHealth() - trueDamage);
+        if(!Guard.containsImmune(hero)) {
+            System.out.println(this.name + " did " + trueDamage + " damage to " + hero.getName());
+            hero.setHealth(hero.getHealth() - trueDamage);
+        }
+        else{
+            System.out.println(hero.name + " is guarding and is immune to damage!");
+        }
     }
     //use item
     public void useItem(Item item){

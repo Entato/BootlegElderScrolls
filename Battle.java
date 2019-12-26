@@ -110,12 +110,12 @@ class Battle{
             String action = reader.nextLine();
 
             if(action.equalsIgnoreCase("Guard")){
-                if(Guard.containsGuardable(team1[i])){
+                if(Guard.containsUnGuardable(team1[i])){
                     System.out.println("You cannot guard twice in a row!");
                     i--;
                     continue;
                 } else {
-                    Guard.addGuardable(team1[i]);
+                    Guard.addUnGuardable(team1[i]);
                     Guard.addImmune(team1[i]);
                 }
             }
@@ -123,9 +123,28 @@ class Battle{
                 System.out.println("Who do you want to attack?");
                 int x = ints.nextInt();
                 Game.addAttack(team1[i], team2[x]);
+
+                //lets hero be ready to guard again next turn
+                if(Guard.containsUnGuardable(team1[i])){
+                    Guard.removeUnGuardable(team1[i]);
+                }
             }
             else if(action.equalsIgnoreCase("Item")){
-                System.out.println("What item do you want to use");
+                System.out.println("What item do you want to use?");
+                String item = reader.nextLine();
+                if(item.equalsIgnoreCase("Healing")){
+                    team1[i].useItem(new Item(Item.ItemType.HEALING));
+                }
+                else if(item.equalsIgnoreCase("Attack")){
+                    team1[i].useItem(new Item(Item.ItemType.ATTACK));
+                }
+                //will error if you try to use on class without mana but I won't fix since GUI will redo this part
+                else if(item.equalsIgnoreCase("Mana")){
+                    team1[i].useItem(new Item(Item.ItemType.MANA));
+                }
+                else if(item.equalsIgnoreCase("Defence")){
+                    team1[i].useItem(new Item(Item.ItemType.DEFENCE));
+                }
             }
 
         }

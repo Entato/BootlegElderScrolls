@@ -4,29 +4,29 @@ import java.util.ArrayList;
 
 class Guard{
     private static ArrayList<Hero> immune = new ArrayList<Hero>();
-    private static ArrayList<Hero> guardable = new ArrayList<Hero>();
+    private static ArrayList<Hero> unGuardable = new ArrayList<Hero>();
 
     public static void addImmune(Hero hero){
         immune.add(hero);
     }
 
-    public static void addGuardable(Hero hero){
-        guardable.add(hero);
+    public static void addUnGuardable(Hero hero){
+        unGuardable.add(hero);
     }
 
     public static void removeImmune(Hero hero){
         immune.remove(hero);
     }
 
-    public static void removeGuardable(Hero hero){
-        guardable.remove(hero);
+    public static void removeUnGuardable(Hero hero){
+        unGuardable.remove(hero);
     }
 
     public static boolean containsImmune(Hero hero){
         return immune.contains(hero);
     }
 
-    public static boolean containsGuardable(Hero hero){
-        return guardable.contains(hero);
+    public static boolean containsUnGuardable(Hero hero){
+        return unGuardable.contains(hero);
     }
 }
