@@ -38,14 +38,15 @@ public class Game {
 
     //performs the attacks
     public static void commitAttacks(){
-        for(Hero[] h : attackList){
-            h[0].attack(h[1]);
+        for(int i = 0; i < attackList.size(); i++){
+            attackList.get(i)[0].attack(attackList.get(i)[1]);
 
             //if attacker has died, removes that hero's attack
-            if(h[1].getHealth() <= 0){
+            if(attackList.get(i)[1].getHealth() <= 0){
                 for(Hero[] dead : attackList){
-                    if(dead[0] == h[1]){
+                    if(dead[0] == attackList.get(i)[1]){
                         attackList.remove(dead);
+                        break;
                     }
                 }
             }
