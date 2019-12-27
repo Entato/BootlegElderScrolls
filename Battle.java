@@ -196,17 +196,19 @@ class Battle{
 
     public static void checkIfDead(ArrayList<Hero> team1, ArrayList<Hero> team2){
 
-        for(Hero h : team1){
-            if(h.getHealth() <= 0){
-                System.out.println(h.toString() + " has died!");
-                team1.remove(h);
+        for(int i = 0; i < team1.size(); i++){
+            if(team1.get(i).getHealth() <= 0){
+                System.out.println(team1.get(i).getName() + " has died!");
+                team1.remove(team1.get(i));
+                i--;
             }
         }
 
-        for(Hero h : team2){
-            if(h.getHealth() <= 0){
-                System.out.println(h.toString() + " has died!");
-                team2.remove(h);
+        for(int i = 0; i < team2.size(); i++){
+            if(team2.get(i).getHealth() <= 0){
+                System.out.println(team2.get(i).getName() + " has died!");
+                team2.remove(team2.get(i));
+                i--;
             }
         }
 
