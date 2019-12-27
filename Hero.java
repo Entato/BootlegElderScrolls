@@ -24,21 +24,29 @@ public class Hero{
     public int getHealth(){
         return this.health;
     }
+
     public void setHealth(int health){
         this.health = health;
     }
+
     public int getDefence(){
         return this.defence;
     }
+
     public String getName(){
         return this.name;
     }
+
     public int getMagicResist() {
         return magicResist;
     }
 
     public int getSpeed(){
         return speed;
+    }
+
+    public int getEvasion(){
+        return evasion;
     }
 
     //attack method
