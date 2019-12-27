@@ -165,6 +165,9 @@ class Battle{
         int rand;
         //randomly picks hero to attack
         for(int i = 0; i < AI.size(); i++){
+            if (AI.get(i).getHealth() <= 0){
+                continue;
+            }
             while(true){
                 rand = random.nextInt(player.size());
                 if(!selected.contains(rand)){
