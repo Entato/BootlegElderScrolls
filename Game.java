@@ -39,6 +39,8 @@ public class Game {
     public static void commitAttacks(){
         for(int i = 0; i < attackList.size(); i++){
             if(Guard.containsImmune(attackList.get(i)[1])){
+                System.out.println(attackList.get(i)[1].getName() + " is guarding and is immune to " +
+                        attackList.get(i)[0].getName() + "'s attack!");
                 continue;
             } else if (evade(attackList.get(i)[1])){
                 continue;
@@ -62,7 +64,6 @@ public class Game {
     public static boolean evade(Hero defender){
         Random random = new Random();
         int rand = random.nextInt(100);
-        defender.getEvasion();
         if(rand <= defender.getEvasion()){
             return true;
         } else {
