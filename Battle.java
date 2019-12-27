@@ -29,6 +29,8 @@ class Battle{
             action(team1, team2);
             AIAction(team1, team2);
             Game.commitAttacks();
+            checkIfDead(team1, team2);
+            gameOver(team1, team2);
             turn ++;
         }
 
