@@ -1,13 +1,29 @@
 package BootlegElderScrolls;
 
-import java.lang.reflect.Array;
+import javafx.application.*;
+import javafx.stage.*;
+
 import java.util.*;
 
 
-
-class Battle{
+public class Battle extends Application{
     static Scanner reader = new Scanner(System.in);
+
+    //GUI METHODS
+    public void start(Stage primaryStage) throws Exception{
+        Stage battleStage = primaryStage;
+        MainMenu.display();
+    }
+
     public static void main(String[] args){
+        //GUI
+        //launches GUI (start method)
+        launch(args);
+
+        
+
+
+
         
         ArrayList<Hero> team1 = new ArrayList<Hero>();
         ArrayList<Hero> team2 = new ArrayList<Hero>();
@@ -130,7 +146,7 @@ class Battle{
                 }
             }
             else if(action.equalsIgnoreCase("Attack")){
-                System.out.println("Who do you want to attack?");
+                System.out.println("What index do you want to attack (MAY VARY)");
                 int x = ints.nextInt();
                 Game.addAttack(team1.get(i), team2.get(x));
 
