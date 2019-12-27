@@ -12,6 +12,7 @@ public class Hero{
     
     //Hero constructor
     public Hero(int attack, int health, int defence, int magicResist, int evasion, int speed, String name){
+        this.attack = attack;
         this.health = health;
         this.defence = defence;
         this.magicResist = magicResist;
