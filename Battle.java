@@ -77,13 +77,13 @@ public class Battle extends Application{
             //drop down list
             ComboBox heroList = new ComboBox(FXCollections.observableArrayList(heroTypes));
             heroList.setPromptText("Select a Hero");
-            Game.addHeroSelections(heroList);
+            Game.getHeroSelections().add(heroList);
 
             //enter hero name
             TextField nameField = new TextField();
             nameField.setPromptText("Enter a Name");
             nameField.setFont(new Font("Traditional Arabic", 16));
-            Game.addHeroNames(nameField);
+            Game.getHeroNames().add(nameField);
 
             Label namePrompt = new Label("Hero Name:");
             namePrompt.setFont(new Font("Traditional Arabic", 20));
@@ -103,11 +103,31 @@ public class Battle extends Application{
         buttonBox.setPadding(new Insets(20, 20, 20, 20));
         buttonBox.getChildren().add(enterButton);
 
-        //putting the layout in the borderpane
+        //putting the layout in the border pane
         borderPane.setCenter(hBox);
         borderPane.setBottom(buttonBox);
 
         Scene selectionScene = new Scene(borderPane, 600, 300);
+
+        //button method
+        enterButton.setOnAction(e ->{
+            //loop to check for duplicate hero selections
+            try {
+                outer_loop:
+                for (ComboBox c : Game.getHeroSelections()) {
+                    for (ComboBox c2 : Game.getHeroSelections()) {
+                        if (c.getValue().equals(c2.getValue()) && !c.equals(c2)) {
+                            Popup.display("You Cannot Select Duplicate Heroes!");
+                            break outer_loop;
+                        }
+                    }
+                }
+            }
+            //if user tries to battle without selecting 3 heroes
+            catch(NullPointerException ne){
+                Popup.display("Please Select 3 Heroes!");
+            }
+        });
 
         return selectionScene;
     }
