@@ -111,13 +111,16 @@ public class Battle extends Application{
 
         //button method
         enterButton.setOnAction(e ->{
+            boolean valid = true;
+
             //loop to check for duplicate hero selections
-            try {
+            try{
                 outer_loop:
                 for (ComboBox c : Game.getHeroSelections()) {
                     for (ComboBox c2 : Game.getHeroSelections()) {
                         if (c.getValue().equals(c2.getValue()) && !c.equals(c2)) {
                             Popup.display("You Cannot Select Duplicate Heroes!");
+                            valid = false;
                             break outer_loop;
                         }
                     }
@@ -125,13 +128,42 @@ public class Battle extends Application{
             }
             //if user tries to battle without selecting 3 heroes
             catch(NullPointerException ne){
+                valid = false;
                 Popup.display("Please Select 3 Heroes!");
             }
+
+            //saving hero selections
+            if(valid) {
+                for (int i = 0; i < 3; i++) {
+                    switch (Game.getHeroSelections().get(i).getValue().toString()) {
+                        case "Wizard":
+                            Game.getTeam1().add(new Wizard(Game.getHeroNames().get(i).getText()));
+                            break;
+
+                        case "Archer":
+                            Game.getTeam1().add(new Archer(Game.getHeroNames().get(i).getText()));
+                            break;
+                        case "Knight":
+                            Game.getTeam1().add(new Knight(Game.getHeroNames().get(i).getText()));
+                            break;
+
+                        case "Assassin":
+                            Game.getTeam1().add(new Assassin(Game.getHeroNames().get(i).getText()));
+                            break;
+
+                        case "Healer":
+                            Game.getTeam1().add(new Healer(Game.getHeroNames().get(i).getText()));
+                            break;
+                    }
+                }
+
+            }
+
         });
 
         return selectionScene;
     }
-
+    //main method ------------------------------------------------------------------------------------------------------
     public static void main(String[] args){
         //GUI
         //launches GUI (start method)
