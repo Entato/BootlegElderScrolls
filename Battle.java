@@ -1,6 +1,14 @@
 package BootlegElderScrolls;
 
 import javafx.application.*;
+import javafx.collections.*;
+import javafx.geometry.*;
+import javafx.geometry.Pos;
+import javafx.scene.*;
+import javafx.scene.control.*;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
+import javafx.scene.text.*;
 import javafx.stage.*;
 
 import java.util.*;
@@ -12,7 +20,96 @@ public class Battle extends Application{
     //GUI METHODS
     public void start(Stage primaryStage) throws Exception{
         Stage battleStage = primaryStage;
-        MainMenu.display();
+        battleStage.setTitle("Fantasy Showdown");
+
+        boolean run = MainMenu.display();
+
+        //if player pressed start on menu
+        if(run){
+            battleStage.setScene(createHeroSelectionScene());
+            battleStage.show();
+        }
+    }
+
+    //creating battle stage
+    public Scene createBattleStage(){
+
+        //border pane layout allows for stacking layout easily
+        BorderPane borderPane = new BorderPane();
+
+        //action layout
+        HBox battleActions = new HBox(20);
+        battleActions.setAlignment(Pos.CENTER);
+        battleActions.setPadding(new Insets(20, 20, 20, 20));
+        battleActions.setStyle("-fx-background-color: GOLD;");
+
+        //action buttons and labels
+        Button attackButton = new Button("Attack");
+        attackButton.setPrefSize(100, 40);
+        Button guardButton = new Button("Guard");
+        guardButton.setPrefSize(100, 40);
+        Button itemButton = new Button("Use Item");
+        itemButton.setPrefSize(100, 40);
+
+        //adds buttons to layout
+        battleActions.getChildren().addAll(attackButton, guardButton, itemButton);
+        //adds action layout to bottom of borderpane
+        borderPane.setBottom(battleActions);
+
+        Scene battleScene = new Scene(borderPane, 800, 550);
+
+        return battleScene;
+    }
+
+    //create hero selection scene
+    public Scene createHeroSelectionScene(){
+        String[] heroTypes = {"Archer", "Assassin", "Healer", "Knight", "Wizard"};
+        BorderPane borderPane = new BorderPane();
+        HBox hBox = new HBox();
+        hBox.setAlignment(Pos.TOP_CENTER);
+        hBox.setPadding(new Insets(20, 20, 20, 20));
+        hBox.setStyle("-fx-background-color: indianred;");
+
+        for(int i = 0; i < 3; i++){
+            VBox vBox = new VBox(20);
+            vBox.setPadding(new Insets(10, 20, 10, 20));
+
+            //drop down list
+            ComboBox heroList = new ComboBox(FXCollections.observableArrayList(heroTypes));
+            heroList.setPromptText("Select a Hero");
+            Game.addHeroSelections(heroList);
+
+            //enter hero name
+            TextField nameField = new TextField();
+            nameField.setPromptText("Enter a Name");
+            nameField.setFont(new Font("Traditional Arabic", 16));
+            Game.addHeroNames(nameField);
+
+            Label namePrompt = new Label("Hero Name:");
+            namePrompt.setFont(new Font("Traditional Arabic", 20));
+
+            //compile in a layout
+            vBox.getChildren().addAll(heroList, namePrompt, nameField);
+
+            //add to main horizontal layout
+            hBox.getChildren().add(vBox);
+        }
+        //button to enter results
+        Button enterButton = new Button("Battle!");
+        enterButton.setFont(new Font("Urdu Typesetting", 20));
+        enterButton.setPrefSize(200, 20);
+        VBox buttonBox = new VBox();
+        buttonBox.setAlignment(Pos.CENTER);
+        buttonBox.setPadding(new Insets(20, 20, 20, 20));
+        buttonBox.getChildren().add(enterButton);
+
+        //putting the layout in the borderpane
+        borderPane.setCenter(hBox);
+        borderPane.setBottom(buttonBox);
+
+        Scene selectionScene = new Scene(borderPane, 600, 300);
+
+        return selectionScene;
     }
 
     public static void main(String[] args){
@@ -20,7 +117,7 @@ public class Battle extends Application{
         //launches GUI (start method)
         launch(args);
 
-        
+
 
 
 

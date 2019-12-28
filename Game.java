@@ -1,11 +1,30 @@
 package BootlegElderScrolls;
 
+import javafx.scene.control.*;
 import java.util.ArrayList;
 import java.util.Random;
 
 public class Game {
     private static ArrayList<Hero[]> attackList = new ArrayList<Hero[]>();
+    private static ArrayList<Hero> team1 = new ArrayList<Hero>();
+    private static ArrayList<Hero> team2 = new ArrayList<Hero>();
+    private static ArrayList<ComboBox> heroSelections = new ArrayList<ComboBox>();
+    private static ArrayList<TextField> heroNames = new ArrayList<TextField>();
 
+
+    //adding team members, lists, and name lists
+    public static void addTeam1(Hero hero){
+        team1.add(hero);
+    }
+    public static void addTeam2(Hero hero){
+        team2.add(hero);
+    }
+    public static void addHeroSelections(ComboBox comboBox){
+        heroSelections.add(comboBox);
+    }
+    public static void addHeroNames(TextField textField){
+        heroNames.add(textField);
+    }
     //storing attack actions
     public static void addAttack(Hero attacker, Hero defender){
         Hero[] heroes = new Hero[2];
