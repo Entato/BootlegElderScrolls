@@ -1,11 +1,11 @@
 package BootlegElderScrolls;
 
+import javafx.scene.paint.Paint;
 import javafx.scene.shape.*;
 
 public class HealthBar {
     private int maxHealth;
-    private static int barWidth = 100;
-    private static Rectangle bar = new Rectangle(barWidth, 20);
+
 
     //health bar constructor
     public HealthBar(int maxHealth){
@@ -14,9 +14,15 @@ public class HealthBar {
 
     public Rectangle adjustGreenBar(int newHealth){
         //calculates how much bar should be filled
-        Rectangle greenBar = new Rectangle((newHealth/barWidth)*100, 20);
+        Rectangle greenBar = new Rectangle((newHealth/this.maxHealth)*100, 20);
 
         return greenBar;
+    }
+
+
+    //maxHP getter
+    public int getMaxHealth(){
+        return this.maxHealth;
     }
 
 }

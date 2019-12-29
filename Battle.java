@@ -3,13 +3,21 @@ package BootlegElderScrolls;
 import javafx.application.*;
 import javafx.collections.*;
 import javafx.geometry.*;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.*;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.*;
-import javafx.scene.text.*;
+import javafx.scene.shape.*;
+import javafx.scene.shape.Rectangle;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import javafx.stage.*;
 
+import java.awt.*;
 import java.util.*;
 
 
@@ -65,14 +73,26 @@ public class Battle extends Application{
         nameBox.setPadding(new Insets(20, 200, 20, 20));
         nameBox.setAlignment(Pos.TOP_CENTER);
         Label nameLabel = new Label("What Will " + Game.getTeam1().get(0).getName() + " Do?");
-
         nameBox.getChildren().addAll(nameLabel);
+
+        //Health bars
+        //team 1
+        VBox team1Bars = new VBox(30);
+        team1Bars.setAlignment(Pos.CENTER);
+        setBars(team1Bars, true);
+        //team2
+        VBox team2Bars = new VBox(30);
+        team2Bars.setAlignment(Pos.CENTER);
+        setBars(team2Bars, true); //change this later
+
         //adds buttons to layouts
         battleActions.getChildren().addAll(attackButton, guardButton, itemButton, specialButton);
         bottomBox.getChildren().addAll(nameBox, battleActions);
 
-        //adds layouts to borderpane
+        //adds layouts to border pane
         borderPane.setBottom(bottomBox);
+        borderPane.setLeft(team1Bars);
+        borderPane.setRight(team2Bars);
 
         //creates scene and returns it
         Scene battleScene = new Scene(borderPane, 800, 550);
@@ -180,6 +200,41 @@ public class Battle extends Application{
         });
 
         return selectionScene;
+    }
+    //setting health bars method ---------------------------------------------------------------------------------------
+    public static void setBars(VBox box, boolean team){
+        Rectangle mainBar;
+        Rectangle greenBar;
+
+        for(int i = 0; i < Game.getTeam1().size(); i++){
+            Label healthInfo;
+            //creating health bar
+
+            mainBar = new Rectangle(100, 20);
+            mainBar.setStroke(Color.BLACK);
+            mainBar.setStrokeWidth(5);
+
+            greenBar = Game.getTeam1().get(i).getHealthBar().adjustGreenBar(Game.getTeam1().get(i).getHealth());
+            greenBar.setFill(Color.GREEN);
+
+
+            Pane completeBar = new Pane();
+            completeBar.getChildren().addAll(mainBar, greenBar);
+
+            if(team) {
+                healthInfo = new Label(Game.getTeam1().get(i).getName() + ": " +
+                        Game.getTeam1().get(i).getHealth() +
+                        "/" + Game.getTeam1().get(i).getHealthBar().getMaxHealth());
+            }
+            else{
+                healthInfo = new Label(Game.getTeam2().get(i).getName() + ": " +
+                        Game.getTeam2().get(i).getHealth() +
+                        "/" + Game.getTeam2().get(i).getHealthBar().getMaxHealth());
+            }
+
+            //adding it to the layout
+            box.getChildren().addAll(healthInfo, completeBar);
+        }
     }
     //main method ------------------------------------------------------------------------------------------------------
     public static void main(String[] args){
