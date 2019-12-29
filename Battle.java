@@ -7,7 +7,6 @@ import javafx.geometry.Pos;
 import javafx.scene.*;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
 import javafx.scene.text.*;
 import javafx.stage.*;
 
@@ -18,6 +17,7 @@ public class Battle extends Application{
     static Scanner reader = new Scanner(System.in);
 
     //GUI METHODS
+    //start method -----------------------------------------------------------------------------------------------------
     public void start(Stage primaryStage) throws Exception{
         Stage battleStage = primaryStage;
         battleStage.setTitle("Fantasy Showdown");
@@ -26,43 +26,62 @@ public class Battle extends Application{
 
         //if player pressed start on menu
         if(run){
-            battleStage.setScene(createHeroSelectionScene());
+            battleStage.setScene(createHeroSelectionScene(battleStage));
             battleStage.show();
         }
     }
 
-    //creating battle stage
-    public Scene createBattleStage(){
+    //creating battle scene method -------------------------------------------------------------------------------------
+    public Scene createBattleScene(){
 
         //border pane layout allows for stacking layout easily
         BorderPane borderPane = new BorderPane();
 
+        //bottom portion layout
+        HBox bottomBox = new HBox(20);
+        bottomBox.setStyle("-fx-background-color: GOLD;");
+
         //action layout
-        HBox battleActions = new HBox(20);
+        FlowPane battleActions = new FlowPane();
+        battleActions.setPrefSize(400, 200);
+        battleActions.setHgap(40);
+        battleActions.setVgap(20);
         battleActions.setAlignment(Pos.CENTER);
         battleActions.setPadding(new Insets(20, 20, 20, 20));
-        battleActions.setStyle("-fx-background-color: GOLD;");
+
 
         //action buttons and labels
         Button attackButton = new Button("Attack");
-        attackButton.setPrefSize(100, 40);
+        attackButton.setPrefSize(150, 60);
         Button guardButton = new Button("Guard");
-        guardButton.setPrefSize(100, 40);
+        guardButton.setPrefSize(150, 60);
         Button itemButton = new Button("Use Item");
-        itemButton.setPrefSize(100, 40);
+        itemButton.setPrefSize(150, 60);
+        Button specialButton = new Button("Special");
+        specialButton.setPrefSize(150, 60);
 
-        //adds buttons to layout
-        battleActions.getChildren().addAll(attackButton, guardButton, itemButton);
-        //adds action layout to bottom of borderpane
-        borderPane.setBottom(battleActions);
+        //Tells user who is attacking
+        VBox nameBox = new VBox(20);
+        nameBox.setPadding(new Insets(20, 200, 20, 20));
+        nameBox.setAlignment(Pos.TOP_CENTER);
+        Label nameLabel = new Label("What Will " + Game.getTeam1().get(0).getName() + " Do?");
 
+        nameBox.getChildren().addAll(nameLabel);
+        //adds buttons to layouts
+        battleActions.getChildren().addAll(attackButton, guardButton, itemButton, specialButton);
+        bottomBox.getChildren().addAll(nameBox, battleActions);
+
+        //adds layouts to borderpane
+        borderPane.setBottom(bottomBox);
+
+        //creates scene and returns it
         Scene battleScene = new Scene(borderPane, 800, 550);
 
         return battleScene;
     }
 
-    //create hero selection scene
-    public Scene createHeroSelectionScene(){
+    //create hero selection scene method -------------------------------------------------------------------------------
+    public Scene createHeroSelectionScene(Stage stage){
         String[] heroTypes = {"Archer", "Assassin", "Healer", "Knight", "Wizard"};
         BorderPane borderPane = new BorderPane();
         HBox hBox = new HBox();
@@ -139,26 +158,25 @@ public class Battle extends Application{
                         case "Wizard":
                             Game.getTeam1().add(new Wizard(Game.getHeroNames().get(i).getText()));
                             break;
-
                         case "Archer":
                             Game.getTeam1().add(new Archer(Game.getHeroNames().get(i).getText()));
                             break;
                         case "Knight":
                             Game.getTeam1().add(new Knight(Game.getHeroNames().get(i).getText()));
                             break;
-
                         case "Assassin":
                             Game.getTeam1().add(new Assassin(Game.getHeroNames().get(i).getText()));
                             break;
-
                         case "Healer":
                             Game.getTeam1().add(new Healer(Game.getHeroNames().get(i).getText()));
                             break;
                     }
                 }
 
-            }
+                //makes window show the battle scene
+                stage.setScene(createBattleScene());
 
+            }
         });
 
         return selectionScene;

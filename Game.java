@@ -11,6 +11,16 @@ public class Game {
     private static ArrayList<Hero> team2 = new ArrayList<Hero>();
     private static ArrayList<ComboBox> heroSelections = new ArrayList<ComboBox>();
     private static ArrayList<TextField> heroNames = new ArrayList<TextField>();
+    private static int teamTurn = 0;
+
+    //getter and setter
+    public static int getTeamTurn(){
+        return teamTurn;
+    }
+
+    public static void setTeamTurn(int teamTurn){
+        Game.teamTurn = teamTurn;
+    }
 
 
     //made getters so I can edit them without making a method for each action
@@ -90,4 +100,15 @@ public class Game {
             return false;
         }
     }
+
+    //reset method
+    public static void reset(){
+        attackList.clear();
+        team1.clear();
+        team2.clear();
+        heroSelections.clear();
+        heroNames.clear();
+    }
+
+
 }

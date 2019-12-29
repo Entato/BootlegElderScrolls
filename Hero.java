@@ -9,6 +9,7 @@ public class Hero{
     private int evasion;
     private int speed;
     private String name;
+    private HealthBar healthBar;
     
     //Hero constructor
     public Hero(int attack, int health, int defence, int magicResist, int evasion, int speed, String name){
@@ -19,6 +20,8 @@ public class Hero{
         this.evasion = evasion;
         this.speed = speed;
         this.name = name;
+
+        healthBar = new HealthBar(this.health);
     }
     //getters and setters
     public int getHealth(){
@@ -38,15 +41,18 @@ public class Hero{
     }
 
     public int getMagicResist() {
-        return magicResist;
+        return this.magicResist;
     }
 
     public int getSpeed(){
-        return speed;
+        return this.speed;
     }
 
     public int getEvasion(){
-        return evasion;
+        return this.evasion;
+    }
+    public HealthBar getHealthBar() {
+        return this.healthBar;
     }
 
     //attack method
@@ -78,7 +84,6 @@ public class Hero{
     public String toString(){
         return "Hero Type: " + this.getClass() + "\nHero Name: " + this.name + "\nHealth: " + this.health;
     }
-
 
 
 }
