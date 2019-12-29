@@ -22,7 +22,8 @@ public class MainMenu{
         //labels and buttons
         Label title = new Label("Fantasy Showdown");
         title.setPadding(new Insets(20, 20, 40, 20));
-        Button startButton = new Button("Start");
+        Button newGameButton = new Button("New Game");
+        Button loadGameButton = new Button("Load Game");
         Button quitButton = new Button("Quit");
         Button infoButton = new Button("How To Play");
 
@@ -34,7 +35,7 @@ public class MainMenu{
 
 
         //add labels and buttons to layout
-        menuLayout.getChildren().addAll(title, startButton, quitButton, infoButton);
+        menuLayout.getChildren().addAll(title, newGameButton, loadGameButton, quitButton, infoButton);
         //creates scene
         Scene menuScene = new Scene(menuLayout, 400, 300);
         //sets as scene to be displayed
@@ -50,10 +51,14 @@ public class MainMenu{
 
 
         //button methods
-        //start
-        startButton.setOnAction(e -> {
+        //new game
+        newGameButton.setOnAction(e -> {
             begin = true;
             mainMenu.close();
+        });
+        //load game
+        loadGameButton.setOnAction(e -> {
+            //placeholder for when we do IO
         });
         //quit
         quitButton.setOnAction(e -> {
