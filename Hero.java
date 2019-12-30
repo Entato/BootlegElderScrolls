@@ -65,6 +65,7 @@ public class Hero{
         if(!Guard.containsImmune(hero)) {
             System.out.println(this.name + " did " + trueDamage + " damage to " + hero.getName());
             hero.setHealth(hero.getHealth() - trueDamage);
+            Game.getBattleLog().getItems().add(this.name + " attacked " + hero.name + " for " + trueDamage + " damage.");
         }
         else{
             System.out.println(hero.name + " is guarding and is immune to damage!");

@@ -9,6 +9,7 @@ import javafx.scene.*;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.*;
 import javafx.scene.shape.*;
@@ -17,7 +18,6 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.*;
 
-import java.awt.*;
 import java.util.*;
 
 
@@ -48,6 +48,7 @@ public class Battle extends Application{
         //bottom portion layout
         HBox bottomBox = new HBox(20);
         bottomBox.setStyle("-fx-background-color: GOLD;");
+        bottomBox.setPrefHeight(200);
 
         //action layout
         FlowPane battleActions = new FlowPane();
@@ -69,25 +70,48 @@ public class Battle extends Application{
         specialButton.setPrefSize(150, 60);
 
         //Tells user who is attacking
-        VBox nameBox = new VBox(20);
-        nameBox.setPadding(new Insets(20, 200, 20, 20));
+        VBox nameBox = new VBox();
+        nameBox.setStyle("-fx-border-color: black");
+        nameBox.setPadding(new Insets(20, 20, 20, 20));
         nameBox.setAlignment(Pos.TOP_CENTER);
         Label nameLabel = new Label("What Will " + Game.getTeam1().get(0).getName() + " Do?");
+        nameLabel.setWrapText(true);
         nameBox.getChildren().addAll(nameLabel);
 
         //Health bars
         //team 1
         VBox team1Bars = new VBox(30);
+        team1Bars.setPadding(new Insets(20, 20, 20, 20));
         team1Bars.setAlignment(Pos.CENTER);
         setBars(team1Bars, true);
         //team2
         VBox team2Bars = new VBox(30);
+        team2Bars.setPadding(new Insets(20, 20, 20, 20));
         team2Bars.setAlignment(Pos.CENTER);
-        setBars(team2Bars, true); //change this later
+        setBars(team2Bars, false);
+
+        //battle log
+        HBox bottomLeftBox = new HBox(20);
+        VBox logBox = new VBox(10);
+        logBox.setPadding(new Insets(10, 10, 10, 10));
+        Label logLabel = new Label("Battle Log:");
+        //scroll pane used for when battle log gets longer
+        ScrollPane scroller = new ScrollPane();
+        scroller.setStyle("-fx-border-color: black");
+        scroller.setFitToWidth(true);
+        scroller.setMaxHeight(200);
+        //battle log is a static variable stored in the game class
+        scroller.setContent(Game.getBattleLog());
+        logBox.getChildren().addAll(logLabel, scroller);
+        bottomLeftBox.getChildren().addAll(nameBox, logBox);
+        bottomLeftBox.setAlignment(Pos.CENTER);
+
+        //BUTTON ACTIONS
+        attackButton.setOnAction(e -> attackButtonMethod(bottomBox, battleActions));
 
         //adds buttons to layouts
         battleActions.getChildren().addAll(attackButton, guardButton, itemButton, specialButton);
-        bottomBox.getChildren().addAll(nameBox, battleActions);
+        bottomBox.getChildren().addAll(bottomLeftBox, battleActions);
 
         //adds layouts to border pane
         borderPane.setBottom(bottomBox);
@@ -95,9 +119,42 @@ public class Battle extends Application{
         borderPane.setRight(team2Bars);
 
         //creates scene and returns it
-        Scene battleScene = new Scene(borderPane, 800, 550);
+        Scene battleScene = new Scene(borderPane, 850, 550);
 
         return battleScene;
+    }
+
+    //attack button method ---------------------------------------------------------------------------------------------
+    public void attackButtonMethod(HBox hBox, FlowPane flowPane){
+        //layout
+        VBox bigBox = new VBox(20);
+        bigBox.setPadding(new Insets(20, 20, 20, 20));
+        HBox optionBox = new HBox(20);
+        optionBox.setPadding(new Insets(10, 10, 10, 10));
+        optionBox.setAlignment(Pos.CENTER);
+        optionBox.setStyle("-fx-border-color: black");
+
+        //label
+        Label optionsLabel = new Label("Who Will " + Game.getTeam1().get(Game.getTeamTurn()).getName() + " Attack?");
+
+        //storing buttons
+        ArrayList<Button> options = new ArrayList<Button>();
+        Button button;
+
+        for(Hero h : Game.getTeam2()){
+            button = new Button(h.getName());
+            button.setPrefSize(100, 40);
+            options.add(button);
+            Button finalButton = button;
+            optionBox.getChildren().add(button);
+            button.setOnAction(e -> {
+                Game.getTeam1().get(Game.getTeamTurn()).attack(Game.getTeam2().get(options.indexOf(finalButton)));
+                hBox.getChildren().set(1, flowPane);
+            });
+        }
+        bigBox.getChildren().addAll(optionsLabel, optionBox);
+        hBox.getChildren().set(1, bigBox);
+
     }
 
     //create hero selection scene method -------------------------------------------------------------------------------
@@ -193,9 +250,16 @@ public class Battle extends Application{
                     }
                 }
 
+
+                //AI creates team
+                //keep track of what AI has chosen
+                ArrayList<Integer> picks = new ArrayList<Integer>();
+                for(int i = 0; i < 3; i++){
+                    Game.getTeam2().add(AIPick(i, picks));
+                }
+
                 //makes window show the battle scene
                 stage.setScene(createBattleScene());
-
             }
         });
 
@@ -214,23 +278,27 @@ public class Battle extends Application{
             mainBar.setStroke(Color.BLACK);
             mainBar.setStrokeWidth(5);
 
-            greenBar = Game.getTeam1().get(i).getHealthBar().adjustGreenBar(Game.getTeam1().get(i).getHealth());
-            greenBar.setFill(Color.GREEN);
 
-
-            Pane completeBar = new Pane();
-            completeBar.getChildren().addAll(mainBar, greenBar);
-
+            //for first team
             if(team) {
+                greenBar = Game.getTeam1().get(i).getHealthBar().adjustGreenBar(Game.getTeam1().get(i).getHealth());
+
                 healthInfo = new Label(Game.getTeam1().get(i).getName() + ": " +
                         Game.getTeam1().get(i).getHealth() +
                         "/" + Game.getTeam1().get(i).getHealthBar().getMaxHealth());
             }
+            //for second team
             else{
+                greenBar = Game.getTeam2().get(i).getHealthBar().adjustGreenBar(Game.getTeam2().get(i).getHealth());
+
                 healthInfo = new Label(Game.getTeam2().get(i).getName() + ": " +
                         Game.getTeam2().get(i).getHealth() +
                         "/" + Game.getTeam2().get(i).getHealthBar().getMaxHealth());
             }
+            greenBar.setFill(Color.GREEN);
+
+            Pane completeBar = new Pane();
+            completeBar.getChildren().addAll(mainBar, greenBar);
 
             //adding it to the layout
             box.getChildren().addAll(healthInfo, completeBar);

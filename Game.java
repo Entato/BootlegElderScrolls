@@ -11,9 +11,10 @@ public class Game {
     private static ArrayList<Hero> team2 = new ArrayList<Hero>();
     private static ArrayList<ComboBox> heroSelections = new ArrayList<ComboBox>();
     private static ArrayList<TextField> heroNames = new ArrayList<TextField>();
+    private static ListView<String> battleLog = new ListView<String>();
     private static int teamTurn = 0;
 
-    //getter and setter
+    //getters and setters
     public static int getTeamTurn(){
         return teamTurn;
     }
@@ -22,8 +23,10 @@ public class Game {
         Game.teamTurn = teamTurn;
     }
 
-
     //made getters so I can edit them without making a method for each action
+    public static ListView<String> getBattleLog() {
+        return battleLog;
+    }
     public static ArrayList<Hero> getTeam1(){
         return team1;
     }
@@ -108,7 +111,10 @@ public class Game {
         team2.clear();
         heroSelections.clear();
         heroNames.clear();
+        battleLog.getItems().clear();
     }
+
+
 
 
 }
