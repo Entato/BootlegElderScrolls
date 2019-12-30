@@ -75,10 +75,24 @@ public class Hero{
     public void useItem(Item item){
         switch(item.getItemType()){
             case HEALING:
-                this.health += 250;
+                int healed;
+                //if there is more than 150 hp to heal, heal 150
+                if(this.healthBar.getMaxHealth() - this.health > 150) {
+                    healed = 150;
+                    this.health += healed;
+                }
+                //else just fill the health back to full
+                else {
+                    healed = this.healthBar.getMaxHealth() - this.health;
+                    this.health += healed;
+                }
+                //battle log message
+                System.out.println();
+                Game.getBattleLog().getItems().add(this.name + " Used a Healing Potion for " + healed + " Health.");
                 break;
             case DEFENCE:
                 this.defence += 50;
+                Game.getBattleLog().getItems().add(this.name + " Used a Defence Potion For 50 Defence.");
         }
     }
 

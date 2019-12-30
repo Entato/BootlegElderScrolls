@@ -13,6 +13,7 @@ public class Game {
     private static ArrayList<TextField> heroNames = new ArrayList<TextField>();
     private static ListView<String> battleLog = new ListView<String>();
     private static int teamTurn = 0;
+    private static Label nameLabel = new Label();
 
     //getters and setters
     public static int getTeamTurn(){
@@ -21,6 +22,9 @@ public class Game {
 
     public static void setTeamTurn(int teamTurn){
         Game.teamTurn = teamTurn;
+    }
+    public static Label getNameLabel() {
+        return nameLabel;
     }
 
     //made getters so I can edit them without making a method for each action
@@ -113,7 +117,6 @@ public class Game {
         heroNames.clear();
         battleLog.getItems().clear();
     }
-
 
 
 

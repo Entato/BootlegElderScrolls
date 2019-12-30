@@ -18,6 +18,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.*;
 
+import java.awt.*;
 import java.util.*;
 
 
@@ -74,9 +75,10 @@ public class Battle extends Application{
         nameBox.setStyle("-fx-border-color: black");
         nameBox.setPadding(new Insets(20, 20, 20, 20));
         nameBox.setAlignment(Pos.TOP_CENTER);
-        Label nameLabel = new Label("What Will " + Game.getTeam1().get(0).getName() + " Do?");
-        nameLabel.setWrapText(true);
-        nameBox.getChildren().addAll(nameLabel);
+
+        Game.getNameLabel().setWrapText(true);
+        Game.getNameLabel().setText("What Will " + Game.getTeam1().get(0).getName() + " Do?");
+        nameBox.getChildren().addAll(Game.getNameLabel());
 
         //Health bars
         //team 1
@@ -99,6 +101,7 @@ public class Battle extends Application{
         //scroll pane used for when battle log gets longer
         ScrollPane scroller = new ScrollPane();
         scroller.setStyle("-fx-border-color: black");
+        Game.getBattleLog().setPrefWidth(300);
         scroller.setFitToWidth(true);
         scroller.setMaxHeight(200);
         //battle log is a static variable stored in the game class
@@ -109,6 +112,7 @@ public class Battle extends Application{
 
         //BUTTON ACTIONS
         attackButton.setOnAction(e -> attackButtonMethod(bottomBox, battleActions)); //passing layouts for temp change
+        itemButton.setOnAction(e -> itemButtonMethod(bottomBox, battleActions));
 
         //adds buttons to layouts
         battleActions.getChildren().addAll(attackButton, guardButton, itemButton, specialButton);
@@ -120,7 +124,7 @@ public class Battle extends Application{
         borderPane.setRight(team2Bars);
 
         //creates scene and returns it
-        Scene battleScene = new Scene(borderPane, 850, 550);
+        Scene battleScene = new Scene(borderPane, 900, 550);
 
         return battleScene;
     }
@@ -138,7 +142,7 @@ public class Battle extends Application{
         //label
         Label optionsLabel = new Label("Who Will " + Game.getTeam1().get(Game.getTeamTurn()).getName() + " Attack?");
 
-        //storing buttons
+        //storing buttons so I can reference them later
         ArrayList<Button> options = new ArrayList<Button>();
         Button button;
 
@@ -149,13 +153,88 @@ public class Battle extends Application{
             Button finalButton = button;
             optionBox.getChildren().add(button);
             button.setOnAction(e -> {
-                Game.getTeam1().get(Game.getTeamTurn()).attack(Game.getTeam2().get(options.indexOf(finalButton)));
+                Game.addAttack(Game.getTeam1().get(Game.getTeamTurn()), Game.getTeam2().get(options.indexOf(finalButton)));
+                //apply old layout back
                 hBox.getChildren().set(1, flowPane);
+
+                //if there are more actions left for the player
+                if(Game.getTeamTurn() < 2) {
+                    //increase counter for next turn
+                    Game.setTeamTurn(Game.getTeamTurn() + 1);
+                    //new name label
+                    Game.getNameLabel().setText("What Will " + Game.getTeam1().get(Game.getTeamTurn()).getName() + " Do?");
+                }
             });
         }
+        //apply new layout
         bigBox.getChildren().addAll(optionsLabel, optionBox);
         hBox.getChildren().set(1, bigBox);
 
+    }
+
+    public void itemButtonMethod(HBox hBox, FlowPane flowPane){
+        //layout
+        VBox bigBox = new VBox(20);
+        bigBox.setPadding(new Insets(20, 20, 20, 20));
+        HBox optionBox = new HBox(20);
+        optionBox.setPadding(new Insets(10, 10, 10, 10));
+        optionBox.setAlignment(Pos.CENTER);
+        optionBox.setStyle("-fx-border-color: black");
+
+        ChoiceBox itemChoice = new ChoiceBox();
+        itemChoice.setMaxWidth(50);
+        itemChoice.getItems().addAll("Attack", "Defence", "Healing");
+        //only wizard and healer have mana
+        if(Game.getTeam1().get(Game.getTeamTurn()) instanceof Wizard ||
+                Game.getTeam1().get(Game.getTeamTurn()) instanceof Healer){
+            itemChoice.getItems().add("Mana");
+        }
+        itemChoice.setValue("Attack");
+
+        //label
+        Label optionsLabel = new Label("Who Will You Use The Item On?");
+
+        //storing buttons so I can reference them later
+        ArrayList<Button> options = new ArrayList<Button>();
+        Button button;
+
+        for(Hero h : Game.getTeam1()){
+            button = new Button(h.getName());
+            button.setPrefSize(100, 40);
+            options.add(button);
+            Button finalButton = button;
+            optionBox.getChildren().add(button);
+            button.setOnAction(e -> {
+                switch (itemChoice.getValue().toString()){
+                    case "Attack":
+                        Game.getTeam1().get(options.indexOf(finalButton)).useItem(new Item(Item.ItemType.ATTACK));
+                        break;
+                    case "Defence":
+                        Game.getTeam1().get(options.indexOf(finalButton)).useItem(new Item(Item.ItemType.DEFENCE));
+                        break;
+                    case "Healing":
+                        Game.getTeam1().get(options.indexOf(finalButton)).useItem(new Item(Item.ItemType.HEALING));
+                        break;
+                    case "Mana":
+                        Game.getTeam1().get(options.indexOf(finalButton)).useItem(new Item(Item.ItemType.MANA));
+                        break;
+                }
+                //apply old layout back
+                hBox.getChildren().set(1, flowPane);
+
+                //if there are more actions left for the player
+                if(Game.getTeamTurn() < 2) {
+                    //increase counter for next turn
+                    Game.setTeamTurn(Game.getTeamTurn() + 1);
+                    //new name label
+                    Game.getNameLabel().setText("What Will " + Game.getTeam1().get(Game.getTeamTurn()).getName() + " Do?");
+                }
+            });
+        }
+        optionBox.getChildren().add(itemChoice);
+        //apply new layout
+        bigBox.getChildren().addAll(optionsLabel, optionBox);
+        hBox.getChildren().set(1, bigBox);
     }
 
     //create hero selection scene method -------------------------------------------------------------------------------
