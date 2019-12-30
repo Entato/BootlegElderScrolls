@@ -18,7 +18,6 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.*;
 
-import java.awt.*;
 import java.util.*;
 
 
@@ -205,6 +204,8 @@ public class Battle extends Application{
             Button finalButton = button;
             optionBox.getChildren().add(button);
             button.setOnAction(e -> {
+                //used for battle log
+                Game.setItemLastUsedOn(Game.getTeam1().get(options.indexOf(finalButton)));
                 switch (itemChoice.getValue().toString()){
                     case "Attack":
                         Game.getTeam1().get(options.indexOf(finalButton)).useItem(new Item(Item.ItemType.ATTACK));

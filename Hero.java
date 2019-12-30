@@ -88,11 +88,13 @@ public class Hero{
                 }
                 //battle log message
                 System.out.println();
-                Game.getBattleLog().getItems().add(this.name + " Used a Healing Potion for " + healed + " Health.");
+                Game.getBattleLog().getItems().add("A Potion was used on " + Game.getItemLastUsedOn().getName() +
+                        " For " + healed + " Health");
                 break;
             case DEFENCE:
                 this.defence += 50;
-                Game.getBattleLog().getItems().add(this.name + " Used a Defence Potion For 50 Defence.");
+                Game.getBattleLog().getItems().add("A Potion was used on " + Game.getItemLastUsedOn().getName() +
+                        " For 50 Defence");
         }
     }
 

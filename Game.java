@@ -14,6 +14,7 @@ public class Game {
     private static ListView<String> battleLog = new ListView<String>();
     private static int teamTurn = 0;
     private static Label nameLabel = new Label();
+    private static Hero itemLastUsedOn;
 
     //getters and setters
     public static int getTeamTurn(){
@@ -25,6 +26,13 @@ public class Game {
     }
     public static Label getNameLabel() {
         return nameLabel;
+    }
+    public static Hero getItemLastUsedOn() {
+        return itemLastUsedOn;
+    }
+
+    public static void setItemLastUsedOn(Hero itemLastUsedOn) {
+        Game.itemLastUsedOn = itemLastUsedOn;
     }
 
     //made getters so I can edit them without making a method for each action
