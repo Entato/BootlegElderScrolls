@@ -25,9 +25,14 @@ public class Wizard extends Hero{
 
         switch(item.getItemType()){
             case MANA:
-                this.mana += 150;
+                this.mana += 50;
+                Game.getBattleLog().getItems().add("A Potion was used on " + Game.getItemLastUsedOn().getName() +
+                        " For 50 Mana");
+                break;
+
             case ATTACK:
                 this.spellPower += 50;
+                break;
         }
     }
 }

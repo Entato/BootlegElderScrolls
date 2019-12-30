@@ -180,14 +180,14 @@ public class Battle extends Application{
         optionBox.setAlignment(Pos.CENTER);
         optionBox.setStyle("-fx-border-color: black");
 
+
+
         ChoiceBox itemChoice = new ChoiceBox();
+
         itemChoice.setMaxWidth(50);
-        itemChoice.getItems().addAll("Attack", "Defence", "Healing");
+        itemChoice.getItems().addAll("Attack", "Defence", "Healing", "Mana");
         //only wizard and healer have mana
-        if(Game.getTeam1().get(Game.getTeamTurn()) instanceof Wizard ||
-                Game.getTeam1().get(Game.getTeamTurn()) instanceof Healer){
-            itemChoice.getItems().add("Mana");
-        }
+
         itemChoice.setValue("Attack");
 
         //label
@@ -232,6 +232,22 @@ public class Battle extends Application{
                 }
             });
         }
+        //for preventing user from using mana potions on classes without mana
+        itemChoice.setOnAction(e -> {
+            if(itemChoice.getValue().equals("Mana")){
+                for(Button b : options){
+                    if(!(Game.getTeam1().get(options.indexOf(b)) instanceof Wizard) &&
+                            !(Game.getTeam1().get(options.indexOf(b)) instanceof Healer)){
+                        b.setDisable(true);
+                    }
+                }
+            }
+            else{
+                for(Button b : options){
+                    b.setDisable(false);
+                }
+            }
+        });
         optionBox.getChildren().add(itemChoice);
         //apply new layout
         bigBox.getChildren().addAll(optionsLabel, optionBox);

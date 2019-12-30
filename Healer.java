@@ -20,6 +20,8 @@ public class Healer extends Hero{
             healing += 50;
         }
         else if(item.getItemType() == Item.ItemType.MANA){
+            Game.getBattleLog().getItems().add("A Potion was used on " + Game.getItemLastUsedOn().getName() +
+                    " For 50 Mana");
             mana += 50;
         }
     }
