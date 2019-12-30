@@ -91,6 +91,7 @@ public class Battle extends Application{
         setBars(team2Bars, false);
 
         //battle log
+        //bottom left box is for name info and battle log
         HBox bottomLeftBox = new HBox(20);
         VBox logBox = new VBox(10);
         logBox.setPadding(new Insets(10, 10, 10, 10));
@@ -107,7 +108,7 @@ public class Battle extends Application{
         bottomLeftBox.setAlignment(Pos.CENTER);
 
         //BUTTON ACTIONS
-        attackButton.setOnAction(e -> attackButtonMethod(bottomBox, battleActions));
+        attackButton.setOnAction(e -> attackButtonMethod(bottomBox, battleActions)); //passing layouts for temp change
 
         //adds buttons to layouts
         battleActions.getChildren().addAll(attackButton, guardButton, itemButton, specialButton);
