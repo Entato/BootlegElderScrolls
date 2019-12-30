@@ -23,4 +23,11 @@ public class Healer extends Hero{
             mana += 50;
         }
     }
+
+    public int getMana() {
+        return this.mana;
+    }
+    public void setMana(int mana){
+        this.mana = mana;
+    }
 }

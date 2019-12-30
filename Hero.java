@@ -91,10 +91,21 @@ public class Hero{
                 Game.getBattleLog().getItems().add("A Potion was used on " + Game.getItemLastUsedOn().getName() +
                         " For " + healed + " Health");
                 break;
+
             case DEFENCE:
                 this.defence += 50;
                 Game.getBattleLog().getItems().add("A Potion was used on " + Game.getItemLastUsedOn().getName() +
                         " For 50 Defence");
+                break;
+
+            case ATTACK:
+                this.attack += 50;
+                Game.getBattleLog().getItems().add("A Potion was used on " + Game.getItemLastUsedOn().getName() +
+                        " For 50 Attack");
+                break;
+
+
+                //mana case is dealt with in correct subclass via overriding
         }
     }
 
