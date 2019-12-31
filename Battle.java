@@ -186,7 +186,7 @@ public class Battle extends Application{
 
         itemChoice.setMaxWidth(50);
         itemChoice.getItems().addAll("Attack", "Defence", "Healing", "Mana");
-        //only wizard and healer have mana
+
 
         itemChoice.setValue("Attack");
 
@@ -232,7 +232,7 @@ public class Battle extends Application{
                 }
             });
         }
-        //for preventing user from using mana potions on classes without mana
+        //for preventing user from using mana potions on classes without mana, so I gray out those buttons
         itemChoice.setOnAction(e -> {
             if(itemChoice.getValue().equals("Mana")){
                 for(Button b : options){
