@@ -59,8 +59,13 @@ public class Hero{
     public void attack(Hero hero){
         int trueDamage;
         trueDamage = this.attack - hero.defence/2;
+        //at least 1 damage
         if(trueDamage <= 0){
             trueDamage = 1;
+        }
+        //if hero is killed, damage is exactly how much it took to kill
+        if(hero.health - trueDamage < 0){
+            trueDamage = hero.health;
         }
         if(!Guard.containsImmune(hero)) {
             System.out.println(this.name + " did " + trueDamage + " damage to " + hero.getName());
@@ -69,6 +74,9 @@ public class Hero{
         }
         else{
             System.out.println(hero.name + " is guarding and is immune to damage!");
+        }
+        if(hero.getHealth() <= 0){
+            Game.getBattleLog().getItems().add(hero.name + " Has Died in Battle!");
         }
     }
     //use item
@@ -83,13 +91,16 @@ public class Hero{
                 }
                 //else just fill the health back to full
                 else {
-                    healed = this.healthBar.getMaxHealth() - this.health;
+                    healed = (int) this.healthBar.getMaxHealth() - this.health;
                     this.health += healed;
                 }
                 //battle log message
                 System.out.println();
                 Game.getBattleLog().getItems().add("A Potion was used on " + Game.getItemLastUsedOn().getName() +
                         " For " + healed + " Health");
+                //update health
+                this.updateHealthBar();
+
                 break;
 
             case DEFENCE:
@@ -111,6 +122,16 @@ public class Hero{
 
     public String toString(){
         return "Hero Type: " + this.getClass() + "\nHero Name: " + this.name + "\nHealth: " + this.health;
+    }
+
+    //update individual health bars, doing this individually to allow for animations to happen
+    public void updateHealthBar(){
+        System.out.println("Update health bar reached");
+        //for the green bar
+        this.healthBar.adjustGreenBar(this.health);
+        //for the label
+        this.healthBar.getHealthInfo().setText(this.name + ": " + this.health + "/" +
+                (int) this.healthBar.getMaxHealth());
     }
 
 

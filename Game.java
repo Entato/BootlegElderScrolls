@@ -15,6 +15,7 @@ public class Game {
     private static int teamTurn = 0;
     private static Label nameLabel = new Label();
     private static Hero itemLastUsedOn;
+    private static int turn = 1;
 
     //getters and setters
     public static int getTeamTurn(){
@@ -33,6 +34,13 @@ public class Game {
 
     public static void setItemLastUsedOn(Hero itemLastUsedOn) {
         Game.itemLastUsedOn = itemLastUsedOn;
+    }
+    public static int getTurn() {
+        return turn;
+    }
+
+    public static void setTurn(int turn) {
+        Game.turn = turn;
     }
 
     //made getters so I can edit them without making a method for each action
@@ -82,25 +90,35 @@ public class Game {
 
     //performs the attacks
     public static void commitAttacks(){
+
+
         for(int i = 0; i < attackList.size(); i++){
+            //if attacker has died, skip that hero's attack
+            if(attackList.get(i)[0].getHealth() <= 0){
+                continue;
+            }
+            //if defender is dead, skip that hero's attack
+            if(attackList.get(i)[1].getHealth() <= 0){
+                battleLog.getItems().add(attackList.get(i)[0].getName() + "'s Attack was wasted On a Dead Body!");
+                continue;
+            }
+
             if(Guard.containsImmune(attackList.get(i)[1])){
                 System.out.println(attackList.get(i)[1].getName() + " is guarding and is immune to " +
                         attackList.get(i)[0].getName() + "'s attack!");
                 continue;
-            } else if (evade(attackList.get(i)[1])){
+            }
+
+            if (evade(attackList.get(i)[1])){
+                //battle log message
+                Game.getBattleLog().getItems().add(attackList.get(i)[1].getName() + " Evaded " +
+                        attackList.get(i)[0].getName() + "'s Attack!");
                 continue;
             }
+
+            //attack if none of the above conditions are met
             attackList.get(i)[0].attack(attackList.get(i)[1]);
 
-            //if attacker has died, removes that hero's attack
-            if(attackList.get(i)[1].getHealth() <= 0){
-                for(Hero[] dead : attackList){
-                    if(dead[0] == attackList.get(i)[1]){
-                        attackList.remove(dead);
-                        break;
-                    }
-                }
-            }
         }
         clearAttacks();
     }
@@ -124,6 +142,7 @@ public class Game {
         heroSelections.clear();
         heroNames.clear();
         battleLog.getItems().clear();
+        Game.turn = 1;
     }
 
 

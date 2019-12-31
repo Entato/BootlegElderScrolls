@@ -1,10 +1,14 @@
 package BootlegElderScrolls;
 
-import javafx.scene.paint.Paint;
+import javafx.scene.control.*;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.*;
 
 public class HealthBar {
-    private int maxHealth;
+    private double maxHealth;
+    private Rectangle greenBar = new Rectangle(100, 20);
+    private Label healthInfo = new Label();
 
 
     //health bar constructor
@@ -12,17 +16,28 @@ public class HealthBar {
         this.maxHealth = maxHealth;
     }
 
-    public Rectangle adjustGreenBar(int newHealth){
-        //calculates how much bar should be filled
-        Rectangle greenBar = new Rectangle((newHealth/this.maxHealth)*100, 20);
+    public Rectangle getGreenBar(){
+        return this.greenBar;
+    }
 
-        return greenBar;
+
+    public void adjustGreenBar(double newHealth){
+        //calculates how much bar should be filled
+        this.greenBar.setWidth((newHealth/this.maxHealth)*100);
+        this.greenBar.setFill(Color.GREEN);
     }
 
 
     //maxHP getter
-    public int getMaxHealth(){
+    public double getMaxHealth(){
         return this.maxHealth;
     }
 
+    public Label getHealthInfo() {
+        return this.healthInfo;
+    }
+
+    public void setHealthInfo(Label healthInfo) {
+        this.healthInfo = healthInfo;
+    }
 }

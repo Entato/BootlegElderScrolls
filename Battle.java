@@ -81,15 +81,16 @@ public class Battle extends Application{
 
         //Health bars
         //team 1
-        VBox team1Bars = new VBox(30);
-        team1Bars.setPadding(new Insets(20, 20, 20, 20));
-        team1Bars.setAlignment(Pos.CENTER);
-        setBars(team1Bars, true);
+        VBox team1Box = new VBox(30);
+        team1Box.setPadding(new Insets(20, 20, 20, 20));
+        team1Box.setAlignment(Pos.CENTER);
+        setBars(team1Box, true);
+
         //team2
-        VBox team2Bars = new VBox(30);
-        team2Bars.setPadding(new Insets(20, 20, 20, 20));
-        team2Bars.setAlignment(Pos.CENTER);
-        setBars(team2Bars, false);
+        VBox team2Box = new VBox(30);
+        team2Box.setPadding(new Insets(20, 20, 20, 20));
+        team2Box.setAlignment(Pos.CENTER);
+        setBars(team2Box, false);
 
         //battle log
         //bottom left box is for name info and battle log
@@ -119,8 +120,8 @@ public class Battle extends Application{
 
         //adds layouts to border pane
         borderPane.setBottom(bottomBox);
-        borderPane.setLeft(team1Bars);
-        borderPane.setRight(team2Bars);
+        borderPane.setLeft(team1Box);
+        borderPane.setRight(team2Box);
 
         //creates scene and returns it
         Scene battleScene = new Scene(borderPane, 900, 550);
@@ -164,10 +165,7 @@ public class Battle extends Application{
                 hBox.getChildren().set(1, flowPane);
 
                 //if there are more actions left for the player
-                if(Game.getTeamTurn() < 2) {
-                    //increase counter for next turn
-                    Game.setTeamTurn(Game.getTeamTurn() + 1);
-
+                if(team1Alive()) {
                     //new name label
                     Game.getNameLabel().setText("What Will " + Game.getTeam1().get(Game.getTeamTurn()).getName() + " Do?");
                 } else {
@@ -180,7 +178,24 @@ public class Battle extends Application{
         hBox.getChildren().set(1, bigBox);
 
     }
-
+    //check if there are any other heroes in team 1 that can still attack
+    public boolean team1Alive(){
+        //start one after current one
+        int start = Game.getTeamTurn() + 1;
+        //there are only 3 heroes max (index 0, 1, 2)
+        if(start > 2){
+            return false;
+        }
+        for(int i = start; i < Game.getTeam1().size(); i++){
+            if(Game.getTeam1().get(i).getHealth() > 0){
+                Game.setTeamTurn(i);
+                return true;
+            }
+        }
+        //if no one else is alive, return false
+        return false;
+    }
+    // item button method ----------------------------------------------------------------------------------------------
     public void itemButtonMethod(HBox hBox, FlowPane flowPane){
         //layout
         VBox bigBox = new VBox(20);
@@ -234,11 +249,12 @@ public class Battle extends Application{
                 hBox.getChildren().set(1, flowPane);
 
                 //if there are more actions left for the player
-                if(Game.getTeamTurn() < 2) {
-                    //increase counter for next turn
-                    Game.setTeamTurn(Game.getTeamTurn() + 1);
+                if(team1Alive()) {
                     //new name label
                     Game.getNameLabel().setText("What Will " + Game.getTeam1().get(Game.getTeamTurn()).getName() + " Do?");
+                }
+                else {
+                    AI();
                 }
             });
         }
@@ -248,6 +264,10 @@ public class Battle extends Application{
                 for(Button b : options){
                     if(!(Game.getTeam1().get(options.indexOf(b)) instanceof Wizard) &&
                             !(Game.getTeam1().get(options.indexOf(b)) instanceof Healer)){
+                        b.setDisable(true);
+                    }
+                    //also gray out button if hero has died
+                    if(Game.getTeam1().get(options.indexOf(b)).getHealth() <= 0){
                         b.setDisable(true);
                     }
                 }
@@ -364,6 +384,7 @@ public class Battle extends Application{
                 for(int i = 0; i < 3; i++){
                     Game.getTeam2().add(AIPick(i, picks));
                 }
+                System.out.println(Game.getTeam2().toString());
 
                 //makes window show the battle scene
                 stage.setScene(createBattleScene());
@@ -375,10 +396,10 @@ public class Battle extends Application{
     //setting health bars method ---------------------------------------------------------------------------------------
     public static void setBars(VBox box, boolean team){
         Rectangle mainBar;
-        Rectangle greenBar;
+        Pane completeBar;
 
-        for(int i = 0; i < Game.getTeam1().size(); i++){
-            Label healthInfo;
+        for(int i = 0; i < 3; i++){
+
             //creating health bar
 
             mainBar = new Rectangle(100, 20);
@@ -388,27 +409,30 @@ public class Battle extends Application{
 
             //for first team
             if(team) {
-                greenBar = Game.getTeam1().get(i).getHealthBar().adjustGreenBar(Game.getTeam1().get(i).getHealth());
 
-                healthInfo = new Label(Game.getTeam1().get(i).getName() + ": " +
+                Game.getTeam1().get(i).getHealthBar().getHealthInfo().setText(Game.getTeam1().get(i).getName() + ": " +
                         Game.getTeam1().get(i).getHealth() +
-                        "/" + Game.getTeam1().get(i).getHealthBar().getMaxHealth());
+                        "/" + (int) Game.getTeam1().get(i).getHealthBar().getMaxHealth());
+                Game.getTeam1().get(i).getHealthBar().getGreenBar().setFill(Color.GREEN);
+                completeBar = new Pane();
+                completeBar.getChildren().addAll(mainBar, Game.getTeam1().get(i).getHealthBar().getGreenBar());
+
+                //adding it to the layout
+                box.getChildren().addAll(Game.getTeam1().get(i).getHealthBar().getHealthInfo(), completeBar);
             }
             //for second team
             else{
-                greenBar = Game.getTeam2().get(i).getHealthBar().adjustGreenBar(Game.getTeam2().get(i).getHealth());
-
-                healthInfo = new Label(Game.getTeam2().get(i).getName() + ": " +
+                Game.getTeam2().get(i).getHealthBar().getHealthInfo().setText(Game.getTeam2().get(i).getName() + ": " +
                         Game.getTeam2().get(i).getHealth() +
-                        "/" + Game.getTeam2().get(i).getHealthBar().getMaxHealth());
+                        "/" + (int) Game.getTeam2().get(i).getHealthBar().getMaxHealth());
+                Game.getTeam2().get(i).getHealthBar().getGreenBar().setFill(Color.GREEN);
+                completeBar = new Pane();
+                completeBar.getChildren().addAll(mainBar, Game.getTeam2().get(i).getHealthBar().getGreenBar());
+
+                //adding it to the layout
+                box.getChildren().addAll(Game.getTeam2().get(i).getHealthBar().getHealthInfo(), completeBar);
             }
-            greenBar.setFill(Color.GREEN);
 
-            Pane completeBar = new Pane();
-            completeBar.getChildren().addAll(mainBar, greenBar);
-
-            //adding it to the layout
-            box.getChildren().addAll(healthInfo, completeBar);
         }
     }
 
@@ -421,13 +445,41 @@ public class Battle extends Application{
                 continue;
             }
 
-            rand = random.nextInt(Game.getTeam1().size());
+            while(true) {
+                rand = random.nextInt(Game.getTeam1().size());
+                //don't want to attack a hero that's already dead
+                if(Game.getTeam1().get(rand).getHealth() > 0){
+                    break;
+                }
+            }
 
             Game.addAttack(Game.getTeam2().get(i), Game.getTeam1().get(rand));
         }
         Game.commitAttacks();
-        Game.setTeamTurn(0);
 
+        //update health bars
+        //team1
+        for(Hero h : Game.getTeam1()){
+            h.updateHealthBar();
+            System.out.println("team 1: " + h.getHealth());
+            System.out.println("Width: " + h.getHealthBar().getGreenBar().getWidth());
+        }
+        for(Hero h : Game.getTeam2()){
+            h.updateHealthBar();
+            System.out.println("team 2: " + h.getHealth());
+            System.out.println("Width: " + h.getHealthBar().getGreenBar().getWidth());
+        }
+
+        //for next turn
+        Game.setTurn(Game.getTurn() + 1);
+        Game.getBattleLog().getItems().add("Turn " + Game.getTurn() + ":");
+        for(int i = 0; i < Game.getTeam1().size(); i++) {
+            //sets it as first alive hero
+            if(Game.getTeam1().get(i).getHealth() > 0){
+                Game.setTeamTurn(i);
+                break;
+            }
+        }
         Game.getNameLabel().setText("What Will " + Game.getTeam1().get(Game.getTeamTurn()).getName() + " Do?");
     }
     //main method ------------------------------------------------------------------------------------------------------
