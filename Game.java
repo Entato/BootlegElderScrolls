@@ -101,8 +101,8 @@ public class Game {
                     }
                 }
             }
-
         }
+        clearAttacks();
     }
 
     //random check to see if defender evades
