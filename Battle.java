@@ -418,6 +418,9 @@ public class Battle extends Application{
             Game.addAttack(Game.getTeam2().get(i), Game.getTeam1().get(rand));
         }
         Game.commitAttacks();
+        Game.setTeamTurn(0);
+
+        Game.getNameLabel().setText("What Will " + Game.getTeam1().get(Game.getTeamTurn()).getName() + " Do?");
     }
     //main method ------------------------------------------------------------------------------------------------------
     public static void main(String[] args){
