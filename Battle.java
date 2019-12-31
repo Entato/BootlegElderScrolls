@@ -146,11 +146,18 @@ public class Battle extends Application{
         Button button;
 
         for(Hero h : Game.getTeam2()){
+
             button = new Button(h.getName());
             button.setPrefSize(100, 40);
             options.add(button);
             Button finalButton = button;
             optionBox.getChildren().add(button);
+            
+            //disables button if AI is dead
+            if (h.getHealth() <= 0){
+                button.setDisable(true);
+            }
+            
             button.setOnAction(e -> {
                 Game.addAttack(Game.getTeam1().get(Game.getTeamTurn()), Game.getTeam2().get(options.indexOf(finalButton)));
                 //apply old layout back
@@ -160,6 +167,7 @@ public class Battle extends Application{
                 if(Game.getTeamTurn() < 2) {
                     //increase counter for next turn
                     Game.setTeamTurn(Game.getTeamTurn() + 1);
+
                     //new name label
                     Game.getNameLabel().setText("What Will " + Game.getTeam1().get(Game.getTeamTurn()).getName() + " Do?");
                 } else {
