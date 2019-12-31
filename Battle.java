@@ -146,11 +146,18 @@ public class Battle extends Application{
         Button button;
 
         for(Hero h : Game.getTeam2()){
+
             button = new Button(h.getName());
             button.setPrefSize(100, 40);
             options.add(button);
             Button finalButton = button;
             optionBox.getChildren().add(button);
+            
+            //disables button if AI is dead
+            if (h.getHealth() <= 0){
+                button.setDisable(true);
+            }
+            
             button.setOnAction(e -> {
                 Game.addAttack(Game.getTeam1().get(Game.getTeamTurn()), Game.getTeam2().get(options.indexOf(finalButton)));
                 //apply old layout back
@@ -160,8 +167,11 @@ public class Battle extends Application{
                 if(Game.getTeamTurn() < 2) {
                     //increase counter for next turn
                     Game.setTeamTurn(Game.getTeamTurn() + 1);
+
                     //new name label
                     Game.getNameLabel().setText("What Will " + Game.getTeam1().get(Game.getTeamTurn()).getName() + " Do?");
+                } else {
+                    AI();
                 }
             });
         }
@@ -401,6 +411,25 @@ public class Battle extends Application{
             box.getChildren().addAll(healthInfo, completeBar);
         }
     }
+
+    public void AI(){
+        Random random = new Random();
+        int rand;
+        //randomly picks hero to attack
+        for(int i = 0; i < Game.getTeam2().size(); i++){
+            if (Game.getTeam2().get(i).getHealth() <= 0){
+                continue;
+            }
+
+            rand = random.nextInt(Game.getTeam1().size());
+
+            Game.addAttack(Game.getTeam2().get(i), Game.getTeam1().get(rand));
+        }
+        Game.commitAttacks();
+        Game.setTeamTurn(0);
+
+        Game.getNameLabel().setText("What Will " + Game.getTeam1().get(Game.getTeamTurn()).getName() + " Do?");
+    }
     //main method ------------------------------------------------------------------------------------------------------
     public static void main(String[] args){
         //GUI
@@ -581,7 +610,6 @@ public class Battle extends Application{
                 }
             }
             Game.addAttack(AI.get(i), player.get(rand));
-
         }
 
     }
