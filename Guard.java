@@ -6,6 +6,11 @@ class Guard{
     private static ArrayList<Hero> immune = new ArrayList<Hero>();
     private static ArrayList<Hero> unGuardable = new ArrayList<Hero>();
 
+    public static void addGuard(Hero hero){
+        addImmune(hero);
+        addUnGuardable(hero);
+    }
+
     public static void addImmune(Hero hero){
         immune.add(hero);
     }

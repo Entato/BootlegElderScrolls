@@ -113,6 +113,7 @@ public class Battle extends Application{
         //BUTTON ACTIONS
         attackButton.setOnAction(e -> attackButtonMethod(bottomBox, battleActions)); //passing layouts for temp change
         itemButton.setOnAction(e -> itemButtonMethod(bottomBox, battleActions));
+        guardButton.setOnAction(e -> guardButtonMethod());
 
         //adds buttons to layouts
         battleActions.getChildren().addAll(attackButton, guardButton, itemButton, specialButton);
@@ -163,6 +164,11 @@ public class Battle extends Application{
                 Game.addAttack(Game.getTeam1().get(Game.getTeamTurn()), Game.getTeam2().get(options.indexOf(finalButton)));
                 //apply old layout back
                 hBox.getChildren().set(1, flowPane);
+
+                //removes guard if guard was used last turn
+                if (Guard.containsUnGuardable(Game.getTeam1().get(Game.getTeamTurn()))){
+                    Guard.removeUnGuardable(Game.getTeam1().get(Game.getTeamTurn()));
+                }
 
                 //if there are more actions left for the player
                 if(team1Alive()) {
@@ -482,6 +488,24 @@ public class Battle extends Application{
         }
         Game.getNameLabel().setText("What Will " + Game.getTeam1().get(Game.getTeamTurn()).getName() + " Do?");
     }
+
+    public void guardButtonMethod(){
+        //checks if the player guarded last turn
+        if (Guard.containsUnGuardable(Game.getTeam1().get(Game.getTeamTurn()))){
+            Game.getBattleLog().getItems().add(Game.getTeam1().get(Game.getTeamTurn()).getName() + " cannot guard twice");
+        } else {
+            Guard.addGuard(Game.getTeam1().get(Game.getTeamTurn()));
+
+            //if there are more actions left for the player
+            if(team1Alive()) {
+                //new name label
+                Game.getNameLabel().setText("What Will " + Game.getTeam1().get(Game.getTeamTurn()).getName() + " Do?");
+            } else {
+                AI();
+            }
+        }
+    }
+
     //main method ------------------------------------------------------------------------------------------------------
     public static void main(String[] args){
         //GUI

@@ -106,6 +106,8 @@ public class Game {
             if(Guard.containsImmune(attackList.get(i)[1])){
                 System.out.println(attackList.get(i)[1].getName() + " is guarding and is immune to " +
                         attackList.get(i)[0].getName() + "'s attack!");
+                battleLog.getItems().add(attackList.get(i)[1].getName() + " is guarding and is immune to " +
+                        attackList.get(i)[0].getName() + "'s attack!");
                 continue;
             }
 
@@ -121,6 +123,7 @@ public class Game {
 
         }
         clearAttacks();
+        Guard.clearImmune();
     }
 
     //random check to see if defender evades
