@@ -107,7 +107,15 @@ public class Battle extends Application{
         //battle log is a static variable stored in the game class
         scroller.setContent(Game.getBattleLog());
         logBox.getChildren().addAll(logLabel, scroller);
-        bottomLeftBox.getChildren().addAll(nameBox, logBox);
+
+        //back button
+        Button backButton = new Button("<");
+        backButton.setPrefSize(40, 40);
+        backButton.setOnAction(e -> {
+            bottomBox.getChildren().set(1, battleActions);
+        });
+
+        bottomLeftBox.getChildren().addAll(nameBox, logBox, backButton);
         bottomLeftBox.setAlignment(Pos.CENTER);
 
         //BUTTON ACTIONS
