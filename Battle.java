@@ -52,22 +52,22 @@ public class Battle extends Application{
 
         //action layout
         FlowPane battleActions = new FlowPane();
-        battleActions.setPrefSize(400, 200);
+        battleActions.setPrefSize(350, 200);
         battleActions.setHgap(40);
         battleActions.setVgap(20);
-        battleActions.setAlignment(Pos.CENTER);
-        battleActions.setPadding(new Insets(20, 20, 20, 20));
+        battleActions.setAlignment(Pos.CENTER_RIGHT);
+        battleActions.setPadding(new Insets(20, 0, 20, 20));
 
 
         //action buttons and labels
         Button attackButton = new Button("Attack");
-        attackButton.setPrefSize(150, 60);
+        attackButton.setPrefSize(130, 60);
         Button guardButton = new Button("Guard");
-        guardButton.setPrefSize(150, 60);
+        guardButton.setPrefSize(130, 60);
         Button itemButton = new Button("Use Item");
-        itemButton.setPrefSize(150, 60);
+        itemButton.setPrefSize(130, 60);
         Button specialButton = new Button("Special");
-        specialButton.setPrefSize(150, 60);
+        specialButton.setPrefSize(130, 60);
 
         //Tells user who is attacking
         VBox nameBox = new VBox();
@@ -108,14 +108,9 @@ public class Battle extends Application{
         scroller.setContent(Game.getBattleLog());
         logBox.getChildren().addAll(logLabel, scroller);
 
-        //back button
-        Button backButton = new Button("<");
-        backButton.setPrefSize(40, 40);
-        backButton.setOnAction(e -> {
-            bottomBox.getChildren().set(1, battleActions);
-        });
 
-        bottomLeftBox.getChildren().addAll(nameBox, logBox, backButton);
+
+        bottomLeftBox.getChildren().addAll(nameBox, logBox);
         bottomLeftBox.setAlignment(Pos.CENTER);
 
         //BUTTON ACTIONS
@@ -133,7 +128,7 @@ public class Battle extends Application{
         borderPane.setRight(team2Box);
 
         //creates scene and returns it
-        Scene battleScene = new Scene(borderPane, 900, 550);
+        Scene battleScene = new Scene(borderPane, 1000, 550);
 
         return battleScene;
     }
@@ -150,6 +145,14 @@ public class Battle extends Application{
 
         //label
         Label optionsLabel = new Label("Who Will " + Game.getTeam1().get(Game.getTeamTurn()).getName() + " Attack?");
+
+        //back button
+        Button backButton = new Button("<");
+        backButton.setPrefSize(40, 40);
+        optionBox.getChildren().add(backButton);
+        backButton.setOnAction(e -> {
+            hBox.getChildren().set(1, flowPane);
+        });
 
         //storing buttons so I can reference them later
         ArrayList<Button> options = new ArrayList<Button>();
@@ -169,6 +172,12 @@ public class Battle extends Application{
             }
             
             button.setOnAction(e -> {
+
+                //if guarded last turn, makes it eligible to guard again next turn
+                if(Guard.containsUnGuardable(Game.getTeam1().get(Game.getTeamTurn()))){
+                    Guard.removeUnGuardable(Game.getTeam1().get(Game.getTeamTurn()));
+                }
+                
                 Game.addAttack(Game.getTeam1().get(Game.getTeamTurn()), Game.getTeam2().get(options.indexOf(finalButton)));
                 //apply old layout back
                 hBox.getChildren().set(1, flowPane);
@@ -219,11 +228,18 @@ public class Battle extends Application{
         optionBox.setAlignment(Pos.CENTER);
         optionBox.setStyle("-fx-border-color: black");
 
+        //back button
+        Button backButton = new Button("<");
+        backButton.setPrefSize(40, 40);
+        optionBox.getChildren().add(backButton);
+        backButton.setOnAction(e -> {
+            hBox.getChildren().set(1, flowPane);
+        });
 
 
         ChoiceBox itemChoice = new ChoiceBox();
 
-        itemChoice.setMaxWidth(50);
+        itemChoice.setMaxWidth(100);
         itemChoice.getItems().addAll("Attack", "Defence", "Healing", "Mana");
 
 
@@ -238,11 +254,17 @@ public class Battle extends Application{
 
         for(Hero h : Game.getTeam1()){
             button = new Button(h.getName());
-            button.setPrefSize(100, 40);
+            button.setPrefSize(80, 40);
             options.add(button);
             Button finalButton = button;
             optionBox.getChildren().add(button);
             button.setOnAction(e -> {
+
+                //if guarded last turn, makes it eligible to guard again next turn
+                if(Guard.containsUnGuardable(Game.getTeam1().get(Game.getTeamTurn()))){
+                    Guard.removeUnGuardable(Game.getTeam1().get(Game.getTeamTurn()));
+                }
+
                 //used for battle log
                 Game.setItemLastUsedOn(Game.getTeam1().get(options.indexOf(finalButton)));
                 switch (itemChoice.getValue().toString()){
@@ -494,13 +516,17 @@ public class Battle extends Application{
                 break;
             }
         }
+
+        //clears immune
+        Guard.clearImmune();
         Game.getNameLabel().setText("What Will " + Game.getTeam1().get(Game.getTeamTurn()).getName() + " Do?");
     }
 
+    //guard button method ----------------------------------------------------------------------------------------------
     public void guardButtonMethod(){
         //checks if the player guarded last turn
         if (Guard.containsUnGuardable(Game.getTeam1().get(Game.getTeamTurn()))){
-            Game.getBattleLog().getItems().add(Game.getTeam1().get(Game.getTeamTurn()).getName() + " cannot guard twice");
+            Game.getBattleLog().getItems().add(Game.getTeam1().get(Game.getTeamTurn()).getName() + " Cannot Guard in a Row!");
         } else {
             Guard.addGuard(Game.getTeam1().get(Game.getTeamTurn()));
 
