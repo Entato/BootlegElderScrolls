@@ -177,7 +177,7 @@ public class Battle extends Application{
                 if(Guard.containsUnGuardable(Game.getTeam1().get(Game.getTeamTurn()))){
                     Guard.removeUnGuardable(Game.getTeam1().get(Game.getTeamTurn()));
                 }
-                
+
                 Game.addAttack(Game.getTeam1().get(Game.getTeamTurn()), Game.getTeam2().get(options.indexOf(finalButton)));
                 //apply old layout back
                 hBox.getChildren().set(1, flowPane);
@@ -220,6 +220,7 @@ public class Battle extends Application{
     }
     // item button method ----------------------------------------------------------------------------------------------
     public void itemButtonMethod(HBox hBox, FlowPane flowPane){
+
         //layout
         VBox bigBox = new VBox(20);
         bigBox.setPadding(new Insets(20, 20, 20, 20));
@@ -238,6 +239,7 @@ public class Battle extends Application{
 
 
         ChoiceBox itemChoice = new ChoiceBox();
+
 
         itemChoice.setMaxWidth(100);
         itemChoice.getItems().addAll("Attack", "Defence", "Healing", "Mana");

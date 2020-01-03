@@ -27,15 +27,18 @@ public class MainMenu{
         Button quitButton = new Button("Quit");
         Button infoButton = new Button("How To Play");
 
-        //main menu layout
+        //main menu layouts
+        HBox newOrOldLayout = new HBox(10);
         VBox menuLayout = new VBox(20);
         //design
         menuLayout.setAlignment(Pos.TOP_CENTER);
         menuLayout.setPadding(new Insets(20, 20, 20, 20));
+        newOrOldLayout.setAlignment(Pos.CENTER);
 
 
         //add labels and buttons to layout
-        menuLayout.getChildren().addAll(title, newGameButton, loadGameButton, quitButton, infoButton);
+        newOrOldLayout.getChildren().addAll(newGameButton, loadGameButton);
+        menuLayout.getChildren().addAll(title, newOrOldLayout, quitButton, infoButton);
         //creates scene
         Scene menuScene = new Scene(menuLayout, 400, 300);
         //sets as scene to be displayed
