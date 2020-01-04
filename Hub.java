@@ -9,7 +9,7 @@ import javafx.stage.Stage;
 
 class Hub{
     //GUI for the hub
-    public static Scene hubScene(Stage stage){
+    public static Scene hubScene(){
         BorderPane borderPane = new BorderPane();
 
         VBox partyList = new VBox();
@@ -26,7 +26,7 @@ class Hub{
         //button to start battle
         Button startBattle = new Button("Battle");
         startBattle.setOnAction(e -> {
-            stage.setScene(Battle.createBattleScene());
+            MainMenu.getMainStage().setScene(Battle.createBattleScene());
         });
 
         //adds everything to borderPane

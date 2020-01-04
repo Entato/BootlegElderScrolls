@@ -320,7 +320,7 @@ public class Battle{
     }
 
     //create hero selection scene method -------------------------------------------------------------------------------
-    public static Scene createHeroSelectionScene(Stage stage){
+    public static Scene createHeroSelectionScene(){
         String[] heroTypes = {"Archer", "Assassin", "Healer", "Knight", "Wizard"};
         BorderPane borderPane = new BorderPane();
         HBox hBox = new HBox();
@@ -422,7 +422,7 @@ public class Battle{
                 System.out.println(Game.getTeam2().toString());
 
                 //makes window show the battle scene
-                stage.setScene(Hub.hubScene(stage));
+                MainMenu.getMainStage().setScene(Hub.hubScene());
             }
         });
 

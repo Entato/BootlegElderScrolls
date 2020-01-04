@@ -12,19 +12,24 @@ import javafx.stage.*;
 public class MainMenu extends Application{
 
     private static boolean begin;
+    private static Stage mainStage;
 
     //start method -----------------------------------------------------------------------------------------------------
     public void start(Stage primaryStage) throws Exception{
-        Stage battleStage = primaryStage;
-        battleStage.setTitle("Fantasy Showdown");
+        mainStage = primaryStage;
+        mainStage.setTitle("Fantasy Showdown");
 
         boolean run = display();
 
         //if player pressed start on menu
         if(run){
-            battleStage.setScene(Battle.createHeroSelectionScene(battleStage));
-            battleStage.show();
+            mainStage.setScene(Battle.createHeroSelectionScene());
+            mainStage.show();
         }
+    }
+
+    public static Stage getMainStage(){
+        return mainStage;
     }
 
     //main method ------------------------------------------------------------------------------------------------------
