@@ -507,9 +507,9 @@ public class Battle{
 
         //checks if a team is dead
         if(checkTeamDead(Game.getTeam2())){
-            System.out.println("you win");
+            MainMenu.getMainStage().setScene(Hub.hubScene());
         } else if (checkTeamDead(Game.getTeam1())){
-            System.out.println("you lose");
+            MainMenu.getMainStage().setScene(Hub.hubScene());
         }
 
         //for next turn
