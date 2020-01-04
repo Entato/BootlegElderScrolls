@@ -68,13 +68,13 @@ public class Battle{
 
         //Health bars
         //team 1
-        VBox team1Box = new VBox(30);
+        VBox team1Box = new VBox(50);
         team1Box.setPadding(new Insets(20, 20, 20, 20));
         team1Box.setAlignment(Pos.CENTER);
         setBars(team1Box, true);
 
         //team2
-        VBox team2Box = new VBox(30);
+        VBox team2Box = new VBox(50);
         team2Box.setPadding(new Insets(20, 20, 20, 20));
         team2Box.setAlignment(Pos.CENTER);
         setBars(team2Box, false);
@@ -115,7 +115,7 @@ public class Battle{
         borderPane.setRight(team2Box);
 
         //creates scene and returns it
-        Scene battleScene = new Scene(borderPane, 1000, 550);
+        Scene battleScene = new Scene(borderPane, 1000, 650);
 
         return battleScene;
     }
