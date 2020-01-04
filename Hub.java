@@ -18,8 +18,8 @@ class Hub{
         partyList.getChildren().add(party);
 
         //adds all the party member to a vBox
-        for (int i = 0; i < Game.getTeam1().size(); i++){
-            Label member = new Label(Game.getTeam1().get(i).getName());
+        for (int i = 0; i < Player.getPlayerTeam().size(); i++){
+            Label member = new Label(Player.getPlayerTeam().get(i).getName());
             partyList.getChildren().add(member);
         }
 

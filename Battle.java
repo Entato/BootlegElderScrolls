@@ -505,11 +505,25 @@ public class Battle{
             System.out.println("Width: " + h.getHealthBar().getGreenBar().getWidth());
         }
 
-        //checks if a team is dead
+        //checks if battle is over
         if(checkTeamDead(Game.getTeam2())){
             MainMenu.getMainStage().setScene(Hub.hubScene());
+            Game.reset();
+            //AI creates team
+            //keep track of what AI has chosen
+            ArrayList<Integer> picks = new ArrayList<Integer>();
+            for(int i = 0; i < 3; i++){
+                Game.getTeam2().add(AIPick(i, picks));
+            }
         } else if (checkTeamDead(Player.getPlayerTeam())){
             MainMenu.getMainStage().setScene(Hub.hubScene());
+            Game.reset();
+            //AI creates team
+            //keep track of what AI has chosen
+            ArrayList<Integer> picks = new ArrayList<Integer>();
+            for(int i = 0; i < 3; i++){
+                Game.getTeam2().add(AIPick(i, picks));
+            }
         }
 
         //for next turn
