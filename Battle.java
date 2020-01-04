@@ -518,6 +518,13 @@ public class Battle extends Application{
             System.out.println("Width: " + h.getHealthBar().getGreenBar().getWidth());
         }
 
+        //checks if a team is dead
+        if(checkTeamDead(Game.getTeam2())){
+            System.out.println("you win");
+        } else if (checkTeamDead(Game.getTeam1())){
+            System.out.println("you lose");
+        }
+
         //for next turn
         Game.setTurn(Game.getTurn() + 1);
         Game.getBattleLog().getItems().add("Turn " + Game.getTurn() + ":");
