@@ -1,5 +1,6 @@
 package BootlegElderScrolls;
 
+import javafx.application.Application;
 import javafx.geometry.*;
 import javafx.geometry.Pos;
 import javafx.scene.*;
@@ -8,9 +9,30 @@ import javafx.scene.layout.*;
 import javafx.stage.*;
 
 
-public class MainMenu{
+public class MainMenu extends Application{
 
     private static boolean begin;
+
+    //start method -----------------------------------------------------------------------------------------------------
+    public void start(Stage primaryStage) throws Exception{
+        Stage battleStage = primaryStage;
+        battleStage.setTitle("Fantasy Showdown");
+
+        boolean run = display();
+
+        //if player pressed start on menu
+        if(run){
+            battleStage.setScene(Battle.createHeroSelectionScene(battleStage));
+            battleStage.show();
+        }
+    }
+
+    //main method ------------------------------------------------------------------------------------------------------
+    public static void main(String[] args){
+        //GUI
+        //launches GUI (start method)
+        launch(args);
+    }
 
     public static boolean display(){
 

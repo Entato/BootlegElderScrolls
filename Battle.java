@@ -25,22 +25,9 @@ public class Battle extends Application{
     static Scanner reader = new Scanner(System.in);
 
     //GUI METHODS
-    //start method -----------------------------------------------------------------------------------------------------
-    public void start(Stage primaryStage) throws Exception{
-        Stage battleStage = primaryStage;
-        battleStage.setTitle("Fantasy Showdown");
-
-        boolean run = MainMenu.display();
-
-        //if player pressed start on menu
-        if(run){
-            battleStage.setScene(createHeroSelectionScene(battleStage));
-            battleStage.show();
-        }
-    }
 
     //creating battle scene method -------------------------------------------------------------------------------------
-    public Scene createBattleScene(){
+    public static Scene createBattleScene(){
 
         //border pane layout allows for stacking layout easily
         BorderPane borderPane = new BorderPane();
@@ -133,7 +120,7 @@ public class Battle extends Application{
         return battleScene;
     }
 
-    public boolean checkTeamDead(ArrayList<Hero> team){
+    public static boolean checkTeamDead(ArrayList<Hero> team){
         boolean dead = true;
         for (int i = 0; i < team.size(); i++){
             if (team.get(i).getHealth() > 0){
@@ -144,7 +131,7 @@ public class Battle extends Application{
     }
 
     //attack button method ---------------------------------------------------------------------------------------------
-    public void attackButtonMethod(HBox hBox, FlowPane flowPane){
+    public static void attackButtonMethod(HBox hBox, FlowPane flowPane){
         //layout
         VBox bigBox = new VBox(20);
         bigBox.setPadding(new Insets(20, 20, 20, 20));
@@ -212,7 +199,7 @@ public class Battle extends Application{
 
     }
     //check if there are any other heroes in team 1 that can still attack
-    public boolean team1Alive(){
+    public static boolean team1Alive(){
         //start one after current one
         int start = Game.getTeamTurn() + 1;
         //there are only 3 heroes max (index 0, 1, 2)
@@ -229,7 +216,7 @@ public class Battle extends Application{
         return false;
     }
     // item button method ----------------------------------------------------------------------------------------------
-    public void itemButtonMethod(HBox hBox, FlowPane flowPane){
+    public static void itemButtonMethod(HBox hBox, FlowPane flowPane){
 
         //layout
         VBox bigBox = new VBox(20);
@@ -333,7 +320,7 @@ public class Battle extends Application{
     }
 
     //create hero selection scene method -------------------------------------------------------------------------------
-    public Scene createHeroSelectionScene(Stage stage){
+    public static Scene createHeroSelectionScene(Stage stage){
         String[] heroTypes = {"Archer", "Assassin", "Healer", "Knight", "Wizard"};
         BorderPane borderPane = new BorderPane();
         HBox hBox = new HBox();
@@ -484,7 +471,7 @@ public class Battle extends Application{
         }
     }
 
-    public void AI(){
+    public static void AI(){
         Random random = new Random();
         int rand;
         //randomly picks hero to attack
@@ -542,7 +529,7 @@ public class Battle extends Application{
     }
 
     //guard button method ----------------------------------------------------------------------------------------------
-    public void guardButtonMethod(){
+    public static void guardButtonMethod(){
         //checks if the player guarded last turn
         if (Guard.containsUnGuardable(Game.getTeam1().get(Game.getTeamTurn()))){
             Game.getBattleLog().getItems().add(Game.getTeam1().get(Game.getTeamTurn()).getName() + " Cannot Guard in a Row!");
@@ -557,13 +544,6 @@ public class Battle extends Application{
                 AI();
             }
         }
-    }
-
-    //main method ------------------------------------------------------------------------------------------------------
-    public static void main(String[] args){
-        //GUI
-        //launches GUI (start method)
-        launch(args);
     }
 
     public static Hero AIPick(int i, ArrayList<Integer> picks){
