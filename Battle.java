@@ -483,7 +483,7 @@ public class Battle extends Application{
 
         }
     }
-
+    //AI ---------------------------------------------------------------------------------------------------------------
     public void AI(){
         Random random = new Random();
         int rand;
