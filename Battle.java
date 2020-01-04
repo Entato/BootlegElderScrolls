@@ -21,7 +21,7 @@ import javafx.stage.*;
 import java.util.*;
 
 
-public class Battle extends Application{
+public class Battle{
     static Scanner reader = new Scanner(System.in);
 
     //GUI METHODS
