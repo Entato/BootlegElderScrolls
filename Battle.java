@@ -422,7 +422,7 @@ public class Battle{
                 System.out.println(Game.getTeam2().toString());
 
                 //makes window show the battle scene
-                stage.setScene(createBattleScene());
+                stage.setScene(Hub.hubScene(stage));
             }
         });
 
