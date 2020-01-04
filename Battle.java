@@ -133,6 +133,16 @@ public class Battle extends Application{
         return battleScene;
     }
 
+    public boolean checkTeamDead(ArrayList<Hero> team){
+        boolean dead = true;
+        for (int i = 0; i < team.size(); i++){
+            if (team.get(i).getHealth() > 0){
+                dead = false;
+            }
+        }
+        return dead;
+    }
+
     //attack button method ---------------------------------------------------------------------------------------------
     public void attackButtonMethod(HBox hBox, FlowPane flowPane){
         //layout
