@@ -63,7 +63,7 @@ public class Battle{
         nameBox.setAlignment(Pos.TOP_CENTER);
 
         Game.getNameLabel().setWrapText(true);
-        Game.getNameLabel().setText("What Will " + Game.getTeam1().get(0).getName() + " Do?");
+        Game.getNameLabel().setText("What Will " + Player.getPlayerTeam().get(0).getName() + " Do?");
         nameBox.getChildren().addAll(Game.getNameLabel());
 
         //Health bars
@@ -141,7 +141,7 @@ public class Battle{
         optionBox.setStyle("-fx-border-color: black");
 
         //label
-        Label optionsLabel = new Label("Who Will " + Game.getTeam1().get(Game.getTeamTurn()).getName() + " Attack?");
+        Label optionsLabel = new Label("Who Will " + Player.getPlayerTeam().get(Game.getTeamTurn()).getName() + " Attack?");
 
         //back button
         Button backButton = new Button("<");
@@ -171,23 +171,23 @@ public class Battle{
             button.setOnAction(e -> {
 
                 //if guarded last turn, makes it eligible to guard again next turn
-                if(Guard.containsUnGuardable(Game.getTeam1().get(Game.getTeamTurn()))){
-                    Guard.removeUnGuardable(Game.getTeam1().get(Game.getTeamTurn()));
+                if(Guard.containsUnGuardable(Player.getPlayerTeam().get(Game.getTeamTurn()))){
+                    Guard.removeUnGuardable(Player.getPlayerTeam().get(Game.getTeamTurn()));
                 }
 
-                Game.addAttack(Game.getTeam1().get(Game.getTeamTurn()), Game.getTeam2().get(options.indexOf(finalButton)));
+                Game.addAttack(Player.getPlayerTeam().get(Game.getTeamTurn()), Game.getTeam2().get(options.indexOf(finalButton)));
                 //apply old layout back
                 hBox.getChildren().set(1, flowPane);
 
                 //removes guard if guard was used last turn
-                if (Guard.containsUnGuardable(Game.getTeam1().get(Game.getTeamTurn()))){
-                    Guard.removeUnGuardable(Game.getTeam1().get(Game.getTeamTurn()));
+                if (Guard.containsUnGuardable(Player.getPlayerTeam().get(Game.getTeamTurn()))){
+                    Guard.removeUnGuardable(Player.getPlayerTeam().get(Game.getTeamTurn()));
                 }
 
                 //if there are more actions left for the player
                 if(team1Alive()) {
                     //new name label
-                    Game.getNameLabel().setText("What Will " + Game.getTeam1().get(Game.getTeamTurn()).getName() + " Do?");
+                    Game.getNameLabel().setText("What Will " + Player.getPlayerTeam().get(Game.getTeamTurn()).getName() + " Do?");
                 } else {
                     AI();
                 }
@@ -206,8 +206,8 @@ public class Battle{
         if(start > 2){
             return false;
         }
-        for(int i = start; i < Game.getTeam1().size(); i++){
-            if(Game.getTeam1().get(i).getHealth() > 0){
+        for(int i = start; i < Player.getPlayerTeam().size(); i++){
+            if(Player.getPlayerTeam().get(i).getHealth() > 0){
                 Game.setTeamTurn(i);
                 return true;
             }
@@ -251,7 +251,7 @@ public class Battle{
         ArrayList<Button> options = new ArrayList<Button>();
         Button button;
 
-        for(Hero h : Game.getTeam1()){
+        for(Hero h : Player.getPlayerTeam()){
             button = new Button(h.getName());
             button.setPrefSize(80, 40);
             options.add(button);
@@ -260,24 +260,24 @@ public class Battle{
             button.setOnAction(e -> {
 
                 //if guarded last turn, makes it eligible to guard again next turn
-                if(Guard.containsUnGuardable(Game.getTeam1().get(Game.getTeamTurn()))){
-                    Guard.removeUnGuardable(Game.getTeam1().get(Game.getTeamTurn()));
+                if(Guard.containsUnGuardable(Player.getPlayerTeam().get(Game.getTeamTurn()))){
+                    Guard.removeUnGuardable(Player.getPlayerTeam().get(Game.getTeamTurn()));
                 }
 
                 //used for battle log
-                Game.setItemLastUsedOn(Game.getTeam1().get(options.indexOf(finalButton)));
+                Game.setItemLastUsedOn(Player.getPlayerTeam().get(options.indexOf(finalButton)));
                 switch (itemChoice.getValue().toString()){
                     case "Attack":
-                        Game.getTeam1().get(options.indexOf(finalButton)).useItem(new Item(Item.ItemType.ATTACK));
+                        Player.getPlayerTeam().get(options.indexOf(finalButton)).useItem(new Item(Item.ItemType.ATTACK));
                         break;
                     case "Defence":
-                        Game.getTeam1().get(options.indexOf(finalButton)).useItem(new Item(Item.ItemType.DEFENCE));
+                        Player.getPlayerTeam().get(options.indexOf(finalButton)).useItem(new Item(Item.ItemType.DEFENCE));
                         break;
                     case "Healing":
-                        Game.getTeam1().get(options.indexOf(finalButton)).useItem(new Item(Item.ItemType.HEALING));
+                        Player.getPlayerTeam().get(options.indexOf(finalButton)).useItem(new Item(Item.ItemType.HEALING));
                         break;
                     case "Mana":
-                        Game.getTeam1().get(options.indexOf(finalButton)).useItem(new Item(Item.ItemType.MANA));
+                        Player.getPlayerTeam().get(options.indexOf(finalButton)).useItem(new Item(Item.ItemType.MANA));
                         break;
                 }
                 //apply old layout back
@@ -286,7 +286,7 @@ public class Battle{
                 //if there are more actions left for the player
                 if(team1Alive()) {
                     //new name label
-                    Game.getNameLabel().setText("What Will " + Game.getTeam1().get(Game.getTeamTurn()).getName() + " Do?");
+                    Game.getNameLabel().setText("What Will " + Player.getPlayerTeam().get(Game.getTeamTurn()).getName() + " Do?");
                 }
                 else {
                     AI();
@@ -297,12 +297,12 @@ public class Battle{
         itemChoice.setOnAction(e -> {
             if(itemChoice.getValue().equals("Mana")){
                 for(Button b : options){
-                    if(!(Game.getTeam1().get(options.indexOf(b)) instanceof Wizard) &&
-                            !(Game.getTeam1().get(options.indexOf(b)) instanceof Healer)){
+                    if(!(Player.getPlayerTeam().get(options.indexOf(b)) instanceof Wizard) &&
+                            !(Player.getPlayerTeam().get(options.indexOf(b)) instanceof Healer)){
                         b.setDisable(true);
                     }
                     //also gray out button if hero has died
-                    if(Game.getTeam1().get(options.indexOf(b)).getHealth() <= 0){
+                    if(Player.getPlayerTeam().get(options.indexOf(b)).getHealth() <= 0){
                         b.setDisable(true);
                     }
                 }
@@ -335,13 +335,13 @@ public class Battle{
             //drop down list
             ComboBox heroList = new ComboBox(FXCollections.observableArrayList(heroTypes));
             heroList.setPromptText("Select a Hero");
-            Game.getHeroSelections().add(heroList);
+            Player.getHeroSelections().add(heroList);
 
             //enter hero name
             TextField nameField = new TextField();
             nameField.setPromptText("Enter a Name");
             nameField.setFont(new Font("Traditional Arabic", 16));
-            Game.getHeroNames().add(nameField);
+            Player.getHeroNames().add(nameField);
 
             Label namePrompt = new Label("Hero Name:");
             namePrompt.setFont(new Font("Traditional Arabic", 20));
@@ -374,8 +374,8 @@ public class Battle{
             //loop to check for duplicate hero selections
             try{
                 outer_loop:
-                for (ComboBox c : Game.getHeroSelections()) {
-                    for (ComboBox c2 : Game.getHeroSelections()) {
+                for (ComboBox c : Player.getHeroSelections()) {
+                    for (ComboBox c2 : Player.getHeroSelections()) {
                         if (c.getValue().equals(c2.getValue()) && !c.equals(c2)) {
                             Popup.display("You Cannot Select Duplicate Heroes!");
                             valid = false;
@@ -393,21 +393,21 @@ public class Battle{
             //saving hero selections
             if(valid) {
                 for (int i = 0; i < 3; i++) {
-                    switch (Game.getHeroSelections().get(i).getValue().toString()) {
+                    switch (Player.getHeroSelections().get(i).getValue().toString()) {
                         case "Wizard":
-                            Game.getTeam1().add(new Wizard(Game.getHeroNames().get(i).getText()));
+                            Player.getPlayerTeam().add(new Wizard(Player.getHeroNames().get(i).getText()));
                             break;
                         case "Archer":
-                            Game.getTeam1().add(new Archer(Game.getHeroNames().get(i).getText()));
+                            Player.getPlayerTeam().add(new Archer(Player.getHeroNames().get(i).getText()));
                             break;
                         case "Knight":
-                            Game.getTeam1().add(new Knight(Game.getHeroNames().get(i).getText()));
+                            Player.getPlayerTeam().add(new Knight(Player.getHeroNames().get(i).getText()));
                             break;
                         case "Assassin":
-                            Game.getTeam1().add(new Assassin(Game.getHeroNames().get(i).getText()));
+                            Player.getPlayerTeam().add(new Assassin(Player.getHeroNames().get(i).getText()));
                             break;
                         case "Healer":
-                            Game.getTeam1().add(new Healer(Game.getHeroNames().get(i).getText()));
+                            Player.getPlayerTeam().add(new Healer(Player.getHeroNames().get(i).getText()));
                             break;
                     }
                 }
@@ -445,15 +445,15 @@ public class Battle{
             //for first team
             if(team) {
 
-                Game.getTeam1().get(i).getHealthBar().getHealthInfo().setText(Game.getTeam1().get(i).getName() + ": " +
-                        Game.getTeam1().get(i).getHealth() +
-                        "/" + (int) Game.getTeam1().get(i).getHealthBar().getMaxHealth());
-                Game.getTeam1().get(i).getHealthBar().getGreenBar().setFill(Color.GREEN);
+                Player.getPlayerTeam().get(i).getHealthBar().getHealthInfo().setText(Player.getPlayerTeam().get(i).getName() + ": " +
+                        Player.getPlayerTeam().get(i).getHealth() +
+                        "/" + (int) Player.getPlayerTeam().get(i).getHealthBar().getMaxHealth());
+                Player.getPlayerTeam().get(i).getHealthBar().getGreenBar().setFill(Color.GREEN);
                 completeBar = new Pane();
-                completeBar.getChildren().addAll(mainBar, Game.getTeam1().get(i).getHealthBar().getGreenBar());
+                completeBar.getChildren().addAll(mainBar, Player.getPlayerTeam().get(i).getHealthBar().getGreenBar());
 
                 //adding it to the layout
-                box.getChildren().addAll(Game.getTeam1().get(i).getHealthBar().getHealthInfo(), completeBar);
+                box.getChildren().addAll(Player.getPlayerTeam().get(i).getHealthBar().getHealthInfo(), completeBar);
             }
             //for second team
             else{
@@ -481,20 +481,20 @@ public class Battle{
             }
 
             while(true) {
-                rand = random.nextInt(Game.getTeam1().size());
+                rand = random.nextInt(Player.getPlayerTeam().size());
                 //don't want to attack a hero that's already dead
-                if(Game.getTeam1().get(rand).getHealth() > 0){
+                if(Player.getPlayerTeam().get(rand).getHealth() > 0){
                     break;
                 }
             }
 
-            Game.addAttack(Game.getTeam2().get(i), Game.getTeam1().get(rand));
+            Game.addAttack(Game.getTeam2().get(i), Player.getPlayerTeam().get(rand));
         }
         Game.commitAttacks();
 
         //update health bars
         //team1
-        for(Hero h : Game.getTeam1()){
+        for(Hero h : Player.getPlayerTeam()){
             h.updateHealthBar();
             System.out.println("team 1: " + h.getHealth());
             System.out.println("Width: " + h.getHealthBar().getGreenBar().getWidth());
@@ -508,16 +508,16 @@ public class Battle{
         //checks if a team is dead
         if(checkTeamDead(Game.getTeam2())){
             MainMenu.getMainStage().setScene(Hub.hubScene());
-        } else if (checkTeamDead(Game.getTeam1())){
+        } else if (checkTeamDead(Player.getPlayerTeam())){
             MainMenu.getMainStage().setScene(Hub.hubScene());
         }
 
         //for next turn
         Game.setTurn(Game.getTurn() + 1);
         Game.getBattleLog().getItems().add("Turn " + Game.getTurn() + ":");
-        for(int i = 0; i < Game.getTeam1().size(); i++) {
+        for(int i = 0; i < Player.getPlayerTeam().size(); i++) {
             //sets it as first alive hero
-            if(Game.getTeam1().get(i).getHealth() > 0){
+            if(Player.getPlayerTeam().get(i).getHealth() > 0){
                 Game.setTeamTurn(i);
                 break;
             }
@@ -525,21 +525,21 @@ public class Battle{
 
         //clears immune
         Guard.clearImmune();
-        Game.getNameLabel().setText("What Will " + Game.getTeam1().get(Game.getTeamTurn()).getName() + " Do?");
+        Game.getNameLabel().setText("What Will " + Player.getPlayerTeam().get(Game.getTeamTurn()).getName() + " Do?");
     }
 
     //guard button method ----------------------------------------------------------------------------------------------
     public static void guardButtonMethod(){
         //checks if the player guarded last turn
-        if (Guard.containsUnGuardable(Game.getTeam1().get(Game.getTeamTurn()))){
-            Game.getBattleLog().getItems().add(Game.getTeam1().get(Game.getTeamTurn()).getName() + " Cannot Guard in a Row!");
+        if (Guard.containsUnGuardable(Player.getPlayerTeam().get(Game.getTeamTurn()))){
+            Game.getBattleLog().getItems().add(Player.getPlayerTeam().get(Game.getTeamTurn()).getName() + " Cannot Guard in a Row!");
         } else {
-            Guard.addGuard(Game.getTeam1().get(Game.getTeamTurn()));
+            Guard.addGuard(Player.getPlayerTeam().get(Game.getTeamTurn()));
 
             //if there are more actions left for the player
             if(team1Alive()) {
                 //new name label
-                Game.getNameLabel().setText("What Will " + Game.getTeam1().get(Game.getTeamTurn()).getName() + " Do?");
+                Game.getNameLabel().setText("What Will " + Player.getPlayerTeam().get(Game.getTeamTurn()).getName() + " Do?");
             } else {
                 AI();
             }
