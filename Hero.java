@@ -10,6 +10,8 @@ public class Hero{
     private int speed;
     private String name;
     private HealthBar healthBar;
+    private int level = 1;
+    private int exp = 0;
     
     //Hero constructor
     public Hero(int attack, int health, int defence, int magicResist, int evasion, int speed, String name){
@@ -51,8 +53,20 @@ public class Hero{
     public int getEvasion(){
         return this.evasion;
     }
+
     public HealthBar getHealthBar() {
         return this.healthBar;
+    }
+
+    public void addExp(int exp){
+        this.exp += exp;
+        if (checkLevelUp()){
+            levelUp();
+        }
+    }
+
+    public int getExp(){
+        return exp;
     }
 
     //attack method
@@ -134,5 +148,16 @@ public class Hero{
                 (int) this.healthBar.getMaxHealth());
     }
 
+    public boolean checkLevelUp(){
+        if (level < 2 && exp > 100){
+            return true;
+        } else if (level < 3 && exp > 300){
+            return true;
+        }
+        return false;
+    }
 
+    public void levelUp(){
+
+    }
 }
