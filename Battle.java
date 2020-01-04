@@ -558,4 +558,39 @@ public class Battle extends Application{
         //launches GUI (start method)
         launch(args);
     }
+
+    public static Hero AIPick(int i, ArrayList<Integer> picks){
+
+        Random rand = new Random();
+        int r;
+        while(true) {
+            r = rand.nextInt(5);
+            if(!picks.contains(r)){
+                picks.add(r);
+                break;
+            }
+        }
+        Hero hero = null;
+        String name = "AI " + i;
+
+        switch(r){
+            case 0:
+                hero = new Wizard(name);
+                break;
+            case 1:
+                hero = new Archer(name);
+                break;
+            case 2:
+                hero = new Knight(name);
+                break;
+            case 3:
+                hero = new Assassin(name);
+                break;
+            case 4:
+                hero = new Healer(name);
+                break;
+        }
+
+        return hero;
+    }
 }
