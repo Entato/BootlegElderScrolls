@@ -8,6 +8,8 @@ import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.stage.*;
 
+import java.io.IOException;
+
 
 public class MainMenu extends Application{
 
@@ -33,9 +35,10 @@ public class MainMenu extends Application{
     }
 
     //main method ------------------------------------------------------------------------------------------------------
-    public static void main(String[] args){
+    public static void main(String[] args) throws IOException {
         //GUI
         //launches GUI (start method)
+        Visuals.initializeSprites();
         launch(args);
     }
 

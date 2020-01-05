@@ -11,6 +11,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.scene.shape.*;
 import javafx.scene.shape.Rectangle;
@@ -95,10 +96,16 @@ public class Battle{
         scroller.setContent(Game.getBattleLog());
         logBox.getChildren().addAll(logLabel, scroller);
 
-
-
         bottomLeftBox.getChildren().addAll(nameBox, logBox);
         bottomLeftBox.setAlignment(Pos.CENTER);
+
+        //SPRITES
+        HBox spriteBox = new HBox();
+        spriteBox.setAlignment(Pos.CENTER);
+        Visuals.getSprite1Box().setAlignment(Pos.CENTER_LEFT);
+        Visuals.getSprite2Box().setAlignment(Pos.CENTER_RIGHT);
+        spriteBox.getChildren().addAll(Visuals.getSprite1Box(), Visuals.getSprite2Box());
+        Visuals.placeSprites();
 
         //BUTTON ACTIONS
         attackButton.setOnAction(e -> attackButtonMethod(bottomBox, battleActions)); //passing layouts for temp change
@@ -113,6 +120,7 @@ public class Battle{
         borderPane.setBottom(bottomBox);
         borderPane.setLeft(team1Box);
         borderPane.setRight(team2Box);
+        borderPane.setCenter(spriteBox);
 
         //creates scene and returns it
         Scene battleScene = new Scene(borderPane, 1000, 650);
@@ -396,18 +404,23 @@ public class Battle{
                     switch (Player.getHeroSelections().get(i).getValue().toString()) {
                         case "Wizard":
                             Player.getPlayerTeam().add(new Wizard(Player.getHeroNames().get(i).getText()));
+                            Visuals.getTeam1Sprites().add(new Image(Visuals.getSprites().get(4)));
                             break;
                         case "Archer":
                             Player.getPlayerTeam().add(new Archer(Player.getHeroNames().get(i).getText()));
+                            Visuals.getTeam1Sprites().add(new Image(Visuals.getSprites().get(0)));
                             break;
                         case "Knight":
                             Player.getPlayerTeam().add(new Knight(Player.getHeroNames().get(i).getText()));
+                            Visuals.getTeam1Sprites().add(new Image(Visuals.getSprites().get(3)));
                             break;
                         case "Assassin":
                             Player.getPlayerTeam().add(new Assassin(Player.getHeroNames().get(i).getText()));
+                            Visuals.getTeam1Sprites().add(new Image(Visuals.getSprites().get(1)));
                             break;
                         case "Healer":
                             Player.getPlayerTeam().add(new Healer(Player.getHeroNames().get(i).getText()));
+                            Visuals.getTeam1Sprites().add(new Image(Visuals.getSprites().get(2)));
                             break;
                     }
                 }
@@ -576,21 +589,25 @@ public class Battle{
 
         switch(r){
             case 0:
-                hero = new Wizard(name);
-                break;
-            case 1:
                 hero = new Archer(name);
                 break;
-            case 2:
-                hero = new Knight(name);
-                break;
-            case 3:
+            case 1:
                 hero = new Assassin(name);
                 break;
-            case 4:
+            case 2:
                 hero = new Healer(name);
                 break;
+            case 3:
+                hero = new Knight(name);
+                break;
+            case 4:
+                hero = new Wizard(name);
+                break;
         }
+
+        //adds sprite to list
+        System.out.println("r:" + r);
+        Visuals.getTeam2Sprites().add(new Image(Visuals.getSprites().get(r)));
 
         return hero;
     }

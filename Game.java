@@ -140,11 +140,11 @@ public class Game {
     //reset method
     public static void reset(){
         attackList.clear();
-        team1.clear();
         team2.clear();
         heroSelections.clear();
         heroNames.clear();
         battleLog.getItems().clear();
+        Visuals.getTeam2Sprites().clear();
         Game.turn = 1;
     }
 
