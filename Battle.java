@@ -100,7 +100,8 @@ public class Battle{
         bottomLeftBox.setAlignment(Pos.CENTER);
 
         //SPRITES
-        HBox spriteBox = new HBox();
+        HBox spriteBox = new HBox(500);
+
         spriteBox.setAlignment(Pos.CENTER);
         Visuals.getSprite1Box().setAlignment(Pos.CENTER_LEFT);
         Visuals.getSprite2Box().setAlignment(Pos.CENTER_RIGHT);
@@ -404,23 +405,23 @@ public class Battle{
                     switch (Player.getHeroSelections().get(i).getValue().toString()) {
                         case "Wizard":
                             Player.getPlayerTeam().add(new Wizard(Player.getHeroNames().get(i).getText()));
-                            Visuals.getTeam1Sprites().add(new Image(Visuals.getSprites().get(4)));
+                            Visuals.getTeam1Sprites().add(Visuals.getSprites().get(4));
                             break;
                         case "Archer":
                             Player.getPlayerTeam().add(new Archer(Player.getHeroNames().get(i).getText()));
-                            Visuals.getTeam1Sprites().add(new Image(Visuals.getSprites().get(0)));
+                            Visuals.getTeam1Sprites().add(Visuals.getSprites().get(0));
                             break;
                         case "Knight":
                             Player.getPlayerTeam().add(new Knight(Player.getHeroNames().get(i).getText()));
-                            Visuals.getTeam1Sprites().add(new Image(Visuals.getSprites().get(3)));
+                            Visuals.getTeam1Sprites().add(Visuals.getSprites().get(3));
                             break;
                         case "Assassin":
                             Player.getPlayerTeam().add(new Assassin(Player.getHeroNames().get(i).getText()));
-                            Visuals.getTeam1Sprites().add(new Image(Visuals.getSprites().get(1)));
+                            Visuals.getTeam1Sprites().add(Visuals.getSprites().get(1));
                             break;
                         case "Healer":
                             Player.getPlayerTeam().add(new Healer(Player.getHeroNames().get(i).getText()));
-                            Visuals.getTeam1Sprites().add(new Image(Visuals.getSprites().get(2)));
+                            Visuals.getTeam1Sprites().add(Visuals.getSprites().get(2));
                             break;
                     }
                 }
@@ -607,7 +608,8 @@ public class Battle{
 
         //adds sprite to list
         System.out.println("r:" + r);
-        Visuals.getTeam2Sprites().add(new Image(Visuals.getSprites().get(r)));
+        Image image = Visuals.getSprites().get(r);
+        Visuals.getTeam2Sprites().add(image);
 
         return hero;
     }

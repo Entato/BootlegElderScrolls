@@ -8,7 +8,7 @@ import java.io.*;
 import java.util.*;
 
 public class Visuals {
-    private static ArrayList<FileInputStream> sprites = new ArrayList<FileInputStream>();
+    private static ArrayList<Image> sprites = new ArrayList<Image>();
     private static ArrayList<Image> team1Sprites = new ArrayList<Image>();
     private static ArrayList<Image> team2Sprites = new ArrayList<Image>();
     //layouts for sprites
@@ -16,7 +16,7 @@ public class Visuals {
     private static VBox sprite2Box = new VBox(50);
 
     //getters so I can access them and use their methods
-    public static ArrayList<FileInputStream> getSprites() {
+    public static ArrayList<Image> getSprites() {
         return sprites;
     }
 
@@ -39,7 +39,7 @@ public class Visuals {
     //initialize sprites
     public static void initializeSprites() throws IOException {
         for(int i = 0; i < 5; i++){
-            sprites.add(new FileInputStream("src/BootlegElderScrolls/Assets/sprite_" + i + ".png"));
+            sprites.add(new Image(new FileInputStream("src/BootlegElderScrolls/Assets/sprite_" + i + ".png")));
         }
     }
 
@@ -67,14 +67,14 @@ public class Visuals {
             imageViews.get(i).setFitWidth(100);
             imageViews.get(i).setPreserveRatio(true);
             //adding to layout
-            roots.get(i).getChildren().add(imageViews.get(i));
+            roots.get(i).getChildren().setAll(imageViews.get(i));
             if(i < 3){
                 sprite1Box.getChildren().add(roots.get(i));
             }
             else{
                 sprite2Box.getChildren().add(roots.get(i));
             }
-            System.out.println("IMGVIEW :" + imageViews.get(i).getParent().getParent());
+            System.out.println("IMGVIEW :" + imageViews.get(i).toString());
 
 
         }
