@@ -125,6 +125,7 @@ public class Battle{
 
         //creates scene and returns it
         Scene battleScene = new Scene(borderPane, 1000, 650);
+        battleScene.getStylesheets().add("BootlegElderScrolls/MainStyleSheet.css");
 
         return battleScene;
     }

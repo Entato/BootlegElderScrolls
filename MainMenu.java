@@ -71,6 +71,7 @@ public class MainMenu extends Application{
         menuLayout.getChildren().addAll(title, newOrOldLayout, quitButton, infoButton);
         //creates scene
         Scene menuScene = new Scene(menuLayout, 400, 300);
+        menuScene.getStylesheets().add("BootlegElderScrolls/MainStyleSheet.css");
         //sets as scene to be displayed
         mainMenu.setScene(menuScene);
 

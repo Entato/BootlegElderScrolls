@@ -47,6 +47,7 @@ class Hub{
         borderPane.setLeft(partyList);
 
         Scene hub = new Scene(borderPane, 500, 350);
+        hub.getStylesheets().add("BootlegElderScrolls/MainStyleSheet.css");
 
         return hub;
     }
