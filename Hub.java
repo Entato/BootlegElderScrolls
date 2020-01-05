@@ -21,6 +21,7 @@ class Hub{
         partyList.setAlignment(Pos.CENTER);
 
         Label party = new Label("Party:");
+        party.setStyle("-fx-font-weight: bold");
         party.setFont(new Font("Traditional Arabic", 30));
         partyList.getChildren().add(party);
 
@@ -30,6 +31,9 @@ class Hub{
             member.setFont(new Font("Traditional Arabic", 18));
             partyList.getChildren().add(member);
         }
+
+        //stats
+        VBox statBox = new VBox(20);
 
         //button to start battle
         Button startBattle = new Button("Battle");
