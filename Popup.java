@@ -31,6 +31,8 @@ public class Popup {
         okButton.setOnAction(e -> popStage.close());
 
         Scene scene = new Scene(box, 300, 150);
+        scene.getStylesheets().add("BootlegElderScrolls/MainStyleSheet.css");
+
         popStage.setScene(scene);
 
         //you have to deal with this before you carry on

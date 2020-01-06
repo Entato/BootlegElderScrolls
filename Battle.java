@@ -35,7 +35,7 @@ public class Battle{
 
         //bottom portion layout
         HBox bottomBox = new HBox(20);
-        bottomBox.setStyle("-fx-background-color: GOLD;");
+        bottomBox.setId("redder-layouts");
         bottomBox.setPrefHeight(200);
 
         //action layout
@@ -93,6 +93,7 @@ public class Battle{
         scroller.setFitToWidth(true);
         scroller.setMaxHeight(200);
         //battle log is a static variable stored in the game class
+        Game.getBattleLog().setId("battle-log");
         scroller.setContent(Game.getBattleLog());
         logBox.getChildren().addAll(logLabel, scroller);
 
@@ -376,6 +377,7 @@ public class Battle{
         borderPane.setBottom(buttonBox);
 
         Scene selectionScene = new Scene(borderPane, 600, 300);
+        selectionScene.getStylesheets().add("BootlegElderScrolls/MainStyleSheet.css");
 
         //button method
         enterButton.setOnAction(e ->{

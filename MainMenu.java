@@ -51,6 +51,7 @@ public class MainMenu extends Application{
 
         //labels and buttons
         Label title = new Label("Fantasy Showdown");
+        title.setId("title-labels");
         title.setPadding(new Insets(20, 20, 40, 20));
         Button newGameButton = new Button("New Game");
         Button loadGameButton = new Button("Load Game");
@@ -70,8 +71,9 @@ public class MainMenu extends Application{
         newOrOldLayout.getChildren().addAll(newGameButton, loadGameButton);
         menuLayout.getChildren().addAll(title, newOrOldLayout, quitButton, infoButton);
         //creates scene
-        Scene menuScene = new Scene(menuLayout, 400, 300);
+        Scene menuScene = new Scene(menuLayout, 500, 400);
         menuScene.getStylesheets().add("BootlegElderScrolls/MainStyleSheet.css");
+
         //sets as scene to be displayed
         mainMenu.setScene(menuScene);
 
