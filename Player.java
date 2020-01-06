@@ -8,6 +8,10 @@ class Player {
     private static ArrayList<Hero> playerTeam = new ArrayList<Hero>();
     private static ArrayList<ComboBox> heroSelections = new ArrayList<ComboBox>();
     private static ArrayList<TextField> heroNames = new ArrayList<TextField>();
+    private int score;
+    private int bossCount;
+    private int totalDamage;
+    private int kills;
 
     public static ArrayList<Hero> getPlayerTeam(){
         return playerTeam;

@@ -146,6 +146,7 @@ public class Game {
         battleLog.getItems().clear();
         Visuals.getTeam2Sprites().clear();
         Game.turn = 1;
+        Game.teamTurn = 0;
     }
 
 
