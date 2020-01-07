@@ -84,6 +84,7 @@ public class MainMenu extends Application{
         Button backButton = new Button("Back");
         infoLayout.getChildren().addAll(infoLabel, backButton);
         Scene infoScene = new Scene(infoLayout, 600, 400);
+        infoScene.getStylesheets().add("BootlegElderScrolls/MainStyleSheet.css");
 
 
         //button methods

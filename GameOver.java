@@ -7,6 +7,7 @@ import javafx.scene.layout.VBox;
 
 class GameOver {
     public static Scene gameOverScene(){
+    
         VBox vbox = new VBox();
 
         Label gameOverMessage = new Label("Game Over");

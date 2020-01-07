@@ -137,6 +137,8 @@ public class Game {
         Visuals.getSprite1Box().getChildren().clear();
         Game.turn = 1;
         Game.teamTurn = 0;
+        Player.getHeroSelections().clear();
+        Player.getHeroNames().clear();
 
         //reset health
         for(Hero h : Player.getPlayerTeam()){

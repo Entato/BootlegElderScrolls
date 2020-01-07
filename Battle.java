@@ -438,8 +438,9 @@ public class Battle{
                 }
                 System.out.println(Game.getTeam2().toString());
 
-                //makes window show the battle scene
+                //makes window show the hub scene
                 MainMenu.getMainStage().setScene(Hub.hubScene());
+                System.out.println(Game.getTeam2().toString());
             }
         });
 
@@ -528,6 +529,7 @@ public class Battle{
         //checks if battle is over
         //both cases have a return so the rest of the method is not used
         if(checkTeamDead(Game.getTeam2())){
+        
             battleOver();
             //AI creates team
             //keep track of what AI has chosen
@@ -538,15 +540,10 @@ public class Battle{
 
             return;
         } else if (checkTeamDead(Player.getPlayerTeam())){
+            Player.getPlayerTeam().clear();
             MainMenu.getMainStage().setScene(GameOver.gameOverScene());
             Game.reset();
-            //AI creates team
-            //keep track of what AI has chosen
-            ArrayList<Integer> picks = new ArrayList<Integer>();
-            for(int i = 0; i < 3; i++){
-                Game.getTeam2().add(AIPick(i, picks));
-            }
-
+            
             return;
         }
 
