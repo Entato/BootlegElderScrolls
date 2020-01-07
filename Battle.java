@@ -524,8 +524,7 @@ public class Battle{
 
         //checks if battle is over
         if(checkTeamDead(Game.getTeam2())){
-            MainMenu.getMainStage().setScene(Hub.hubScene());
-            Game.reset();
+            battleOver();
             //AI creates team
             //keep track of what AI has chosen
             ArrayList<Integer> picks = new ArrayList<Integer>();
@@ -533,7 +532,7 @@ public class Battle{
                 Game.getTeam2().add(AIPick(i, picks));
             }
         } else if (checkTeamDead(Player.getPlayerTeam())){
-            MainMenu.getMainStage().setScene(Hub.hubScene());
+            MainMenu.getMainStage().setScene(GameOver.gameOverScene());
             Game.reset();
             //AI creates team
             //keep track of what AI has chosen
@@ -615,5 +614,12 @@ public class Battle{
         Visuals.getTeam2Sprites().add(image);
 
         return hero;
+    }
+
+    //gets called when battle finishes
+    public static void battleOver(){
+        Player.bossCountAdd();
+        MainMenu.getMainStage().setScene(Hub.hubScene());
+        Game.reset();
     }
 }
