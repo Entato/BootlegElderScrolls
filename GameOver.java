@@ -17,7 +17,11 @@ class GameOver {
 
         mainMenu.setOnAction(e -> {
             MainMenu.getMainStage().close();
-            MainMenu.display();
+            boolean run = MainMenu.display();
+            if(run){
+                MainMenu.getMainStage().setScene(Battle.createHeroSelectionScene());
+                MainMenu.getMainStage().show();
+            }
         });
 
         exit.setOnAction(e -> {
