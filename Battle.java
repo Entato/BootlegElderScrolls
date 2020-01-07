@@ -509,6 +509,9 @@ public class Battle{
         }
         Game.commitAttacks();
 
+        //clears immune
+        Guard.clearImmune();
+
         //update health bars
         //team1
         for(Hero h : Player.getPlayerTeam()){
@@ -523,6 +526,7 @@ public class Battle{
         }
 
         //checks if battle is over
+        //both cases have a return so the rest of the method is not used
         if(checkTeamDead(Game.getTeam2())){
             MainMenu.getMainStage().setScene(Hub.hubScene());
             Game.reset();
@@ -532,6 +536,8 @@ public class Battle{
             for(int i = 0; i < 3; i++){
                 Game.getTeam2().add(AIPick(i, picks));
             }
+
+            return;
         } else if (checkTeamDead(Player.getPlayerTeam())){
             MainMenu.getMainStage().setScene(Hub.hubScene());
             Game.reset();
@@ -541,6 +547,8 @@ public class Battle{
             for(int i = 0; i < 3; i++){
                 Game.getTeam2().add(AIPick(i, picks));
             }
+
+            return;
         }
 
         //for next turn
@@ -554,8 +562,7 @@ public class Battle{
             }
         }
 
-        //clears immune
-        Guard.clearImmune();
+
         Game.getNameLabel().setText("What Will " + Player.getPlayerTeam().get(Game.getTeamTurn()).getName() + " Do?");
     }
 
@@ -576,7 +583,7 @@ public class Battle{
             }
         }
     }
-
+    //Ai picks its team (to be edited)----------------------------------------------------------------------------------
     public static Hero AIPick(int i, ArrayList<Integer> picks){
 
         Random rand = new Random();
