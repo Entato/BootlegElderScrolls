@@ -133,7 +133,15 @@ public class Game {
         team2.clear();
         battleLog.getItems().clear();
         Visuals.getTeam2Sprites().clear();
+        Visuals.getSprite2Box().getChildren().clear();
+        Visuals.getSprite1Box().getChildren().clear();
         Game.turn = 1;
         Game.teamTurn = 0;
+
+        //reset health
+        for(Hero h : Player.getPlayerTeam()){
+            h.setHealth((int)h.getHealthBar().getMaxHealth());
+            h.updateHealthBar();
+        }
     }
 }
