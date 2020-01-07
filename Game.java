@@ -7,10 +7,7 @@ import java.util.Random;
 
 public class Game {
     private static ArrayList<Hero[]> attackList = new ArrayList<Hero[]>();
-    private static ArrayList<Hero> team1 = new ArrayList<Hero>();
     private static ArrayList<Hero> team2 = new ArrayList<Hero>();
-    private static ArrayList<ComboBox> heroSelections = new ArrayList<ComboBox>();
-    private static ArrayList<TextField> heroNames = new ArrayList<TextField>();
     private static ListView<String> battleLog = new ListView<String>();
     private static int teamTurn = 0;
     private static Label nameLabel = new Label();
@@ -47,18 +44,11 @@ public class Game {
     public static ListView<String> getBattleLog() {
         return battleLog;
     }
-    public static ArrayList<Hero> getTeam1(){
-        return team1;
-    }
+
     public static ArrayList<Hero> getTeam2(){
         return team2;
     }
-    public static ArrayList<ComboBox> getHeroSelections(){
-        return heroSelections;
-    }
-    public static ArrayList<TextField> getHeroNames(){
-        return heroNames;
-    }
+
     //storing attack actions
     public static void addAttack(Hero attacker, Hero defender){
         Hero[] heroes = new Hero[2];
@@ -141,8 +131,6 @@ public class Game {
     public static void reset(){
         attackList.clear();
         team2.clear();
-        heroSelections.clear();
-        heroNames.clear();
         battleLog.getItems().clear();
         Visuals.getTeam2Sprites().clear();
         Visuals.getSprite2Box().getChildren().clear();
@@ -156,7 +144,4 @@ public class Game {
             h.updateHealthBar();
         }
     }
-
-
-
 }
