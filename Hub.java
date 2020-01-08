@@ -21,11 +21,12 @@ class Hub{
         partyList.setAlignment(Pos.CENTER);
 
         Label party = new Label("Party:");
+        party.setId("title-labels");
         party.setStyle("-fx-font-weight: bold");
         party.setFont(new Font("Traditional Arabic", 30));
         partyList.getChildren().add(party);
 
-        //adds all the party members to a vBox
+        //adds all the party members to a VBox
         for (int i = 0; i < Player.getPlayerTeam().size(); i++){
             Label member = new Label("Member " + (i+1) + ": " + Player.getPlayerTeam().get(i).getName());
             member.setFont(new Font("Traditional Arabic", 18));
@@ -33,7 +34,18 @@ class Hub{
         }
 
         //stats
-        VBox statBox = new VBox(20);
+        VBox statBox = new VBox(30);
+        Label statLabel = new Label("Statistics");
+        statLabel.setId("title-labels");
+        Label levelsLabel = new Label("Levels Cleared: " + Player.getBossCount());
+        Label killsLabel = new Label("Total Kills: " + Player.getKills());
+        Label scoreLabel = new Label("Score: " + Player.getScore());
+        Label damageLabel = new Label("Total Damage: " + Player.getTotalDamage());
+
+        statBox.getChildren().addAll(statLabel, levelsLabel, killsLabel, scoreLabel, damageLabel);
+        statBox.setAlignment(Pos.CENTER);
+        statBox.setPadding(new Insets(20, 40, 60, 20));
+
 
         //button to start battle
         Button startBattle = new Button("Battle");
@@ -45,6 +57,7 @@ class Hub{
 
         //adds everything to borderPane
         borderPane.setLeft(partyList);
+        borderPane.setRight(statBox);
 
         Scene hub = new Scene(borderPane, 500, 350);
         hub.getStylesheets().add("BootlegElderScrolls/MainStyleSheet.css");
