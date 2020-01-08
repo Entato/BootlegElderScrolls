@@ -532,7 +532,8 @@ public class Battle{
         //checks if battle is over
         //both cases have a return so the rest of the method is not used
         if(checkTeamDead(Game.getTeam2())){
-        
+            
+            
             battleOver();
             //AI creates team
             //keep track of what AI has chosen
