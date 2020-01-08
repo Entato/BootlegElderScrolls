@@ -338,7 +338,7 @@ public class Battle{
         HBox hBox = new HBox();
         hBox.setAlignment(Pos.TOP_CENTER);
         hBox.setPadding(new Insets(20, 20, 20, 20));
-        hBox.setStyle("-fx-background-color: indianred;");
+        hBox.setId("redder-layouts");
 
         for(int i = 0; i < 3; i++){
             VBox vBox = new VBox(20);
@@ -346,6 +346,7 @@ public class Battle{
 
             //drop down list
             ComboBox heroList = new ComboBox(FXCollections.observableArrayList(heroTypes));
+            heroList.setId("drop-downs");
             heroList.setPromptText("Select a Hero");
             Player.getHeroSelections().add(heroList);
 
@@ -356,6 +357,7 @@ public class Battle{
             Player.getHeroNames().add(nameField);
 
             Label namePrompt = new Label("Hero Name:");
+            namePrompt.setId("title-labels-light");
             namePrompt.setFont(new Font("Traditional Arabic", 20));
 
             //compile in a layout

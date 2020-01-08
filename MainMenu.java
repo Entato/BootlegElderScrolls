@@ -36,6 +36,7 @@ public class MainMenu extends Application{
 
     //main method ------------------------------------------------------------------------------------------------------
     public static void main(String[] args) throws IOException {
+        System.out.println(javafx.scene.text.Font.getFamilies());
         //GUI
         //launches GUI (start method)
         Visuals.initializeSprites();
