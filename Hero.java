@@ -10,6 +10,7 @@ public class Hero{
     private int speed;
     private String name;
     private HealthBar healthBar;
+    private boolean activeSpecial = true;
     private int level = 1;
     private int exp = 0;
     
@@ -56,6 +57,14 @@ public class Hero{
 
     public HealthBar getHealthBar() {
         return this.healthBar;
+    }
+
+    public boolean getActiveSpecial() {
+        return this.activeSpecial;
+    }
+
+    public void setActiveSpecial(boolean activeSpecial) {
+        this.activeSpecial = activeSpecial;
     }
 
     public void addExp(int exp){
@@ -160,4 +169,6 @@ public class Hero{
     public void levelUp(){
 
     }
+
+
 }

@@ -113,6 +113,7 @@ public class Battle{
         attackButton.setOnAction(e -> attackButtonMethod(bottomBox, battleActions)); //passing layouts for temp change
         itemButton.setOnAction(e -> itemButtonMethod(bottomBox, battleActions));
         guardButton.setOnAction(e -> guardButtonMethod());
+        specialButton.setOnAction(e -> specialButtonMethod());
 
         //adds buttons to layouts
         battleActions.getChildren().addAll(attackButton, guardButton, itemButton, specialButton);
@@ -567,14 +568,35 @@ public class Battle{
         //checks if the player guarded last turn
         if (Guard.containsUnGuardable(Player.getPlayerTeam().get(Game.getTeamTurn()))){
             Game.getBattleLog().getItems().add(Player.getPlayerTeam().get(Game.getTeamTurn()).getName() + " Cannot Guard in a Row!");
-        } else {
+        }
+        else {
             Guard.addGuard(Player.getPlayerTeam().get(Game.getTeamTurn()));
 
             //if there are more actions left for the player
             if(team1Alive()) {
                 //new name label
                 Game.getNameLabel().setText("What Will " + Player.getPlayerTeam().get(Game.getTeamTurn()).getName() + " Do?");
-            } else {
+            }
+            else {
+                AI();
+            }
+        }
+    }
+    //special button method
+    public static void specialButtonMethod(){
+        if(Player.getPlayerTeam().get(Game.getTeamTurn()).getActiveSpecial()){
+            Game.getBattleLog().getItems().add(Player.getPlayerTeam().get(Game.getTeamTurn()).getName() +
+                    " Has Already Used Their Special");
+        }
+        else{
+            //SPECIAL MOVE HERE
+
+            //if there are more actions left for the player
+            if(team1Alive()) {
+                //new name label
+                Game.getNameLabel().setText("What Will " + Player.getPlayerTeam().get(Game.getTeamTurn()).getName() + " Do?");
+            }
+            else {
                 AI();
             }
         }

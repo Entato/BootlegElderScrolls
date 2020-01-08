@@ -56,4 +56,11 @@ class Player {
     public static int getKills(){
         return kills;
     }
+
+    //set specials back to true
+    public static void resetSpecials(){
+        for(Hero h : playerTeam){
+            h.setActiveSpecial(true);
+        }
+    }
 }
