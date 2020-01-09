@@ -437,7 +437,10 @@ public class Battle{
                 //keep track of what AI has chosen
                 ArrayList<Integer> picks = new ArrayList<Integer>();
                 for(int i = 0; i < 3; i++){
+                    /*
                     Game.getTeam2().add(AIPick(i, picks));
+                    */
+                    Game.getTeam2().add(AIPickGrunt(i));
                 }
                 System.out.println(Game.getTeam2().toString());
 
@@ -533,13 +536,15 @@ public class Battle{
         //both cases have a return so the rest of the method is not used
         if(checkTeamDead(Game.getTeam2())){
             
-            
             battleOver();
             //AI creates team
             //keep track of what AI has chosen
             ArrayList<Integer> picks = new ArrayList<Integer>();
             for(int i = 0; i < 3; i++){
+                /*
                 Game.getTeam2().add(AIPick(i, picks));
+                */
+                Game.getTeam2().add(AIPickGrunt(i));
             }
 
             return;
@@ -643,6 +648,14 @@ public class Battle{
         Visuals.getTeam2Sprites().add(image);
 
         return hero;
+    }
+
+    public static Hero AIPickGrunt(int i){
+        String name = "AI " + i;
+
+        Grunt grunt = new Grunt(name, Player.getBossCount());
+
+        return grunt;
     }
 
     //gets called when battle finishes

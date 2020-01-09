@@ -51,7 +51,7 @@ public class Visuals {
             roots.add(new Group());
         }
 
-        for(int i = 0; i < 6; i++){
+        for(int i = 0; i < 3; i++){
 
             imageViews.add(new ImageView());
             if(i < 3){
