@@ -88,7 +88,6 @@ public class Battle{
         Label logLabel = new Label("Battle Log:");
         //scroll pane used for when battle log gets longer
         ScrollPane scroller = new ScrollPane();
-        scroller.setStyle("-fx-border-color: black");
         Game.getBattleLog().setPrefWidth(300);
         scroller.setFitToWidth(true);
         scroller.setMaxHeight(200);
@@ -268,7 +267,7 @@ public class Battle{
             if(h.getHealth() <= 0){
                 button.setDisable(true);
             }
-            button.setPrefSize(80, 40);
+            button.setPrefSize(120, 40);
             options.add(button);
             Button finalButton = button;
             optionBox.getChildren().add(button);

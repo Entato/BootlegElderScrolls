@@ -144,6 +144,10 @@ public class Game {
         for(Hero h : Player.getPlayerTeam()){
             h.setHealth((int)h.getHealthBar().getMaxHealth());
             h.updateHealthBar();
+
+            //remove in game item effects
+            h.setDefence(h.getRegDef());
+            h.setAttack(h.getRegDef());
         }
     }
 }

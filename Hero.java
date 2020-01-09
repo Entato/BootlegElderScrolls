@@ -13,6 +13,8 @@ public class Hero{
     private boolean activeSpecial = true;
     private int level = 1;
     private int exp = 0;
+    private int regDef;
+    private int refAtk;
     
     //Hero constructor
     public Hero(int attack, int health, int defence, int magicResist, int evasion, int speed, String name){
@@ -23,6 +25,10 @@ public class Hero{
         this.evasion = evasion;
         this.speed = speed;
         this.name = name;
+
+        //store what these values should be
+        this.regDef = defence;
+        this.refAtk = attack;
 
         healthBar = new HealthBar(this.health);
     }
@@ -65,6 +71,30 @@ public class Hero{
 
     public void setActiveSpecial(boolean activeSpecial) {
         this.activeSpecial = activeSpecial;
+    }
+
+    public void setDefence(int defence){
+        this.defence = defence;
+    }
+
+    public void setAttack(int attack){
+        this.attack = attack;
+    }
+
+    public int getRefAtk() {
+        return refAtk;
+    }
+
+    public void setRefAtk(int refAtk) {
+        this.refAtk = refAtk;
+    }
+
+    public int getRegDef() {
+        return regDef;
+    }
+
+    public void setRegDef(int regDef) {
+        this.regDef = regDef;
     }
 
     public void addExp(int exp){
@@ -180,6 +210,7 @@ public class Hero{
     public void levelUp(){
 
     }
+
 
 
 }
