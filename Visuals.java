@@ -51,6 +51,7 @@ public class Visuals {
             roots.add(new Group());
         }
 
+        //3 has to be changed back to 6 after grunt sprites is finshed
         for(int i = 0; i < 3; i++){
 
             imageViews.add(new ImageView());
