@@ -111,7 +111,8 @@ public class Hero{
     //attack method
     public void attack(Hero hero){
         int trueDamage;
-        trueDamage = this.attack - hero.defence/2;
+        int damageMultiplier = 100 / (hero.defence + 100);
+        trueDamage = this.attack * damageMultiplier;
         //at least 1 damage
         if(trueDamage <= 0){
             trueDamage = 1;

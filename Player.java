@@ -8,6 +8,7 @@ class Player {
     private static ArrayList<Hero> playerTeam = new ArrayList<Hero>();
     private static ArrayList<ComboBox> heroSelections = new ArrayList<ComboBox>();
     private static ArrayList<TextField> heroNames = new ArrayList<TextField>();
+    private static ArrayList<Item> inventory = new ArrayList<Item>();
     private static int score = 0;
     private static int bossCount = 0;
     private static int totalDamage = 0;
