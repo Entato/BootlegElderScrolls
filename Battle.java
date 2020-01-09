@@ -566,8 +566,6 @@ public class Battle{
             return;
         } else if (checkTeamDead(Player.getPlayerTeam())){
             MainMenu.getMainStage().setScene(GameOver.gameOverScene());
-            Player.reset();
-            Game.reset();
             
             return;
         }

@@ -32,6 +32,9 @@ class GameOver {
         vbox.getChildren().addAll(gameOverMessage, bossesDefeated, mainMenu, exit);
 
         Scene gameOver = new Scene(vbox);
+
+        Player.reset();
+        Game.reset();
         return gameOver;
     }
 }

@@ -73,6 +73,7 @@ class Player {
         bossCount = 0;
         totalDamage = 0;
         kills = 0;
-
+        Visuals.getSprite1Box().getChildren().clear();
+        Visuals.getTeam1Sprites().clear();
     }
 }
