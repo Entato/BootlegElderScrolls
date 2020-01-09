@@ -651,6 +651,9 @@ public class Battle{
     }
 
     public static Hero AIPickGrunt(int i){
+        if(Player.getBossCount() == 3 && i == 1){
+            return new BaronNashor();
+        }
         String name = "AI " + i;
 
         Grunt grunt = new Grunt(name, Player.getBossCount());
