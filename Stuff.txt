@@ -1,3 +1,4 @@
 -make stat variables function properly
 -make 
 -temporarily changed 6 to 3 in a loop in visuals.java to ignore sprites for team2
+- i need to make sure you cant use items on dead people and also to reset attack and defence buffs after each round

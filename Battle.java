@@ -265,6 +265,9 @@ public class Battle{
 
         for(Hero h : Player.getPlayerTeam()){
             button = new Button(h.getName());
+            if(h.getHealth() <= 0){
+                button.setDisable(true);
+            }
             button.setPrefSize(80, 40);
             options.add(button);
             Button finalButton = button;
@@ -321,7 +324,10 @@ public class Battle{
             }
             else{
                 for(Button b : options){
-                    b.setDisable(false);
+                    //only set back to true if that hero is alive
+                    if(Player.getPlayerTeam().get(options.indexOf(b)).getHealth() > 0) {
+                        b.setDisable(false);
+                    }
                 }
             }
         });
