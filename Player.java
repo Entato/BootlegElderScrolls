@@ -63,4 +63,16 @@ class Player {
             h.setActiveSpecial(true);
         }
     }
+
+    //called upon starting new game without exiting gui
+    public static void reset(){
+        playerTeam.clear();
+        heroSelections.clear();
+        heroNames.clear();
+        score = 0;
+        bossCount = 0;
+        totalDamage = 0;
+        kills = 0;
+
+    }
 }

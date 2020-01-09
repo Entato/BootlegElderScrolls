@@ -89,17 +89,32 @@ public class Hero{
         //if hero is killed, damage is exactly how much it took to kill
         if(hero.health - trueDamage < 0){
             trueDamage = hero.health;
+
+            //adds damage to total damage if AI team is being damaged
+            if (Game.getTeam2().contains(hero)){
+                Player.totalDamageAdd(trueDamage);
+            }
         }
         if(!Guard.containsImmune(hero)) {
             System.out.println(this.name + " did " + trueDamage + " damage to " + hero.getName());
             hero.setHealth(hero.getHealth() - trueDamage);
             Game.getBattleLog().getItems().add(this.name + " attacked " + hero.name + " for " + trueDamage + " damage.");
+            
+            //adds damage to total damage if AI team is being damaged
+            if (Game.getTeam2().contains(hero)){
+                Player.totalDamageAdd(trueDamage);
+            }
         }
         else{
             System.out.println(hero.name + " is guarding and is immune to damage!");
         }
         if(hero.getHealth() <= 0){
             Game.getBattleLog().getItems().add(hero.name + " Has Died in Battle!");
+
+            //adds to total kills if AI dies
+            if (Game.getTeam2().contains(hero)){
+                Player.killsAdd();
+            }
         }
     }
     //use item
