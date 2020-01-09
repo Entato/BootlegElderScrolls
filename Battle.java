@@ -40,7 +40,7 @@ public class Battle{
 
         //action layout
         FlowPane battleActions = new FlowPane();
-        battleActions.setPrefSize(350, 200);
+
         battleActions.setHgap(40);
         battleActions.setVgap(20);
         battleActions.setAlignment(Pos.CENTER_RIGHT);
@@ -49,21 +49,20 @@ public class Battle{
 
         //action buttons and labels
         Button attackButton = new Button("Attack");
-        attackButton.setPrefSize(130, 60);
+        attackButton.setPrefSize(270, 60);
         Button guardButton = new Button("Guard");
-        guardButton.setPrefSize(130, 60);
+        guardButton.setPrefSize(270, 60);
         Button itemButton = new Button("Use Item");
-        itemButton.setPrefSize(130, 60);
+        itemButton.setPrefSize(270, 60);
         Button specialButton = new Button("Special");
-        specialButton.setPrefSize(130, 60);
+        specialButton.setPrefSize(270, 60);
 
         //Tells user who is attacking
         VBox nameBox = new VBox();
-        nameBox.setStyle("-fx-border-color: black");
-        nameBox.setPadding(new Insets(20, 20, 20, 20));
         nameBox.setAlignment(Pos.TOP_CENTER);
 
         Game.getNameLabel().setWrapText(true);
+        Game.getNameLabel().setId("title-labels");
         Game.getNameLabel().setText("What Will " + Player.getPlayerTeam().get(0).getName() + " Do?");
         nameBox.getChildren().addAll(Game.getNameLabel());
 
@@ -82,21 +81,21 @@ public class Battle{
 
         //battle log
         //bottom left box is for name info and battle log
-        HBox bottomLeftBox = new HBox(20);
+        HBox bottomLeftBox = new HBox();
         VBox logBox = new VBox(10);
-        logBox.setPadding(new Insets(10, 10, 10, 10));
+        logBox.setPadding(new Insets(10, 10, 30, 10));
         Label logLabel = new Label("Battle Log:");
         //scroll pane used for when battle log gets longer
         ScrollPane scroller = new ScrollPane();
         Game.getBattleLog().setPrefWidth(300);
         scroller.setFitToWidth(true);
-        scroller.setMaxHeight(200);
+        scroller.setMaxHeight(180);
         //battle log is a static variable stored in the game class
         Game.getBattleLog().setId("battle-log");
         scroller.setContent(Game.getBattleLog());
         logBox.getChildren().addAll(logLabel, scroller);
 
-        bottomLeftBox.getChildren().addAll(nameBox, logBox);
+        bottomLeftBox.getChildren().addAll(logBox);
         bottomLeftBox.setAlignment(Pos.CENTER);
 
         //SPRITES
@@ -116,6 +115,7 @@ public class Battle{
 
         //adds buttons to layouts
         battleActions.getChildren().addAll(attackButton, guardButton, itemButton, specialButton);
+        battleActions.setOrientation(Orientation.VERTICAL);
         bottomBox.getChildren().addAll(bottomLeftBox, battleActions);
 
         //adds layouts to border pane
@@ -123,6 +123,7 @@ public class Battle{
         borderPane.setLeft(team1Box);
         borderPane.setRight(team2Box);
         borderPane.setCenter(spriteBox);
+        borderPane.setTop(nameBox);
 
         //creates scene and returns it
         Scene battleScene = new Scene(borderPane, 1000, 650);
@@ -169,7 +170,7 @@ public class Battle{
         for(Hero h : Game.getTeam2()){
 
             button = new Button(h.getName());
-            button.setPrefSize(100, 40);
+            button.setPrefSize(150, 40);
             options.add(button);
             Button finalButton = button;
             optionBox.getChildren().add(button);
