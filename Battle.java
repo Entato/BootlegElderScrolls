@@ -606,7 +606,7 @@ public class Battle{
     }
     //special button method
     public static void specialButtonMethod(){
-        if(Player.getPlayerTeam().get(Game.getTeamTurn()).getActiveSpecial()){
+        if(!Player.getPlayerTeam().get(Game.getTeamTurn()).getActiveSpecial()){
             Game.getBattleLog().getItems().add(Player.getPlayerTeam().get(Game.getTeamTurn()).getName() +
                     " Has Already Used Their Special");
         }

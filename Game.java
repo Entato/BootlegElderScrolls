@@ -147,7 +147,7 @@ public class Game {
 
             //remove in game item effects
             h.setDefence(h.getRegDef());
-            h.setAttack(h.getRegDef());
+            h.setAttack(h.getRegAtk());
         }
     }
 }

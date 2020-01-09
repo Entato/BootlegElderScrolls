@@ -14,7 +14,7 @@ public class Hero{
     private int level = 1;
     private int exp = 0;
     private int regDef;
-    private int refAtk;
+    private int regAtk;
     
     //Hero constructor
     public Hero(int attack, int health, int defence, int magicResist, int evasion, int speed, String name){
@@ -28,7 +28,7 @@ public class Hero{
 
         //store what these values should be
         this.regDef = defence;
-        this.refAtk = attack;
+        this.regAtk = attack;
 
         healthBar = new HealthBar(this.health);
     }
@@ -81,12 +81,12 @@ public class Hero{
         this.attack = attack;
     }
 
-    public int getRefAtk() {
-        return refAtk;
+    public int getRegAtk() {
+        return regAtk;
     }
 
-    public void setRefAtk(int refAtk) {
-        this.refAtk = refAtk;
+    public void setRegAtk(int regAtk) {
+        this.regAtk = regAtk;
     }
 
     public int getRegDef() {
@@ -138,9 +138,10 @@ public class Hero{
         if(hero.getHealth() <= 0){
             Game.getBattleLog().getItems().add(hero.name + " Has Died in Battle!");
 
-            //adds to total kills if AI dies
+            //adds to total kills and exp if AI dies
             if (Game.getTeam2().contains(hero)){
                 Player.killsAdd();
+                this.addExp(50 + (10 * Player.getBossCount()));
             }
         }
     }
@@ -209,7 +210,12 @@ public class Hero{
     }
 
     public void levelUp(){
-
+        this.attack += 10;
+        this.defence += 10;
+        this.health += 30;
+        this.speed += 50;
+        this.regDef += 10;
+        this.regAtk += 10;
     }
 
 
