@@ -55,3 +55,9 @@
     -fx-font-size: 25;
     -fx-text-fill: linear-gradient(lightyellow, khaki);
 }
+
+#hp-labels{
+    -fx-font-weight: bold;
+    -fx-font-size: 16;
+    -fx-text-fill: linear-gradient(mediumvioletred, black);
+}

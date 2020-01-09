@@ -17,6 +17,7 @@ import javafx.scene.shape.*;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import javafx.scene.text.TextAlignment;
 import javafx.stage.*;
 
 import java.util.*;
@@ -474,6 +475,10 @@ public class Battle{
 
             //for first team
             if(team) {
+                //css id
+                Player.getPlayerTeam().get(i).getHealthBar().getHealthInfo().setId("hp-labels");
+                Player.getPlayerTeam().get(i).getHealthBar().getHealthInfo().setPadding(new Insets(0, 0, -30, 0));
+                Player.getPlayerTeam().get(i).getHealthBar().getHealthInfo().setTextAlignment(TextAlignment.LEFT);
 
                 Player.getPlayerTeam().get(i).getHealthBar().getHealthInfo().setText(Player.getPlayerTeam().get(i).getName() + ": " +
                         Player.getPlayerTeam().get(i).getHealth() +
@@ -487,6 +492,11 @@ public class Battle{
             }
             //for second team
             else{
+                //css id
+                Game.getTeam2().get(i).getHealthBar().getHealthInfo().setId("hp-labels");
+                Game.getTeam2().get(i).getHealthBar().getHealthInfo().setPadding(new Insets(0, 0, -30, 0));
+                Game.getTeam2().get(i).getHealthBar().getHealthInfo().setTextAlignment(TextAlignment.LEFT);
+
                 Game.getTeam2().get(i).getHealthBar().getHealthInfo().setText(Game.getTeam2().get(i).getName() + ": " +
                         Game.getTeam2().get(i).getHealth() +
                         "/" + (int) Game.getTeam2().get(i).getHealthBar().getMaxHealth());
