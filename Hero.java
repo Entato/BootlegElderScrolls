@@ -141,6 +141,7 @@ public class Hero{
             hero.setHealth(hero.getHealth() - trueDamage);
             Visuals.attackAnimation(this, hero);
             Game.getBattleLog().getItems().add(this.name + " attacked " + hero.name + " for " + trueDamage + " damage.");
+
             
             //adds damage to total damage if AI team is being damaged
             if (Game.getTeam2().contains(hero)){

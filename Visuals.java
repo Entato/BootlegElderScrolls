@@ -89,29 +89,30 @@ public class Visuals {
     }
 
     public static void attackAnimation(Hero attacker, Hero defender){
-        double minX1 = attacker.getSpriteView().localToScene(attacker.getSpriteView().getBoundsInLocal()).getMinX();
-        double minX2 = defender.getSpriteView().localToScene(defender.getSpriteView().getBoundsInLocal()).getMinX();
+        double minX1 = attacker.getSpriteView().localToScene(attacker.getSpriteView().getParent().getBoundsInLocal()).getMinX();
+        double minX2 = defender.getSpriteView().localToScene(defender.getSpriteView().getParent().getBoundsInLocal()).getMinX();
 
-        double minY1 = attacker.getSpriteView().localToScene(attacker.getSpriteView().getBoundsInLocal()).getMinY();
-        double minY2 = defender.getSpriteView().localToScene(defender.getSpriteView().getBoundsInLocal()).getMinY();
+        double minY1 = attacker.getSpriteView().localToScene(attacker.getSpriteView().getParent().getBoundsInLocal()).getMinY();
+        double minY2 = defender.getSpriteView().localToScene(defender.getSpriteView().getParent().getBoundsInLocal()).getMinY();
 
 
-        TranslateTransition attack1 = new TranslateTransition(Duration.millis(1000), attacker.getSpriteView().getParent());
+        TranslateTransition attack1 = new TranslateTransition(Duration.millis(3000), attacker.getSpriteView().getParent());
         System.out.println("Defender x: " + minX2 + "defender y: " + minY2);
-        attack1.setFromX(minX1);
-        attack1.setFromY(minY1);
+        //attack1.setFromX(minX1);
+        //attack1.setFromY(minY1);
         attack1.setToX(minX2);
         attack1.setToX(minY2);
 
-
-
         attack1.setAutoReverse(true);
+        attack1.setCycleCount(2);
+
+
+        //attack1.setOnFinished(e ->);
 
         attack1.play();
-
-
-
     }
+
+
 
 
 }

@@ -1,3 +1,4 @@
 -make stat variables function properly
 -make 
 -temporarily changed 6 to 3 in a loop in visuals.java to ignore sprites for team2
+-make sequential transitions
