@@ -4,6 +4,7 @@ import javafx.scene.Group;
 import javafx.scene.image.*;
 import javafx.scene.layout.*;
 import javafx.animation.*;
+import javafx.geometry.Point2D;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 
@@ -95,13 +96,23 @@ public class Visuals {
         double minY1 = attacker.getSpriteView().localToScene(attacker.getSpriteView().getParent().getBoundsInLocal()).getMinY();
         double minY2 = defender.getSpriteView().localToScene(defender.getSpriteView().getParent().getBoundsInLocal()).getMinY();
 
+        //Point2D nodeInScene = defender.getSpriteView().getParent().localToScene(nodeMinX, nodeMinY);
 
-        TranslateTransition attack1 = new TranslateTransition(Duration.millis(3000), attacker.getSpriteView().getParent());
-        System.out.println("Defender x: " + minX2 + "defender y: " + minY2);
+        double nodeMinX2 = defender.getSpriteView().getLayoutBounds().getMinX();
+        double nodeMinY2 = defender.getSpriteView().getLayoutBounds().getMinY();
+
+        double nodeMinX1 = attacker.getSpriteView().getLayoutBounds().getMinX();
+        double nodeMinY1 = attacker.getSpriteView().getLayoutBounds().getMinY();
+
+        Point2D points1 = attacker.getSpriteView().localToScene(nodeMinX1, nodeMinY1);
+        Point2D points2 = defender.getSpriteView().localToScene(nodeMinX2, nodeMinY2);
+
+        TranslateTransition attack1 = new TranslateTransition(Duration.millis(500), attacker.getSpriteView().getParent());
+        System.out.println("Distance x: " + (points2.getX() - points1.getX()) + "distance y: " + (points2.getY() - points1.getY()));
         //attack1.setFromX(minX1);
         //attack1.setFromY(minY1);
-        attack1.setToX(minX2);
-        attack1.setToX(minY2);
+        attack1.setToX(points2.getX() - points1.getX());
+        attack1.setToY(points2.getY() - points1.getY());
 
         attack1.setAutoReverse(true);
         attack1.setCycleCount(2);
