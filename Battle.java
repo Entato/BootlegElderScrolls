@@ -106,6 +106,7 @@ public class Battle{
         Visuals.getSprite1Box().setAlignment(Pos.CENTER_LEFT);
         Visuals.getSprite2Box().setAlignment(Pos.CENTER_RIGHT);
         spriteBox.getChildren().addAll(Visuals.getSprite1Box(), Visuals.getSprite2Box());
+        System.out.println(Visuals.getTeam1Sprites().toString());
         Visuals.placeSprites();
 
         //BUTTON ACTIONS
@@ -671,6 +672,8 @@ public class Battle{
         String name = "AI " + i;
 
         Grunt grunt = new Grunt(name, Player.getBossCount());
+        //5 is for grunts
+        Visuals.getTeam2Sprites().add(Visuals.getSprites().get(5));
 
         return grunt;
     }

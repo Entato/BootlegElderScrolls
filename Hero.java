@@ -1,5 +1,7 @@
 package BootlegElderScrolls;
 
+import javafx.scene.image.ImageView;
+
 public class Hero{
     //fields
     private int attack;
@@ -15,6 +17,7 @@ public class Hero{
     private int exp = 0;
     private int regDef;
     private int regAtk;
+    private ImageView spriteView;
     
     //Hero constructor
     public Hero(int attack, int health, int defence, int magicResist, int evasion, int speed, String name){
@@ -30,9 +33,20 @@ public class Hero{
         this.regDef = defence;
         this.regAtk = attack;
 
-        healthBar = new HealthBar(this.health);
+        this.healthBar = new HealthBar(this.health);
+        this.spriteView = new ImageView();
+
     }
     //getters and setters
+
+    public ImageView getSpriteView(){
+        return this.spriteView;
+    }
+
+    public void setSpriteView(ImageView spriteView) {
+        this.spriteView = spriteView;
+    }
+
     public int getHealth(){
         return this.health;
     }
@@ -125,6 +139,7 @@ public class Hero{
         if(!Guard.containsImmune(hero)) {
             System.out.println(this.name + " did " + trueDamage + " damage to " + hero.getName());
             hero.setHealth(hero.getHealth() - trueDamage);
+            Visuals.attackAnimation(this, hero);
             Game.getBattleLog().getItems().add(this.name + " attacked " + hero.name + " for " + trueDamage + " damage.");
             
             //adds damage to total damage if AI team is being damaged

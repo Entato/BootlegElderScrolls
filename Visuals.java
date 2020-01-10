@@ -3,6 +3,8 @@ package BootlegElderScrolls;
 import javafx.scene.Group;
 import javafx.scene.image.*;
 import javafx.scene.layout.*;
+import javafx.animation.*;
+import javafx.util.Duration;
 
 import java.io.*;
 import java.util.*;
@@ -41,45 +43,66 @@ public class Visuals {
         for(int i = 0; i < 5; i++){
             sprites.add(new Image(new FileInputStream("src/BootlegElderScrolls/Assets/sprite_" + i + ".png")));
         }
+        sprites.add(new Image(new FileInputStream("src/BootlegElderScrolls/Assets/sprite_grunt.png")));
     }
 
     //adds sprites to layout
     public static void placeSprites(){
-        ArrayList<ImageView> imageViews = new ArrayList<ImageView>();
         ArrayList<Group> roots = new ArrayList<Group>();
+
         for(int i = 0; i < 6; i++){
             roots.add(new Group());
         }
 
-        //3 has to be changed back to 6 after grunt sprites is finshed
-        for(int i = 0; i < 3; i++){
-
-            imageViews.add(new ImageView());
+        //3 has to be changed back to 6 after grunt sprites is finished
+        for(int i = 0; i < 6; i++){
+            System.out.println(Game.getTeam2().size());
             if(i < 3){
                 Image image = team1Sprites.get(i);
-                imageViews.get(i).setImage(image);
+                Player.getPlayerTeam().get(i).getSpriteView().setImage(image);
+                Player.getPlayerTeam().get(i).getSpriteView().setFitHeight(110);
+                Player.getPlayerTeam().get(i).getSpriteView().setFitWidth(100);
+                Player.getPlayerTeam().get(i).getSpriteView().setPreserveRatio(true);
+                roots.get(i).getChildren().setAll(Player.getPlayerTeam().get(i).getSpriteView());
             }
             else{
                 Image image = team2Sprites.get(i - 3);
-                imageViews.get(i).setImage(image);
+                Game.getTeam2().get(i - 3).getSpriteView().setImage(image);
+                Game.getTeam2().get(i - 3).getSpriteView().setFitHeight(110);
+                Game.getTeam2().get(i - 3).getSpriteView().setFitWidth(100);
+                Game.getTeam2().get(i - 3).getSpriteView().setPreserveRatio(true);
+                roots.get(i).getChildren().setAll(Game.getTeam2().get(i - 3).getSpriteView());
             }
-            //resizing
-            imageViews.get(i).setFitHeight(110);
-            imageViews.get(i).setFitWidth(100);
-            imageViews.get(i).setPreserveRatio(true);
-            //adding to layout
-            roots.get(i).getChildren().setAll(imageViews.get(i));
+
             if(i < 3){
                 sprite1Box.getChildren().add(roots.get(i));
             }
             else{
                 sprite2Box.getChildren().add(roots.get(i));
             }
-            System.out.println("IMGVIEW :" + imageViews.get(i).toString());
+
 
 
         }
 
+    }
+
+    public static void attackAnimation(Hero attacker, Hero defender){
+        TranslateTransition attack1 = new TranslateTransition(Duration.millis(1000), attacker.getSpriteView());
+        System.out.println("Defender x: " + defender.getSpriteView().getLayoutX() + "defender y: " + defender.getSpriteView().getLayoutY());
+        //attack1.setFromX(attacker.getSpriteView().getLayoutX());
+        //attack1.setFromY(attacker.getSpriteView().getLayoutY());
+        //attack1.setToX(defender.getSpriteView().getLayoutX());
+        //attack1.setToY(defender.getSpriteView().getLayoutY());
+
+        attack1.setByX(200);
+        attack1.setCycleCount(4);
+        attack1.setAutoReverse(true);
+
+        attack1.play();
+
+
+        attack1.play();
     }
 
 
