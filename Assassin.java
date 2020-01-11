@@ -19,5 +19,8 @@ public class Assassin extends Hero{
         }
     }
    
-    
+    public void specialAttack(Hero hero){
+        int damage = 50 + (150 * hero.getHealth() / hero.getMaxHealth());
+        hero.setHealth(hero.getHealth() - damage);
+    }
 }

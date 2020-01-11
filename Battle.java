@@ -117,7 +117,7 @@ public class Battle{
         attackButton.setOnAction(e -> attackButtonMethod(bottomBox, battleActions)); //passing layouts for temp change
         itemButton.setOnAction(e -> itemButtonMethod(bottomBox, battleActions));
         guardButton.setOnAction(e -> guardButtonMethod());
-        specialButton.setOnAction(e -> specialButtonMethod());
+        specialButton.setOnAction(e -> specialButtonMethod(bottomBox, battleActions));
 
         //adds buttons to layouts
         battleActions.getChildren().addAll(attackButton, guardButton, itemButton, specialButton);
@@ -187,11 +187,6 @@ public class Battle{
             }
             
             button.setOnAction(e -> {
-
-                //if guarded last turn, makes it eligible to guard again next turn
-                if(Guard.containsUnGuardable(Player.getPlayerTeam().get(Game.getTeamTurn()))){
-                    Guard.removeUnGuardable(Player.getPlayerTeam().get(Game.getTeamTurn()));
-                }
 
                 Game.addAttack(Player.getPlayerTeam().get(Game.getTeamTurn()), Game.getTeam2().get(options.indexOf(finalButton)));
                 //apply old layout back
@@ -578,13 +573,77 @@ public class Battle{
         }
     }
     //special button method
-    public static void specialButtonMethod(){
+    public static void specialButtonMethod(HBox hBox, FlowPane flowPane){
         if(!Player.getPlayerTeam().get(Game.getTeamTurn()).getActiveSpecial()){
             Game.getBattleLog().getItems().add(Player.getPlayerTeam().get(Game.getTeamTurn()).getName() +
                     " Has Already Used Their Special");
         }
         else{
             //SPECIAL MOVE HERE
+            if (Player.getPlayerTeam().get(Game.getTeamTurn()) instanceof Assassin ||
+            Player.getPlayerTeam().get(Game.getTeamTurn()) instanceof Archer){
+                //layout
+                VBox bigBox = new VBox(20);
+                bigBox.setPadding(new Insets(20, 20, 20, 20));
+                HBox optionBox = new HBox(20);
+                optionBox.setPadding(new Insets(10, 10, 10, 10));
+                optionBox.setAlignment(Pos.CENTER);
+                optionBox.setStyle("-fx-border-color: black");
+
+                //label
+                Label optionsLabel = new Label("Who Will " + Player.getPlayerTeam().get(Game.getTeamTurn()).getName() + " Attack?");
+
+                //back button
+                Button backButton = new Button("<");
+                backButton.setPrefSize(40, 40);
+                optionBox.getChildren().add(backButton);
+                backButton.setOnAction(e -> {
+                    hBox.getChildren().set(1, flowPane);
+                });
+
+                //storing buttons so I can reference them later
+                ArrayList<Button> options = new ArrayList<Button>();
+                Button button;
+
+                for(Hero h : Game.getTeam2()){
+
+                    button = new Button(h.getName());
+                    button.setPrefSize(150, 40);
+                    options.add(button);
+                    Button finalButton = button;
+                    optionBox.getChildren().add(button);
+                    
+                    //disables button if AI is dead
+                    if (h.getHealth() <= 0){
+                        button.setDisable(true);
+                    }
+                    
+                    button.setOnAction(e -> {
+
+                        Player.getPlayerTeam().get(Game.getTeamTurn()).specialAttack(Game.getTeam2().get(options.indexOf(finalButton)));
+
+                        //apply old layout back
+                        hBox.getChildren().set(1, flowPane);
+
+                        //removes guard if guard was used last turn
+                        if (Guard.containsUnGuardable(Player.getPlayerTeam().get(Game.getTeamTurn()))){
+                            Guard.removeUnGuardable(Player.getPlayerTeam().get(Game.getTeamTurn()));
+                        }
+
+                        //if there are more actions left for the player
+                        if(team1Alive()) {
+                            //new name label
+                            Game.getNameLabel().setText("What Will " + Player.getPlayerTeam().get(Game.getTeamTurn()).getName() + " Do?");
+                        } else {
+                            AI();
+                        }
+                    });
+                }
+                //apply new layout
+                bigBox.getChildren().addAll(optionsLabel, optionBox);
+                hBox.getChildren().set(1, bigBox);
+
+            }
 
             //if there are more actions left for the player
             if(team1Alive()) {

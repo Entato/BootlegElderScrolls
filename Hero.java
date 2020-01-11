@@ -6,6 +6,7 @@ import javafx.scene.image.ImageView;
 public class Hero{
     //fields
     private int attack;
+    private int maxHealth;
     private int health;
     private int defence;
     private int magicResist;
@@ -23,6 +24,7 @@ public class Hero{
     //Hero constructor
     public Hero(int attack, int health, int defence, int magicResist, int evasion, int speed, String name){
         this.attack = attack;
+        this.maxHealth = health;
         this.health = health;
         this.defence = defence;
         this.magicResist = magicResist;
@@ -46,6 +48,10 @@ public class Hero{
 
     public void setSpriteView(ImageView spriteView) {
         this.spriteView = spriteView;
+    }
+
+    public int getMaxHealth(){
+        return this.maxHealth;
     }
 
     public int getHealth(){
@@ -241,11 +247,14 @@ public class Hero{
         this.attack += 10;
         this.defence += 10;
         this.health += 30;
+        this.maxHealth += 30;
         this.speed += 50;
         this.regDef += 10;
         this.regAtk += 10;
     }
 
+    public void specialAttack(Hero hero){
 
+    }
 
 }

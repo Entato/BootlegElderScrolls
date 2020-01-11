@@ -20,5 +20,7 @@ public class Knight extends Hero{
         }
     }
 
-
+    public void specialAttack(){
+        
+    }
 }

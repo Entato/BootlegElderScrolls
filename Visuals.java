@@ -61,9 +61,9 @@ public class Visuals {
     //initialize sprites
     public static void initializeSprites() throws IOException {
         for(int i = 0; i < 5; i++){
-            sprites.add(new Image(new FileInputStream("src/BootlegElderScrolls/Assets/sprite_" + i + ".png")));
+            sprites.add(new Image(new FileInputStream("BootlegElderScrolls/Assets/sprite_" + i + ".png")));
         }
-        sprites.add(new Image(new FileInputStream("src/BootlegElderScrolls/Assets/sprite_grunt.png")));
+        sprites.add(new Image(new FileInputStream("BootlegElderScrolls/Assets/sprite_grunt.png")));
     }
 
     //adds sprites to layout
