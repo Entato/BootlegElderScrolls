@@ -137,6 +137,7 @@ public class Game {
         attackList.clear();
         team2.clear();
         battleLog.getItems().clear();
+        Battle.getFlowPane().getChildren().clear();
         Visuals.getTeam2Sprites().clear();
         Visuals.getSprite2Box().getChildren().clear();
         Visuals.getSprite1Box().getChildren().clear();
@@ -192,6 +193,7 @@ public class Game {
             //checks if using attack on a dead body
             if(defender.getHealth() <= 0){
                 attackListCopy.remove(i);
+                Game.getBattleLog().getItems().add(attacker.getName() + " 's Attack Was Wasted On a Dead Body!");
                 continue;
             }
 
