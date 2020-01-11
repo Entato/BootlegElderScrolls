@@ -56,6 +56,9 @@ public class Game {
     public static boolean getMidReset(){
         return midReset;
     }
+    public static ArrayList<Hero[]> getAttackList(){
+        return attackList;
+    }
 
     //storing attack actions
     public static void addAttack(Hero attacker, Hero defender){
@@ -88,9 +91,10 @@ public class Game {
 
     //performs the attacks
     public static void commitAttacks(){
-
+        deleteBadAttacks();
 
         for(int i = 0; i < attackList.size(); i++){
+
 
 
             if(Guard.containsImmune(attackList.get(i)[1])){
@@ -150,9 +154,7 @@ public class Game {
             h.setDefence(h.getRegDef());
             h.setAttack(h.getRegAtk());
         }
-        Visuals.getSequences().clear();
-        Visuals.getRecipients().clear();
-        Visuals.getDamages().clear();
+
     }
 
     //check if attack is valid
@@ -170,6 +172,52 @@ public class Game {
         }
 
         return valid;
+    }
+
+    public static void deleteBadAttacks(){
+        ArrayList<Hero[]> attackListCopy = (ArrayList<Hero[]>)attackList.clone();
+        ArrayList<int[]> healths = new ArrayList<int[]>();
+        for(int i = 0; i < attackList.size(); i++){
+            int[] hp = new int[2];
+            hp[0] = attackListCopy.get(i)[0].getHealth();
+            hp[1] = attackListCopy.get(i)[1].getHealth();
+
+            healths.add(hp);
+        }
+
+        for(int i = 0; i < attackListCopy.size(); i++){
+            Hero attacker = attackListCopy.get(i)[0];
+            Hero defender = attackListCopy.get(i)[1];
+
+            //checks if using attack on a dead body
+            if(defender.getHealth() <= 0){
+                attackListCopy.remove(i);
+                continue;
+            }
+
+            //remove dead attackers
+            int damage = attacker.getAttack() * 100 / (defender.getDefence() + 100);
+            defender.setHealth(defender.getHealth() - damage);
+            if(defender.getHealth() <= 0){
+                for(int j = i; j < attackListCopy.size(); j++){
+                    if(attackListCopy.get(j)[0].equals(defender)){
+                        attackListCopy.remove(j);
+                    }
+                }
+            }
+
+
+        }
+        for(int i = 0; i < attackList.size(); i++){
+            attackList.get(i)[0].setHealth(healths.get(i)[0]);
+            attackList.get(i)[1].setHealth(healths.get(i)[1]);
+        }
+
+        //get new list
+        attackList = attackListCopy;
+
+
+
     }
 
 

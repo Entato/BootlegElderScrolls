@@ -679,6 +679,9 @@ public class Battle{
     }
     public static void nextTurn(){
         //for next turn
+
+        Game.getAttackList().clear();
+
         Game.setTurn(Game.getTurn() + 1);
         Game.getBattleLog().getItems().add("Turn " + Game.getTurn() + ":");
         for(int i = 0; i < Player.getPlayerTeam().size(); i++) {
@@ -688,6 +691,10 @@ public class Battle{
                 break;
             }
         }
+
+        Visuals.getSequences().clear();
+        Visuals.getRecipients().clear();
+        Visuals.getDamages().clear();
 
 
         Game.getNameLabel().setText("What Will " + Player.getPlayerTeam().get(Game.getTeamTurn()).getName() + " Do?");

@@ -192,10 +192,13 @@ public class Visuals {
                         if (recipients.get(counter[0] + 1).get(0).getHealth() <= 0) {
                             System.out.println("Animation removed");
                             attackTransition.stop();
-                            attackTransition.playFrom(time.add(Duration.millis(500)));
+                            attackTransition.playFrom(time.add(Duration.millis(1500)));
+                            counter[0]++;
                         }
                     }
+
                      */
+
                     System.out.println("Counter:" + counter[0]);
                     counter[0]++;
 
