@@ -7,6 +7,7 @@ import javafx.animation.*;
 import javafx.geometry.Point2D;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
+import sun.security.krb5.internal.crypto.Aes128;
 
 import java.io.*;
 import java.util.*;
@@ -18,10 +19,20 @@ public class Visuals {
     //layouts for sprites
     private static VBox sprite1Box = new VBox(50);
     private static VBox sprite2Box = new VBox(50);
+    private static ArrayList<SequentialTransition> sequences = new ArrayList<SequentialTransition>();
+    private static ArrayList<Integer> damages = new ArrayList<Integer>();
+    private static ArrayList<ArrayList<Hero>> recipients = new ArrayList<ArrayList<Hero>>();
+    private static ArrayList<Boolean> death = new ArrayList<Boolean>();
 
     //getters so I can access them and use their methods
     public static ArrayList<Image> getSprites() {
         return sprites;
+    }
+    public static ArrayList<Integer> getDamages(){
+        return damages;
+    }
+    public static ArrayList<ArrayList<Hero>> getRecipients(){
+        return recipients;
     }
 
     public static ArrayList<Image> getTeam1Sprites() {
@@ -38,6 +49,13 @@ public class Visuals {
 
     public static VBox getSprite1Box() {
         return sprite1Box;
+    }
+
+    public static ArrayList<SequentialTransition> getSequences() {
+        return sequences;
+    }
+    public static ArrayList<Boolean> getDeath() {
+        return death;
     }
 
     //initialize sprites
@@ -89,14 +107,8 @@ public class Visuals {
 
     }
 
-    public static void attackAnimation(Hero attacker, Hero defender){
-        double minX1 = attacker.getSpriteView().localToScene(attacker.getSpriteView().getParent().getBoundsInLocal()).getMinX();
-        double minX2 = defender.getSpriteView().localToScene(defender.getSpriteView().getParent().getBoundsInLocal()).getMinX();
-
-        double minY1 = attacker.getSpriteView().localToScene(attacker.getSpriteView().getParent().getBoundsInLocal()).getMinY();
-        double minY2 = defender.getSpriteView().localToScene(defender.getSpriteView().getParent().getBoundsInLocal()).getMinY();
-
-        //Point2D nodeInScene = defender.getSpriteView().getParent().localToScene(nodeMinX, nodeMinY);
+    //configures sequence of animations
+    public static void attackAnimation(Hero attacker, Hero defender, int damage){
 
         double nodeMinX2 = defender.getSpriteView().getLayoutBounds().getMinX();
         double nodeMinY2 = defender.getSpriteView().getLayoutBounds().getMinY();
@@ -104,6 +116,7 @@ public class Visuals {
         double nodeMinX1 = attacker.getSpriteView().getLayoutBounds().getMinX();
         double nodeMinY1 = attacker.getSpriteView().getLayoutBounds().getMinY();
 
+        //coordinates for attacker and defender
         Point2D points1 = attacker.getSpriteView().localToScene(nodeMinX1, nodeMinY1);
         Point2D points2 = defender.getSpriteView().localToScene(nodeMinX2, nodeMinY2);
 
@@ -117,12 +130,110 @@ public class Visuals {
         attack1.setAutoReverse(true);
         attack1.setCycleCount(2);
 
+        PauseTransition pauseTransition1 = new PauseTransition(Duration.millis(1000));
+        PauseTransition pauseTransition2 = new PauseTransition(Duration.millis(1000));
 
-        //attack1.setOnFinished(e ->);
+        SequentialTransition sequence = new SequentialTransition(pauseTransition1, attack1, pauseTransition2);
 
-        attack1.play();
+        sequences.add(sequence);
+        ArrayList<Hero> attackerDefender = new ArrayList<Hero>();
+        attackerDefender.add(attacker);
+        attackerDefender.add(defender);
+        recipients.add(attackerDefender);
+
+        damages.add(damage);
+
+
+
     }
 
+    //plays animations
+    public static void playAnimationSet() {
+        SequentialTransition attackTransition = new SequentialTransition();
+        //needed array since lambda expressions need final values
+        final boolean[] problem = {false};
+        PauseTransition[] updates = new PauseTransition[sequences.size()];
+
+        //I'm doing this because the lambda expression needs a constant variable
+        final int[] counter  = {0};
+        for(int i = 0; i < updates.length; i++){
+
+            updates[i] = new PauseTransition(Duration.millis(1));
+            updates[i].setOnFinished(e -> {
+
+                if(problem[0]){
+                    return;
+                }
+                System.out.println("ANIMATION ENTERED________________");
+                try {
+
+
+                    //deal damage
+                    if(Game.validAttack(recipients.get(counter[0]).get(0), recipients.get(counter[0]).get(1))) {
+                        recipients.get(counter[0]).get(1).setHealth(recipients.get(counter[0]).get(1).getHealth() - damages.get(counter[0]));
+                        System.out.println("Health after damage: " + recipients.get(counter[0]).get(1).getHealth());
+
+                        //battle log message
+                        Game.getBattleLog().getItems().add(recipients.get(counter[0]).get(0).getName() + " attacked " +
+                                recipients.get(counter[0]).get(1).getName() + " for " + damages.get(counter[0]) + " damage.");
+
+                        //check if dead
+                        if(death.get(counter[0])){
+                            Game.getBattleLog().getItems().add(recipients.get(counter[0]).get(1).getName() + " Has Died in Battle!");
+                        }
+                        //health bar update
+                        recipients.get(counter[0]).get(1).updateHealthBar();
+
+                    }
+                    //check for dead heroes next turn to cancel animation
+                    /*
+                    if(counter[0] < updates.length-1) {
+                        Duration time = attackTransition.getCurrentTime();
+                        if (recipients.get(counter[0] + 1).get(0).getHealth() <= 0) {
+                            System.out.println("Animation removed");
+                            attackTransition.stop();
+                            attackTransition.playFrom(time.add(Duration.millis(500)));
+                        }
+                    }
+                     */
+                    System.out.println("Counter:" + counter[0]);
+                    counter[0]++;
+
+                    //only check for end after all animations
+                    if(counter[0] == updates.length){
+                        //ensure this does not get called again
+                        counter[0] = 500;
+                        Battle.nextTurn();
+                        Battle.checkForEnd();
+                        problem[0] = true;
+                    }
+
+                }
+                catch(Exception error) {
+                    System.err.println(error);
+                    problem[0] = true;
+                }
+
+
+
+            });
+            if(problem[0]){
+                return;
+            }
+        }
+
+        for(int i = 0; i < sequences.size(); i++){
+            attackTransition.getChildren().addAll(sequences.get(i), updates[i]);
+        }
+
+
+
+
+
+        attackTransition.play();
+
+
+    }
 
 
 

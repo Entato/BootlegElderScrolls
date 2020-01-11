@@ -1,5 +1,6 @@
 package BootlegElderScrolls;
 
+import javafx.animation.Animation;
 import javafx.scene.image.ImageView;
 
 public class Hero{
@@ -53,6 +54,9 @@ public class Hero{
 
     public void setHealth(int health){
         this.health = health;
+    }
+    public int getAttack(){
+        return this.attack;
     }
 
     public int getDefence(){
@@ -137,11 +141,11 @@ public class Hero{
         }
         if(!Guard.containsImmune(hero)) {
             System.out.println(this.name + " did " + trueDamage + " damage to " + hero.getName());
-            hero.setHealth(hero.getHealth() - trueDamage);
-            Visuals.attackAnimation(this, hero);
-            Game.getBattleLog().getItems().add(this.name + " attacked " + hero.name + " for " + trueDamage + " damage.");
+            //hero.setHealth(hero.getHealth() - trueDamage);
 
-            
+            Visuals.attackAnimation(this, hero, trueDamage);
+            //Game.getBattleLog().getItems().add(this.name + " attacked " + hero.name + " for " + trueDamage + " damage.");
+
             //adds damage to total damage if AI team is being damaged
             if (Game.getTeam2().contains(hero)){
                 Player.totalDamageAdd(trueDamage);
@@ -150,14 +154,22 @@ public class Hero{
         else{
             System.out.println(hero.name + " is guarding and is immune to damage!");
         }
+        //put this in visuals
         if(hero.getHealth() <= 0){
-            Game.getBattleLog().getItems().add(hero.name + " Has Died in Battle!");
+            //Game.getBattleLog().getItems().add(hero.name + " Has Died in Battle!");
+
+            //for hero has died message
+            Visuals.getDeath().add(true);
 
             //adds to total kills and exp if AI dies
             if (Game.getTeam2().contains(hero)){
                 Player.killsAdd();
                 this.addExp(50 + (10 * Player.getBossCount()));
             }
+        }
+        //in this case it will make it so there will be no death message
+        else{
+            Visuals.getDeath().add(false);
         }
     }
     //use item
@@ -214,6 +226,7 @@ public class Hero{
         this.healthBar.getHealthInfo().setText(this.name + ": " + this.health + "/" +
                 (int) this.healthBar.getMaxHealth());
     }
+
 
     public boolean checkLevelUp(){
         if (level < 2 && exp > 100){

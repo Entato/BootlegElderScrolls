@@ -532,12 +532,14 @@ public class Battle{
             Game.addAttack(Game.getTeam2().get(i), Player.getPlayerTeam().get(rand));
         }
         Game.commitAttacks();
+        Visuals.playAnimationSet();
 
         //clears immune
         Guard.clearImmune();
 
         //update health bars
         //team1
+        /*
         for(Hero h : Player.getPlayerTeam()){
             h.updateHealthBar();
             System.out.println("team 1: " + h.getHealth());
@@ -548,42 +550,8 @@ public class Battle{
             System.out.println("team 2: " + h.getHealth());
             System.out.println("Width: " + h.getHealthBar().getGreenBar().getWidth());
         }
+         */
 
-        //checks if battle is over
-        //both cases have a return so the rest of the method is not used
-        if(checkTeamDead(Game.getTeam2())){
-            
-            battleOver();
-            //AI creates team
-            //keep track of what AI has chosen
-            ArrayList<Integer> picks = new ArrayList<Integer>();
-            for(int i = 0; i < 3; i++){
-                /*
-                Game.getTeam2().add(AIPick(i, picks));
-                */
-                Game.getTeam2().add(AIPickGrunt(i));
-            }
-
-            return;
-        } else if (checkTeamDead(Player.getPlayerTeam())){
-            MainMenu.getMainStage().setScene(GameOver.gameOverScene());
-            
-            return;
-        }
-
-        //for next turn
-        Game.setTurn(Game.getTurn() + 1);
-        Game.getBattleLog().getItems().add("Turn " + Game.getTurn() + ":");
-        for(int i = 0; i < Player.getPlayerTeam().size(); i++) {
-            //sets it as first alive hero
-            if(Player.getPlayerTeam().get(i).getHealth() > 0){
-                Game.setTeamTurn(i);
-                break;
-            }
-        }
-
-
-        Game.getNameLabel().setText("What Will " + Player.getPlayerTeam().get(Game.getTeamTurn()).getName() + " Do?");
     }
 
     //guard button method ----------------------------------------------------------------------------------------------
@@ -680,8 +648,48 @@ public class Battle{
 
     //gets called when battle finishes
     public static void battleOver(){
+        System.out.println("Battle over called");
         Player.bossCountAdd();
         MainMenu.getMainStage().setScene(Hub.hubScene());
         Game.reset();
+    }
+
+    public static void checkForEnd(){
+        //checks if battle is over
+        //both cases have a return so the rest of the method is not used
+        if(checkTeamDead(Game.getTeam2())){
+
+            battleOver();
+            //AI creates team
+            //keep track of what AI has chosen
+            ArrayList<Integer> picks = new ArrayList<Integer>();
+            for(int i = 0; i < 3; i++){
+                /*
+                Game.getTeam2().add(AIPick(i, picks));
+                */
+                Game.getTeam2().add(AIPickGrunt(i));
+            }
+
+            return;
+        } else if (checkTeamDead(Player.getPlayerTeam())){
+            MainMenu.getMainStage().setScene(GameOver.gameOverScene());
+
+            return;
+        }
+    }
+    public static void nextTurn(){
+        //for next turn
+        Game.setTurn(Game.getTurn() + 1);
+        Game.getBattleLog().getItems().add("Turn " + Game.getTurn() + ":");
+        for(int i = 0; i < Player.getPlayerTeam().size(); i++) {
+            //sets it as first alive hero
+            if(Player.getPlayerTeam().get(i).getHealth() > 0){
+                Game.setTeamTurn(i);
+                break;
+            }
+        }
+
+
+        Game.getNameLabel().setText("What Will " + Player.getPlayerTeam().get(Game.getTeamTurn()).getName() + " Do?");
     }
 }

@@ -1,5 +1,6 @@
 package BootlegElderScrolls;
 
+import com.sun.corba.se.spi.ior.IdentifiableFactory;
 import javafx.scene.control.*;
 
 import java.util.ArrayList;
@@ -13,6 +14,7 @@ public class Game {
     private static Label nameLabel = new Label();
     private static Hero itemLastUsedOn;
     private static int turn = 1;
+    private static boolean midReset = false;
 
     //getters and setters
     public static int getTeamTurn(){
@@ -39,6 +41,9 @@ public class Game {
     public static void setTurn(int turn) {
         Game.turn = turn;
     }
+    public static void setMidReset(boolean midReset){
+        Game.midReset = midReset;
+    }
 
     //made getters so I can edit them without making a method for each action
     public static ListView<String> getBattleLog() {
@@ -47,6 +52,9 @@ public class Game {
 
     public static ArrayList<Hero> getTeam2(){
         return team2;
+    }
+    public static boolean getMidReset(){
+        return midReset;
     }
 
     //storing attack actions
@@ -83,15 +91,7 @@ public class Game {
 
 
         for(int i = 0; i < attackList.size(); i++){
-            //if attacker has died, skip that hero's attack
-            if(attackList.get(i)[0].getHealth() <= 0){
-                continue;
-            }
-            //if defender is dead, skip that hero's attack
-            if(attackList.get(i)[1].getHealth() <= 0){
-                battleLog.getItems().add(attackList.get(i)[0].getName() + "'s Attack was wasted On a Dead Body!");
-                continue;
-            }
+
 
             if(Guard.containsImmune(attackList.get(i)[1])){
                 System.out.println(attackList.get(i)[1].getName() + " is guarding and is immune to " +
@@ -129,6 +129,7 @@ public class Game {
 
     //reset method
     public static void reset(){
+        midReset = true;
         attackList.clear();
         team2.clear();
         battleLog.getItems().clear();
@@ -149,5 +150,30 @@ public class Game {
             h.setDefence(h.getRegDef());
             h.setAttack(h.getRegAtk());
         }
+        Visuals.getSequences().clear();
+        Visuals.getRecipients().clear();
+        Visuals.getDamages().clear();
     }
+
+    //check if attack is valid
+    public static boolean validAttack(Hero attacker, Hero defender){
+        boolean valid = true;
+
+        //if attacker has died, skip that hero's attack
+        if(attacker.getHealth() <= 0){
+            valid = false;
+        }
+        //if defender is dead, skip that hero's attack
+        if( defender.getHealth() <= 0){
+            battleLog.getItems().add(defender.getName() + "'s Attack was wasted On a Dead Body!");
+            valid = false;
+        }
+
+        return valid;
+    }
+
+
+
+
+
 }
