@@ -93,6 +93,7 @@ public class Battle{
         //scroll pane used for when battle log gets longer
         ScrollPane scroller = new ScrollPane();
         Game.getBattleLog().setPrefWidth(300);
+
         scroller.setFitToWidth(true);
         scroller.setMaxHeight(200);
         //battle log is a static variable stored in the game class
@@ -536,20 +537,7 @@ public class Battle{
         //clears immune
         Guard.clearImmune();
 
-        //update health bars
-        //team1
-        /*
-        for(Hero h : Player.getPlayerTeam()){
-            h.updateHealthBar();
-            System.out.println("team 1: " + h.getHealth());
-            System.out.println("Width: " + h.getHealthBar().getGreenBar().getWidth());
-        }
-        for(Hero h : Game.getTeam2()){
-            h.updateHealthBar();
-            System.out.println("team 2: " + h.getHealth());
-            System.out.println("Width: " + h.getHealthBar().getGreenBar().getWidth());
-        }
-         */
+
 
     }
 
@@ -713,6 +701,17 @@ public class Battle{
     //gets called when battle finishes
     public static void battleOver(){
         System.out.println("Battle over called");
+        //adds 3 kills
+        Player.killsAdd();
+        Player.killsAdd();
+        Player.killsAdd();
+        Player.scoreAdd(1000);
+        for(int i = 0; i < Player.getPlayerTeam().size(); i++){
+            if(Player.getPlayerTeam().get(i).getHealth() > 0) {
+                Player.scoreAdd(250);
+            }
+        }
+
         Player.bossCountAdd();
         MainMenu.getMainStage().setScene(Hub.hubScene());
         Game.reset();
@@ -747,7 +746,9 @@ public class Battle{
         Game.getAttackList().clear();
 
         Game.setTurn(Game.getTurn() + 1);
-        Game.getBattleLog().getItems().add("Turn " + Game.getTurn() + ":");
+        String turnUpdate = new String("Turn " + Game.getTurn() + ":");
+        Game.getBattleLog().getItems().add(turnUpdate);
+
         for(int i = 0; i < Player.getPlayerTeam().size(); i++) {
             //sets it as first alive hero
             if(Player.getPlayerTeam().get(i).getHealth() > 0){

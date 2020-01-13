@@ -156,7 +156,7 @@ public class Hero{
             }
         }
         else{
-            System.out.println(hero.name + " is guarding and is immune to damage!");
+            Game.getBattleLog().getItems().add(hero.name + " is guarding and is immune to damage!");
         }
         //put this in visuals
         if(hero.getHealth() <= 0){
