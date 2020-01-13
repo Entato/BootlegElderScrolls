@@ -61,9 +61,9 @@ public class Visuals {
     //initialize sprites
     public static void initializeSprites() throws IOException {
         for(int i = 0; i < 5; i++){
-            sprites.add(new Image(new FileInputStream("src/BootlegElderScrolls/Assets/sprite_" + i + ".png")));
+            sprites.add(new Image(new FileInputStream("BootlegElderScrolls/Assets/sprite_" + i + ".png")));
         }
-        sprites.add(new Image(new FileInputStream("src/BootlegElderScrolls/Assets/sprite_grunt.png")));
+        sprites.add(new Image(new FileInputStream("BootlegElderScrolls/Assets/sprite_grunt.png")));
 
     }
     private static void flipEnemySprites(ImageView imageView) {
@@ -90,13 +90,22 @@ public class Visuals {
                 roots.get(i).getChildren().setAll(Player.getPlayerTeam().get(i).getSpriteView());
             }
             else{
-                Image image = team2Sprites.get(i - 3);
-                Game.getTeam2().get(i - 3).getSpriteView().setImage(image);
-                flipEnemySprites(Game.getTeam2().get(i - 3).getSpriteView());
-                Game.getTeam2().get(i - 3).getSpriteView().setFitHeight(110);
-                Game.getTeam2().get(i - 3).getSpriteView().setFitWidth(100);
-                Game.getTeam2().get(i - 3).getSpriteView().setPreserveRatio(true);
-                roots.get(i).getChildren().setAll(Game.getTeam2().get(i - 3).getSpriteView());
+                if (BossInfo.getBoss() == null && i != 1){
+                    Image image = team2Sprites.get(i - 3);
+                    Game.getTeam2().get(i - 3).getSpriteView().setImage(image);
+                    flipEnemySprites(Game.getTeam2().get(i - 3).getSpriteView());
+                    Game.getTeam2().get(i - 3).getSpriteView().setFitHeight(110);
+                    Game.getTeam2().get(i - 3).getSpriteView().setFitWidth(100);
+                    Game.getTeam2().get(i - 3).getSpriteView().setPreserveRatio(true);
+                    roots.get(i).getChildren().setAll(Game.getTeam2().get(i - 3).getSpriteView());
+                } else {
+                    Image image = new Image(BossInfo.getBoss().getSprite());
+                    Game.getTeam2().get(i - 3).getSpriteView().setImage(image);
+                    Game.getTeam2().get(i - 3).getSpriteView().setFitHeight(110);
+                    Game.getTeam2().get(i - 3).getSpriteView().setFitWidth(100);
+                    Game.getTeam2().get(i - 3).getSpriteView().setPreserveRatio(true);
+                    roots.get(i).getChildren().setAll(Game.getTeam2().get(i - 3).getSpriteView());
+                }
             }
 
             if(i < 3){
