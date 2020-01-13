@@ -93,6 +93,7 @@ public class Battle{
         //scroll pane used for when battle log gets longer
         ScrollPane scroller = new ScrollPane();
         Game.getBattleLog().setPrefWidth(300);
+
         scroller.setFitToWidth(true);
         scroller.setMaxHeight(200);
         //battle log is a static variable stored in the game class
@@ -745,7 +746,9 @@ public class Battle{
         Game.getAttackList().clear();
 
         Game.setTurn(Game.getTurn() + 1);
-        Game.getBattleLog().getItems().add("Turn " + Game.getTurn() + ":");
+        String turnUpdate = new String("Turn " + Game.getTurn() + ":");
+        Game.getBattleLog().getItems().add(turnUpdate);
+
         for(int i = 0; i < Player.getPlayerTeam().size(); i++) {
             //sets it as first alive hero
             if(Player.getPlayerTeam().get(i).getHealth() > 0){

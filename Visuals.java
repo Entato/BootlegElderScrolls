@@ -1,11 +1,13 @@
 package BootlegElderScrolls;
 
 import javafx.scene.Group;
+import javafx.scene.control.Tooltip;
 import javafx.scene.image.*;
 import javafx.scene.layout.*;
 import javafx.animation.*;
 import javafx.geometry.Point2D;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Text;
 import javafx.util.Duration;
 import sun.security.krb5.internal.crypto.Aes128;
 
@@ -92,6 +94,12 @@ public class Visuals {
                 Player.getPlayerTeam().get(i).getSpriteView().setFitWidth(100);
                 Player.getPlayerTeam().get(i).getSpriteView().setPreserveRatio(true);
                 roots.get(i).getChildren().setAll(Player.getPlayerTeam().get(i).getSpriteView());
+
+                Tooltip tooltip = new Tooltip("Name : " + Player.getPlayerTeam().get(i).getName() +
+                        "\nStats:\nHealth: " + Player.getPlayerTeam().get(i).getHealth() +
+                        "\nSpeed: " + Player.getPlayerTeam().get(i).getSpeed() + "\nSpecial Available: " +
+                        Player.getPlayerTeam().get(i).getActiveSpecial());
+                Tooltip.install(Player.getPlayerTeam().get(i).getSpriteView(), tooltip);
             }
             else{
 
@@ -103,7 +111,13 @@ public class Visuals {
                 Game.getTeam2().get(i - 3).getSpriteView().setPreserveRatio(true);
                 roots.get(i).getChildren().setAll(Game.getTeam2().get(i - 3).getSpriteView());
 
+                Tooltip tooltip = new Tooltip("Name : " + Game.getTeam2().get(i - 3).getName() +
+                        "\nStats:\nHealth: " + Game.getTeam2().get(i - 3).getHealth() +
+                        "\nSpeed: " + Game.getTeam2().get(i - 3).getSpeed());
+                Tooltip.install(Game.getTeam2().get(i - 3).getSpriteView(), tooltip);
+
             }
+
 
             if(i < 3){
                 sprite1Box.getChildren().add(roots.get(i));
@@ -203,6 +217,7 @@ public class Visuals {
                         //check if dead
                         if (recipients.get(counter[0]).get(1).getHealth() <= 0) {
                             Game.getBattleLog().getItems().add(recipients.get(counter[0]).get(1).getName() + " Has Died in Battle!");
+
                         }
                         //health bar update
                         recipients.get(counter[0]).get(1).updateHealthBar();
