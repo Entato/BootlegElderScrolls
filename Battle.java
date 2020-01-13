@@ -698,7 +698,7 @@ public class Battle{
 
     public static Hero AIPickGrunt(int i){
         if(BossInfo.getBoss() != null && i == 1){
-            Visuals.getTeam2Sprites().add(Visuals.getSprites().get(6));
+            
             return BossInfo.getBoss();
         }
         String name = "AI " + i;

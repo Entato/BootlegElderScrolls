@@ -9,6 +9,7 @@ public class BossInfo{
         switch(stage){
             case 2:
                 boss = new BaronNashor();
+                Visuals.getTeam2Sprites().add(Visuals.getSprites().get(6));
                 break;
         }
 
