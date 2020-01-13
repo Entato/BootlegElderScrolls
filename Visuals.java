@@ -90,7 +90,7 @@ public class Visuals {
                 roots.get(i).getChildren().setAll(Player.getPlayerTeam().get(i).getSpriteView());
             }
             else{
-                if (BossInfo.getBoss() == null && i != 1){
+                if (BossInfo.getBoss() == null && i != 4){
                     Image image = team2Sprites.get(i - 3);
                     Game.getTeam2().get(i - 3).getSpriteView().setImage(image);
                     flipEnemySprites(Game.getTeam2().get(i - 3).getSpriteView());
