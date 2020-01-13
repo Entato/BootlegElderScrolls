@@ -2,7 +2,7 @@
     -fx-font-family: "Traditional Arabic";
     -fx-border-color: rgb(100, 0, 23);
     -fx-border-width: 5;
-    -fx-background-color: rgb(250,250,210);
+    -fx-background-color: linear-gradient(rgb(250,250,210), burlywood);
     -fx-border-style: solid inside;
 
 
@@ -22,12 +22,13 @@
 }
 .label{
     -fx-font-size: 14;
+    -fx-font-weight: bold;
 
 
 }
 #battle-log{
     -fx-background-color: rgb(250, 250, 210);
-    -fx-border-color: linear-gradient(wheat, gold);
+    -fx-border-color: linear-gradient(wheat, burlywood);
     -fx-border-width: 5;
 }
 #drop-downs{

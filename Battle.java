@@ -94,9 +94,9 @@ public class Battle{
         ScrollPane scroller = new ScrollPane();
         Game.getBattleLog().setPrefWidth(300);
         scroller.setFitToWidth(true);
-        scroller.setMaxHeight(180);
+        scroller.setMaxHeight(200);
         //battle log is a static variable stored in the game class
-        Game.getBattleLog().setId("battle-log");
+        scroller.setId("battle-log");
         scroller.setContent(Game.getBattleLog());
         logBox.getChildren().addAll(logLabel, scroller);
 
@@ -698,6 +698,7 @@ public class Battle{
 
     public static Hero AIPickGrunt(int i){
         if(BossInfo.getBoss() != null && i == 1){
+            Visuals.getTeam2Sprites().add(Visuals.getSprites().get(6));
             return BossInfo.getBoss();
         }
         String name = "AI " + i;
