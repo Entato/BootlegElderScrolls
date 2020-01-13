@@ -147,10 +147,8 @@ public class Hero{
         }
         if(!Guard.containsImmune(hero)) {
             System.out.println(this.name + " did " + trueDamage + " damage to " + hero.getName());
-            //hero.setHealth(hero.getHealth() - trueDamage);
 
             Visuals.attackAnimation(this, hero, trueDamage);
-            //Game.getBattleLog().getItems().add(this.name + " attacked " + hero.name + " for " + trueDamage + " damage.");
 
             //adds damage to total damage if AI team is being damaged
             if (Game.getTeam2().contains(hero)){

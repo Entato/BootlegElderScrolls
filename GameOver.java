@@ -1,5 +1,7 @@
 package BootlegElderScrolls;
 
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -9,8 +11,11 @@ class GameOver {
     public static Scene gameOverScene(){
     
         VBox vbox = new VBox();
+        vbox.setAlignment(Pos.CENTER);
+        vbox.setPadding(new Insets(20, 20, 20, 20));
 
         Label gameOverMessage = new Label("Game Over");
+        gameOverMessage.setId("title-labels");
         Label bossesDefeated = new Label("You have defeated " + Player.getBossCount() + " bosses");
 
         Button mainMenu = new Button("Main Menu");
@@ -31,7 +36,8 @@ class GameOver {
 
         vbox.getChildren().addAll(gameOverMessage, bossesDefeated, mainMenu, exit);
 
-        Scene gameOver = new Scene(vbox);
+        Scene gameOver = new Scene(vbox, 500, 350);
+        gameOver.getStylesheets().add("BootlegElderScrolls/MainStyleSheet.css");
 
         Player.reset();
         Game.reset();

@@ -158,22 +158,8 @@ public class Game {
 
     }
 
-    //check if attack is valid
-    public static boolean validAttack(Hero attacker, Hero defender){
-        boolean valid = true;
 
-        //if attacker has died, skip that hero's attack
-        if(attacker.getHealth() <= 0){
-            valid = false;
-        }
-        //if defender is dead, skip that hero's attack
-        if( defender.getHealth() <= 0){
-            battleLog.getItems().add(defender.getName() + "'s Attack was wasted On a Dead Body!");
-            valid = false;
-        }
 
-        return valid;
-    }
 
     public static void deleteBadAttacks(){
         ArrayList<Hero[]> attackListCopy = (ArrayList<Hero[]>)attackList.clone();
@@ -190,12 +176,6 @@ public class Game {
             Hero attacker = attackListCopy.get(i)[0];
             Hero defender = attackListCopy.get(i)[1];
 
-            //checks if using attack on a dead body
-            if(defender.getHealth() <= 0){
-                attackListCopy.remove(i);
-                Game.getBattleLog().getItems().add(attacker.getName() + " 's Attack Was Wasted On a Dead Body!");
-                continue;
-            }
 
             //remove dead attackers
             int damage = attacker.getAttack() * 100 / (defender.getDefence() + 100);

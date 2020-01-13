@@ -61,9 +61,13 @@ public class Visuals {
     //initialize sprites
     public static void initializeSprites() throws IOException {
         for(int i = 0; i < 5; i++){
-            sprites.add(new Image(new FileInputStream("BootlegElderScrolls/Assets/sprite_" + i + ".png")));
+            sprites.add(new Image(new FileInputStream("src/BootlegElderScrolls/Assets/sprite_" + i + ".png")));
         }
-        sprites.add(new Image(new FileInputStream("BootlegElderScrolls/Assets/sprite_grunt.png")));
+        sprites.add(new Image(new FileInputStream("src/BootlegElderScrolls/Assets/sprite_grunt.png")));
+
+    }
+    private static void flipEnemySprites(ImageView imageView) {
+        imageView.setScaleX(-1);
     }
 
     //adds sprites to layout
@@ -88,6 +92,7 @@ public class Visuals {
             else{
                 Image image = team2Sprites.get(i - 3);
                 Game.getTeam2().get(i - 3).getSpriteView().setImage(image);
+                flipEnemySprites(Game.getTeam2().get(i - 3).getSpriteView());
                 Game.getTeam2().get(i - 3).getSpriteView().setFitHeight(110);
                 Game.getTeam2().get(i - 3).getSpriteView().setFitWidth(100);
                 Game.getTeam2().get(i - 3).getSpriteView().setPreserveRatio(true);
@@ -120,7 +125,7 @@ public class Visuals {
         Point2D points1 = attacker.getSpriteView().localToScene(nodeMinX1, nodeMinY1);
         Point2D points2 = defender.getSpriteView().localToScene(nodeMinX2, nodeMinY2);
 
-        TranslateTransition attack1 = new TranslateTransition(Duration.millis(500), attacker.getSpriteView().getParent());
+        TranslateTransition attack1 = new TranslateTransition(Duration.millis(400), attacker.getSpriteView().getParent());
         System.out.println("Distance x: " + (points2.getX() - points1.getX()) + "distance y: " + (points2.getY() - points1.getY()));
         //attack1.setFromX(minX1);
         //attack1.setFromY(minY1);
@@ -130,8 +135,8 @@ public class Visuals {
         attack1.setAutoReverse(true);
         attack1.setCycleCount(2);
 
-        PauseTransition pauseTransition1 = new PauseTransition(Duration.millis(1000));
-        PauseTransition pauseTransition2 = new PauseTransition(Duration.millis(1000));
+        PauseTransition pauseTransition1 = new PauseTransition(Duration.millis(200));
+        PauseTransition pauseTransition2 = new PauseTransition(Duration.millis(200));
 
         SequentialTransition sequence = new SequentialTransition(pauseTransition1, attack1, pauseTransition2);
 
@@ -140,6 +145,7 @@ public class Visuals {
         attackerDefender.add(attacker);
         attackerDefender.add(defender);
         recipients.add(attackerDefender);
+
 
         damages.add(damage);
 
@@ -171,8 +177,16 @@ public class Visuals {
                 try {
 
 
-                    //deal damage
-                    if(Game.validAttack(recipients.get(counter[0]).get(0), recipients.get(counter[0]).get(1))) {
+                    if(recipients.get(counter[0]).get(1).getHealth() <= 0){
+                        Game.getBattleLog().getItems().add(recipients.get(counter[0]).get(0).getName() +
+                                " 's Attack Was Wasted on a Dead Body");
+                    }
+
+                    else {
+                        //if damage exceeds health, just does enough damage to kill
+                        if (recipients.get(counter[0]).get(1).getHealth() - damages.get(counter[0]) < 0) {
+                            damages.set(counter[0], recipients.get(counter[0]).get(1).getHealth());
+                        }
                         recipients.get(counter[0]).get(1).setHealth(recipients.get(counter[0]).get(1).getHealth() - damages.get(counter[0]));
                         System.out.println("Health after damage: " + recipients.get(counter[0]).get(1).getHealth());
 
@@ -181,26 +195,13 @@ public class Visuals {
                                 recipients.get(counter[0]).get(1).getName() + " for " + damages.get(counter[0]) + " damage.");
 
                         //check if dead
-                        if(death.get(counter[0])){
+                        if (recipients.get(counter[0]).get(1).getHealth() <= 0) {
                             Game.getBattleLog().getItems().add(recipients.get(counter[0]).get(1).getName() + " Has Died in Battle!");
                         }
                         //health bar update
                         recipients.get(counter[0]).get(1).updateHealthBar();
-
-                    }
-                    //check for dead heroes next turn to cancel animation
-                    /*
-                    if(counter[0] < updates.length-1) {
-                        Duration time = attackTransition.getCurrentTime();
-                        if (recipients.get(counter[0] + 1).get(0).getHealth() <= 0) {
-                            System.out.println("Animation removed");
-                            attackTransition.stop();
-                            attackTransition.playFrom(time.add(Duration.millis(1500)));
-                            counter[0]++;
-                        }
                     }
 
-                     */
 
                     System.out.println("Counter:" + counter[0]);
                     counter[0]++;
