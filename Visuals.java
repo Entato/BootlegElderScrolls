@@ -96,7 +96,7 @@ public class Visuals {
                 roots.get(i).getChildren().setAll(Player.getPlayerTeam().get(i).getSpriteView());
 
                 Tooltip tooltip = new Tooltip("Name : " + Player.getPlayerTeam().get(i).getName() +
-                        "\nStats:\nHealth: " + Player.getPlayerTeam().get(i).getHealth() +
+                        "\nStats:\nBase Health: " + Player.getPlayerTeam().get(i).getHealth() +
                         "\nSpeed: " + Player.getPlayerTeam().get(i).getSpeed() + "\nSpecial Available: " +
                         Player.getPlayerTeam().get(i).getActiveSpecial());
                 Tooltip.install(Player.getPlayerTeam().get(i).getSpriteView(), tooltip);
@@ -112,7 +112,7 @@ public class Visuals {
                 roots.get(i).getChildren().setAll(Game.getTeam2().get(i - 3).getSpriteView());
 
                 Tooltip tooltip = new Tooltip("Name : " + Game.getTeam2().get(i - 3).getName() +
-                        "\nStats:\nHealth: " + Game.getTeam2().get(i - 3).getHealth() +
+                        "\nStats:\nBase Health: " + Game.getTeam2().get(i - 3).getHealth() +
                         "\nSpeed: " + Game.getTeam2().get(i - 3).getSpeed());
                 Tooltip.install(Game.getTeam2().get(i - 3).getSpriteView(), tooltip);
 
