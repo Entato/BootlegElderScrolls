@@ -37,6 +37,8 @@ public class Battle{
 
         //border pane layout allows for stacking layout easily
         BorderPane borderPane = new BorderPane();
+        borderPane.setCenter(new VBox());
+
 
         //bottom portion layout
         HBox bottomBox = new HBox(20);
@@ -65,10 +67,11 @@ public class Battle{
         //Tells user who is attacking
         VBox nameBox = new VBox();
         nameBox.setAlignment(Pos.TOP_CENTER);
-
+        nameBox.setPadding(new Insets(0, 0, 0, 0));
         Game.getNameLabel().setWrapText(true);
         Game.getNameLabel().setId("title-labels");
         Game.getNameLabel().setText("What Will " + Player.getPlayerTeam().get(0).getName() + " Do?");
+
         nameBox.getChildren().addAll(Game.getNameLabel());
 
         //Health bars
@@ -80,7 +83,7 @@ public class Battle{
 
         //team2
         VBox team2Box = new VBox(50);
-        team2Box.setPadding(new Insets(20, 40, 20, 20));
+        team2Box.setPadding(new Insets(20, 20, 20, 20));
         team2Box.setAlignment(Pos.CENTER);
         setBars(team2Box, false);
 
@@ -466,6 +469,8 @@ public class Battle{
         Rectangle mainBar;
         Pane completeBar;
 
+
+
         
 
         for(int i = 0; i < 3; i++){
@@ -479,11 +484,13 @@ public class Battle{
 
             //for first team
             if(team) {
+                Player.getPlayerTeam().get(i).getHealthBar().getHealthInfo().setWrapText(true);
                 box.setPadding(new Insets(0, 0, 0, 40));
+                box.setAlignment(Pos.CENTER_RIGHT);
                 //css id
                 Player.getPlayerTeam().get(i).getHealthBar().getHealthInfo().setId("hp-labels");
-                Player.getPlayerTeam().get(i).getHealthBar().getHealthInfo().setPadding(new Insets(0, 0, -30, -20));
-                //Player.getPlayerTeam().get(i).getHealthBar().getHealthInfo().setTextAlignment(TextAlignment.LEFT);
+                Player.getPlayerTeam().get(i).getHealthBar().getHealthInfo().setPadding(new Insets(0, 0, -30, 0));
+                Player.getPlayerTeam().get(i).getHealthBar().getHealthInfo().setAlignment(Pos.CENTER_LEFT);
                 
 
                 Player.getPlayerTeam().get(i).getHealthBar().getHealthInfo().setText(Player.getPlayerTeam().get(i).getName() + ": " +
@@ -491,6 +498,7 @@ public class Battle{
                         "/" + (int) Player.getPlayerTeam().get(i).getHealthBar().getMaxHealth());
                 Player.getPlayerTeam().get(i).getHealthBar().getGreenBar().setFill(Color.GREEN);
                 completeBar = new Pane();
+                completeBar.setPadding(new Insets(0, 0, 0, 0));
                 completeBar.getChildren().addAll(mainBar, Player.getPlayerTeam().get(i).getHealthBar().getGreenBar());
 
                 //adding it to the layout
@@ -498,18 +506,20 @@ public class Battle{
             }
             //for second team
             else{
-
-                box.setPadding(new Insets(0, 80, 0, 0));
+                Game.getTeam2().get(i).getHealthBar().getHealthInfo().setWrapText(true);
+                box.setPadding(new Insets(0, 100, 0, 0));
+                box.setAlignment(Pos.CENTER_LEFT);
                 //css id
                 Game.getTeam2().get(i).getHealthBar().getHealthInfo().setId("hp-labels");
                 Game.getTeam2().get(i).getHealthBar().getHealthInfo().setPadding(new Insets(0, 0, -30, 0));
-                //Game.getTeam2().get(i).getHealthBar().getHealthInfo().setTextAlignment(TextAlignment.LEFT);
+                Game.getTeam2().get(i).getHealthBar().getHealthInfo().setAlignment(Pos.CENTER_RIGHT);
 
                 Game.getTeam2().get(i).getHealthBar().getHealthInfo().setText(Game.getTeam2().get(i).getName() + ": " +
                         Game.getTeam2().get(i).getHealth() +
                         "/" + (int) Game.getTeam2().get(i).getHealthBar().getMaxHealth());
                 Game.getTeam2().get(i).getHealthBar().getGreenBar().setFill(Color.GREEN);
                 completeBar = new Pane();
+                completeBar.setPadding(new Insets(0, 0, 0, 0));
                 completeBar.getChildren().addAll(mainBar, Game.getTeam2().get(i).getHealthBar().getGreenBar());
 
                 //adding it to the layout

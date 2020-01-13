@@ -63,11 +63,11 @@ public class Visuals {
     //initialize sprites
     public static void initializeSprites() throws IOException {
         for(int i = 0; i < 5; i++){
-            sprites.add(new Image(new FileInputStream("BootlegElderScrolls/Assets/sprite_" + i + ".png")));
+            sprites.add(new Image(new FileInputStream("src/BootlegElderScrolls/Assets/sprite_" + i + ".png")));
         }
-        sprites.add(new Image(new FileInputStream("BootlegElderScrolls/Assets/sprite_grunt.png")));
+        sprites.add(new Image(new FileInputStream("src/BootlegElderScrolls/Assets/sprite_grunt.png")));
 
-        sprites.add(new Image(new FileInputStream("BootlegElderScrolls/Assets/sprite_baron.png")));
+        sprites.add(new Image(new FileInputStream("src/BootlegElderScrolls/Assets/sprite_baron.png")));
 
 
 
@@ -95,6 +95,7 @@ public class Visuals {
                 Player.getPlayerTeam().get(i).getSpriteView().setPreserveRatio(true);
                 roots.get(i).getChildren().setAll(Player.getPlayerTeam().get(i).getSpriteView());
 
+
                 Tooltip tooltip = new Tooltip("Name : " + Player.getPlayerTeam().get(i).getName() +
                         "\nStats:\nBase Health: " + Player.getPlayerTeam().get(i).getHealth() +
                         "\nSpeed: " + Player.getPlayerTeam().get(i).getSpeed() + "\nSpecial Available: " +
@@ -117,6 +118,7 @@ public class Visuals {
                 Tooltip.install(Game.getTeam2().get(i - 3).getSpriteView(), tooltip);
 
             }
+
 
 
             if(i < 3){
@@ -207,8 +209,14 @@ public class Visuals {
                         if (recipients.get(counter[0]).get(1).getHealth() - damages.get(counter[0]) < 0) {
                             damages.set(counter[0], recipients.get(counter[0]).get(1).getHealth());
                         }
+                        //deal damage
                         recipients.get(counter[0]).get(1).setHealth(recipients.get(counter[0]).get(1).getHealth() - damages.get(counter[0]));
-                        System.out.println("Health after damage: " + recipients.get(counter[0]).get(1).getHealth());
+
+                        //adds damage to total damage if AI team is being damaged
+                        if (Game.getTeam2().contains(recipients.get(counter[0]).get(1))){
+                            Player.totalDamageAdd(damages.get(counter[0]));
+                        }
+
 
                         //battle log message
                         Game.getBattleLog().getItems().add(recipients.get(counter[0]).get(0).getName() + " attacked " +

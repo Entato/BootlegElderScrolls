@@ -11,6 +11,8 @@ public class BossInfo{
                 boss = new BaronNashor();
                 Visuals.getTeam2Sprites().add(Visuals.getSprites().get(6));
                 break;
+            case 3:
+                boss = new DungeonKeeper();
         }
 
         return boss;

@@ -150,10 +150,7 @@ public class Hero{
 
             Visuals.attackAnimation(this, hero, trueDamage);
 
-            //adds damage to total damage if AI team is being damaged
-            if (Game.getTeam2().contains(hero)){
-                Player.totalDamageAdd(trueDamage);
-            }
+
         }
         else{
             Game.getBattleLog().getItems().add(hero.name + " is guarding and is immune to damage!");

@@ -105,13 +105,6 @@ public class Game {
                 continue;
             }
 
-            if (evade(attackList.get(i)[1])){
-                //battle log message
-                Game.getBattleLog().getItems().add(attackList.get(i)[1].getName() + " Evaded " +
-                        attackList.get(i)[0].getName() + "'s Attack!");
-                continue;
-            }
-
             //attack if none of the above conditions are met
             attackList.get(i)[0].attack(attackList.get(i)[1]);
 
@@ -177,6 +170,15 @@ public class Game {
             Hero defender = attackListCopy.get(i)[1];
 
 
+            //remove evaded attacks
+            if (evade(attackListCopy.get(i)[1])){
+                //battle log message
+                Game.getBattleLog().getItems().add(attackListCopy.get(i)[1].getName() + " Evaded " +
+                        attackListCopy.get(i)[0].getName() + "'s Attack!");
+                attackListCopy.remove(i);
+
+            }
+
             //remove dead attackers
             int damage = attacker.getAttack() * 100 / (defender.getDefence() + 100);
             defender.setHealth(defender.getHealth() - damage);
@@ -189,7 +191,10 @@ public class Game {
             }
 
 
+
+
         }
+
         for(int i = 0; i < attackList.size(); i++){
             attackList.get(i)[0].setHealth(healths.get(i)[0]);
             attackList.get(i)[1].setHealth(healths.get(i)[1]);
