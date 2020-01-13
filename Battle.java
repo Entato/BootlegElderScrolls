@@ -80,7 +80,7 @@ public class Battle{
 
         //team2
         VBox team2Box = new VBox(50);
-        team2Box.setPadding(new Insets(20, 20, 20, 20));
+        team2Box.setPadding(new Insets(20, 40, 20, 20));
         team2Box.setAlignment(Pos.CENTER);
         setBars(team2Box, false);
 
@@ -131,6 +131,7 @@ public class Battle{
         borderPane.setRight(team2Box);
         borderPane.setCenter(spriteBox);
         borderPane.setTop(nameBox);
+        
 
         //creates scene and returns it
         Scene battleScene = new Scene(borderPane, 1000, 650);
@@ -465,6 +466,8 @@ public class Battle{
         Rectangle mainBar;
         Pane completeBar;
 
+        
+
         for(int i = 0; i < 3; i++){
 
             //creating health bar
@@ -472,14 +475,16 @@ public class Battle{
             mainBar = new Rectangle(100, 20);
             mainBar.setStroke(Color.BLACK);
             mainBar.setStrokeWidth(5);
-
+            
 
             //for first team
             if(team) {
+                box.setPadding(new Insets(0, 0, 0, 40));
                 //css id
                 Player.getPlayerTeam().get(i).getHealthBar().getHealthInfo().setId("hp-labels");
-                Player.getPlayerTeam().get(i).getHealthBar().getHealthInfo().setPadding(new Insets(0, 0, -30, 0));
-                Player.getPlayerTeam().get(i).getHealthBar().getHealthInfo().setTextAlignment(TextAlignment.LEFT);
+                Player.getPlayerTeam().get(i).getHealthBar().getHealthInfo().setPadding(new Insets(0, 0, -30, -20));
+                //Player.getPlayerTeam().get(i).getHealthBar().getHealthInfo().setTextAlignment(TextAlignment.LEFT);
+                
 
                 Player.getPlayerTeam().get(i).getHealthBar().getHealthInfo().setText(Player.getPlayerTeam().get(i).getName() + ": " +
                         Player.getPlayerTeam().get(i).getHealth() +
@@ -493,10 +498,12 @@ public class Battle{
             }
             //for second team
             else{
+
+                box.setPadding(new Insets(0, 80, 0, 0));
                 //css id
                 Game.getTeam2().get(i).getHealthBar().getHealthInfo().setId("hp-labels");
                 Game.getTeam2().get(i).getHealthBar().getHealthInfo().setPadding(new Insets(0, 0, -30, 0));
-                Game.getTeam2().get(i).getHealthBar().getHealthInfo().setTextAlignment(TextAlignment.LEFT);
+                //Game.getTeam2().get(i).getHealthBar().getHealthInfo().setTextAlignment(TextAlignment.LEFT);
 
                 Game.getTeam2().get(i).getHealthBar().getHealthInfo().setText(Game.getTeam2().get(i).getName() + ": " +
                         Game.getTeam2().get(i).getHealth() +
@@ -685,8 +692,7 @@ public class Battle{
     }
 
     public static Hero AIPickGrunt(int i){
-        if(BossInfo.getBoss() != null && i == 1){
-            
+        if(i == 1 && Player.getBossCount() > 1){
             return BossInfo.getBoss();
         }
         String name = "AI " + i;
