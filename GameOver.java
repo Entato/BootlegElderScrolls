@@ -10,13 +10,14 @@ import javafx.scene.layout.VBox;
 class GameOver {
     public static Scene gameOverScene(){
     
-        VBox vbox = new VBox();
+        VBox vbox = new VBox(20);
         vbox.setAlignment(Pos.CENTER);
         vbox.setPadding(new Insets(20, 20, 20, 20));
 
         Label gameOverMessage = new Label("Game Over");
         gameOverMessage.setId("title-labels");
         Label bossesDefeated = new Label("You have defeated " + Player.getBossCount() + " bosses");
+        Label scoreLabel = new Label("Final Score: " + Player.getScore());
 
         Button mainMenu = new Button("Main Menu");
         Button exit = new Button("Exit");
@@ -34,7 +35,7 @@ class GameOver {
             MainMenu.getMainStage().close();
         });
 
-        vbox.getChildren().addAll(gameOverMessage, bossesDefeated, mainMenu, exit);
+        vbox.getChildren().addAll(gameOverMessage, bossesDefeated, scoreLabel, mainMenu, exit);
 
         Scene gameOver = new Scene(vbox, 500, 350);
         gameOver.getStylesheets().add("BootlegElderScrolls/MainStyleSheet.css");
