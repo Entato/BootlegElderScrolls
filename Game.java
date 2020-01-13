@@ -165,11 +165,8 @@ public class Game {
             healths.add(hp);
         }
 
+        //removes evaded attacks
         for(int i = 0; i < attackListCopy.size(); i++){
-            Hero attacker = attackListCopy.get(i)[0];
-            Hero defender = attackListCopy.get(i)[1];
-
-
             //remove evaded attacks
             if (evade(attackListCopy.get(i)[1])){
                 //battle log message
@@ -178,6 +175,13 @@ public class Game {
                 attackListCopy.remove(i);
 
             }
+        }
+
+        //another loop for removing dead attacker, don't want to use the same loop, since it might cause conflict
+        for(int i = 0; i < attackListCopy.size(); i++){
+            Hero attacker = attackListCopy.get(i)[0];
+            Hero defender = attackListCopy.get(i)[1];
+
 
             //remove dead attackers
             int damage = attacker.getAttack() * 100 / (defender.getDefence() + 100);

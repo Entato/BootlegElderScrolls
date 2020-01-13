@@ -702,10 +702,14 @@ public class Battle{
     }
 
     public static Hero AIPickGrunt(int i){
-        if(i == 1 && Player.getBossCount() > 1){
+        if(i == 1 && Player.getBossCount() == 2){
             return BossInfo.getBoss();
         }
-        String name = "AI " + i;
+        else if(i == 1 && Player.getBossCount() == 3){
+            return BossInfo.getBoss();
+        }
+
+        String name = "Grunt " + (i + 1);
 
         Grunt grunt = new Grunt(name, Player.getBossCount());
         //5 is for grunts

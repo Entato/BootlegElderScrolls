@@ -12,7 +12,8 @@ public class BossInfo{
                 Visuals.getTeam2Sprites().add(Visuals.getSprites().get(6));
                 break;
             case 3:
-                boss = new DungeonKeeper();
+                boss = new Reaper();
+                Visuals.getTeam2Sprites().add(Visuals.getSprites().get(7));
         }
 
         return boss;
