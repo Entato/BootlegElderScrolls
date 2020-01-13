@@ -24,8 +24,12 @@ import java.util.*;
 
 
 public class Battle{
-    static Scanner reader = new Scanner(System.in);
+    private static FlowPane battleActions = new FlowPane();
 
+    //getter and setter
+    public static FlowPane getFlowPane(){
+        return battleActions;
+    }
     //GUI METHODS
 
     //creating battle scene method -------------------------------------------------------------------------------------
@@ -40,7 +44,7 @@ public class Battle{
         bottomBox.setPrefHeight(200);
 
         //action layout
-        FlowPane battleActions = new FlowPane();
+        battleActions = new FlowPane();
 
         battleActions.setHgap(40);
         battleActions.setVgap(20);
@@ -757,5 +761,11 @@ public class Battle{
 
 
         Game.getNameLabel().setText("What Will " + Player.getPlayerTeam().get(Game.getTeamTurn()).getName() + " Do?");
+    }
+
+    public static void disableInteractions(){
+
+        battleActions.setDisable(true);
+
     }
 }

@@ -149,6 +149,9 @@ public class Visuals {
 
     //plays animations
     public static void playAnimationSet() {
+        //disable buttons
+        Battle.disableInteractions();
+
         SequentialTransition attackTransition = new SequentialTransition();
         //needed array since lambda expressions need final values
         final boolean[] problem = {false};
@@ -205,6 +208,7 @@ public class Visuals {
                     //only check for end after all animations
                     if(counter[0] == updates.length){
                         //ensure this does not get called again
+                        Battle.getFlowPane().setDisable(false);
                         counter[0] = 500;
                         Battle.nextTurn();
                         Battle.checkForEnd();
