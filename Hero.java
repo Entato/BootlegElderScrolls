@@ -248,5 +248,13 @@ public class Hero{
     public void specialAttack(Hero hero){
 
     }
+    public String getHeroName(){
+        String name = this.getClass()+ "";
+        if(name.contains("BootlegElderScrolls.java")){
+            name.replace("BootlegElderScrolls.java", "");
+        }
+        
+        return name;
+    }
 
 }
