@@ -162,7 +162,7 @@ public class MainMenu extends Application{
         Label healerInfo = new Label("The healer is a nice compliment to your team as she can absorb "+
                 "hits and use her special to heal teammates.\n" +
                 "Pros:\n    -Great Health\n    -Good Defence\n    -Can Heal Teammates\nCons:\n   -Poor Speed\n "+
-                "   -Poor Evasion\n   -Mediocre Attack\nSpecial:\n    -Moonlight: Heal everyone on your team  by 100 health");
+                "  -Poor Evasion\n   -Mediocre Attack\nSpecial:\n    -Moonlight: Heal everyone on your team  by 75 health");
         healerInfo.setWrapText(true);
         healerInfoBox.getChildren().addAll(healerLabel, healerInfo);
         ImageView healerView = new ImageView(Visuals.getSprites().get(2));
@@ -171,14 +171,55 @@ public class MainMenu extends Application{
         HBox healerBox = new HBox(20);
         healerBox.getChildren().addAll(healerInfoBox, healerView);
         //--------------------------------------------------------------------------------------------------------------
+        //Knight layout ------------------------------------------------------------------------------------------------
+        VBox knightInfoBox = new VBox();
+        knightInfoBox.setAlignment(Pos.CENTER);
+        Label knightLabel = new Label("Knight");
+        knightLabel.setId("subtitle");
+        Label knightInfo = new Label("The Knight boasts amazing toughness with great offensive firepower.\n" +
+                "Pros:\n    -Great Attack\n    -Good Health\n    -Great Defence\nCons:\n   -Slow Speed\n "+
+                "   -Poor Evasion\nSpecial:\n    -Tank Up: Give your team +50 Defence");
+        knightInfo.setWrapText(true);
+        knightInfoBox.getChildren().addAll(knightLabel, knightInfo);
+        ImageView knightView = new ImageView(Visuals.getSprites().get(3));
+        knightView.setFitHeight(180);
+        knightView.setFitWidth(170);
+        HBox knightBox = new HBox(20);
+        knightBox.getChildren().addAll(knightView, knightInfoBox);
+        //--------------------------------------------------------------------------------------------------------------
+        //Wizard layout ------------------------------------------------------------------------------------------------
+        VBox wizardInfoBox = new VBox();
+        wizardInfoBox.setAlignment(Pos.CENTER);
+        Label wizardLabel = new Label("Wizard");
+        wizardLabel.setId("subtitle");
+        Label wizardInfo = new Label("The Wizard obtains amazing firepower, But is fragile. A true glass cannon.\n" +
+                "Pros:\n    -Amazing Attack\n    -Good Speed\nCons:\n   -Poor Defence\n "+
+                "   -Mediocre Health\nSpecial:\n    -Super Steroid Spell: Give your team +50 attack");
+        wizardInfo.setWrapText(true);
+        wizardInfoBox.getChildren().addAll(wizardLabel, wizardInfo);
+        ImageView wizardView = new ImageView(Visuals.getSprites().get(4));
+        wizardView.setFitHeight(180);
+        wizardView.setFitWidth(170);
+        HBox wizardBox = new HBox(20);
+        wizardBox.getChildren().addAll(wizardInfoBox, wizardView);
+        //--------------------------------------------------------------------------------------------------------------
+
+
+
 
         //separators
         Separator separator1 = new Separator(Orientation.HORIZONTAL);
-        separator1.setPadding(new Insets(20, 0, 20, 0));
+        separator1.setPadding(new Insets(10, 0, 10, 0));
         Separator separator2 = new Separator(Orientation.HORIZONTAL);
-        separator2.setPadding(new Insets(20, 0, 20, 0));
+        separator2.setPadding(new Insets(10, 0, 10, 0));
+        Separator separator3 = new Separator(Orientation.HORIZONTAL);
+        separator3.setPadding(new Insets(10, 0, 10, 0));
+        Separator separator4 = new Separator(Orientation.HORIZONTAL);
+        separator4.setPadding(new Insets(10, 0, 10, 0));
+
         //VBox that stores all of the hero information
-        VBox heroPanes = new VBox(archerBox, separator1, assassinBox, separator2, healerBox);
+        VBox heroPanes = new VBox(archerBox, separator1, assassinBox, separator2, healerBox, separator3, knightBox,
+                separator4, wizardBox);
 
         //button to head back to main menu
         Button backButton = new Button("Back");

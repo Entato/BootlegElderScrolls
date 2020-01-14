@@ -7,7 +7,7 @@ public class Wizard extends Hero{
     
     //constructor
     public Wizard(String name){
-        super(100, 100, 50, 50, 10, 50, name);
+        super(175, 120, 40, 50, 5, 85, name);
         this.mana = 100;
         this.spellPower = 75;
     }
