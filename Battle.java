@@ -730,6 +730,7 @@ public class Battle{
         for(int i = 0; i < Player.getPlayerTeam().size(); i++){
             if(Player.getPlayerTeam().get(i).getHealth() > 0) {
                 Player.scoreAdd(250);
+                Player.getPlayerTeam().get(i).addExp(50 + 10 * Player.getBossCount());
             }
         }
 

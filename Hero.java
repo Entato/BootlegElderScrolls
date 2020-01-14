@@ -36,7 +36,7 @@ public class Hero{
         this.regDef = defence;
         this.regAtk = attack;
 
-        this.healthBar = new HealthBar(this.health);
+        this.healthBar = new HealthBar(this.maxHealth);
         this.spriteView = new ImageView();
 
     }
@@ -162,11 +162,7 @@ public class Hero{
             //for hero has died message
             Visuals.getDeath().add(true);
 
-            //adds to total kills and exp if AI dies
-            if (Game.getTeam2().contains(hero)){
-                Player.killsAdd();
-                this.addExp(50 + (10 * Player.getBossCount()));
-            }
+            this.addExp(50 + (20 * Player.getBossCount()));
         }
         //in this case it will make it so there will be no death message
         else{
@@ -246,6 +242,7 @@ public class Hero{
         this.speed += 50;
         this.regDef += 10;
         this.regAtk += 10;
+        this.healthBar = new HealthBar(this.maxHealth);
     }
 
     public void specialAttack(Hero hero){
