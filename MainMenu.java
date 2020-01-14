@@ -115,12 +115,32 @@ public class MainMenu extends Application{
     //create info Scene
     public static Scene createInfoScene(Stage mainMenu, Scene menuScene){
 
-
+        //main layout
         VBox mainBox = new VBox(20);
         mainBox.setPadding(new Insets(20, 20, 20, 20));
         mainBox.setAlignment(Pos.CENTER);
+
+        //title label
         Label label = new Label("How To Play");
         label.setId("title-labels");
+
+        //Game description layout
+        VBox descriptionBox = new VBox(10);
+        Label descriptionTitleLabel = new Label("Game Description");
+        Label gameDescription = new Label("After waking up inside a cold and damp dungeon, you must fight your "+
+                "way out by defeating the monsters that lie in your path. Assemble your team of 3 heroes and conquer the underground" +
+                " with your knowledge of turn based strategy that will test your skills and break your spirit.");
+        gameDescription.setWrapText(true);
+        descriptionTitleLabel.setId("subtitle");
+        Separator separator0 = new Separator(Orientation.HORIZONTAL);
+        separator0.setPadding(new Insets(5, 0, 5, 0));
+
+        descriptionBox.getChildren().addAll(descriptionTitleLabel, gameDescription, separator0);
+
+        //hero descriptions:
+        Label heroesLabel = new Label("Meet the Heroes");
+        heroesLabel.setPadding(new Insets(10, 0, 30, 0));
+        heroesLabel.setId("title-labels");
 
         //archer layout ------------------------------------------------------------------------------------------------
         VBox archerInfoBox = new VBox();
@@ -209,23 +229,23 @@ public class MainMenu extends Application{
 
         //separators
         Separator separator1 = new Separator(Orientation.HORIZONTAL);
-        separator1.setPadding(new Insets(10, 0, 10, 0));
+        separator1.setPadding(new Insets(5, 0, 5, 0));
         Separator separator2 = new Separator(Orientation.HORIZONTAL);
-        separator2.setPadding(new Insets(10, 0, 10, 0));
+        separator2.setPadding(new Insets(5, 0, 5, 0));
         Separator separator3 = new Separator(Orientation.HORIZONTAL);
-        separator3.setPadding(new Insets(10, 0, 10, 0));
+        separator3.setPadding(new Insets(5, 0, 5, 0));
         Separator separator4 = new Separator(Orientation.HORIZONTAL);
-        separator4.setPadding(new Insets(10, 0, 10, 0));
+        separator4.setPadding(new Insets(5, 0, 5, 0));
 
         //VBox that stores all of the hero information
-        VBox heroPanes = new VBox(archerBox, separator1, assassinBox, separator2, healerBox, separator3, knightBox,
+        VBox heroPanes = new VBox(heroesLabel, archerBox, separator1, assassinBox, separator2, healerBox, separator3, knightBox,
                 separator4, wizardBox);
 
         //button to head back to main menu
         Button backButton = new Button("Back");
         backButton.setPrefWidth(150);
 
-        mainBox.getChildren().addAll(label, backButton, heroPanes);
+        mainBox.getChildren().addAll(label, backButton, descriptionBox, heroPanes);
         mainBox.setId("how-to-play");
         //back
         backButton.setOnAction(e ->{
