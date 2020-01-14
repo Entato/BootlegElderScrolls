@@ -124,7 +124,7 @@ public class MainMenu extends Application{
         Label label = new Label("How To Play");
         label.setId("title-labels");
 
-        //Game description layout
+        //game description layout
         VBox descriptionBox = new VBox(10);
         Label descriptionTitleLabel = new Label("Game Description");
         Label gameDescription = new Label("After waking up inside a cold and damp dungeon, you must fight your "+
@@ -136,6 +136,24 @@ public class MainMenu extends Application{
         separator0.setPadding(new Insets(5, 0, 5, 0));
 
         descriptionBox.getChildren().addAll(descriptionTitleLabel, gameDescription, separator0);
+
+        //controls layout
+        VBox controlsBox = new VBox(10);
+        Label controlsTitleLabel = new Label("Instructions and Controls");
+        controlsTitleLabel.setId("title-labels");
+        Label controlsInstructions = new Label("Fantasy Showdown is a turn based strategy game in which both" +
+                " players make their moves simultaneously and therefore an element of prediction and mind-games is" +
+                " involved.\nEach turn, both players can commit actions with each of their currently alive team members\n:" +
+                "\n1. Attack: Choose an enemy to attack. During the battle phase, your hero will attempt to attack the" +
+                " selected enemy.\n\n2. Guard: Guarding makes a hero immune to damage for a turn, but it consumes a turn." +
+                " You cannot guard twice in a row with the same hero.\n\n3. Use Item: You may use your choice of item and" +
+                " apply it to a team member. This will consume a turn and boost the stat of the recipient corresponding" +
+                " to the type of item used.\n\n4. Special: Your hero will use their special move unique to their hero class" +
+                " for various effects (descriptions below). You may only use a hero's special once per game.");
+        controlsInstructions.setWrapText(true);
+
+        controlsBox.getChildren().addAll(controlsTitleLabel, controlsInstructions);
+
 
         //hero descriptions:
         Label heroesLabel = new Label("Meet the Heroes");
@@ -245,7 +263,7 @@ public class MainMenu extends Application{
         Button backButton = new Button("Back");
         backButton.setPrefWidth(150);
 
-        mainBox.getChildren().addAll(label, backButton, descriptionBox, heroPanes);
+        mainBox.getChildren().addAll(label, backButton, descriptionBox, controlsBox, heroPanes);
         mainBox.setId("how-to-play");
         //back
         backButton.setOnAction(e ->{
@@ -257,7 +275,7 @@ public class MainMenu extends Application{
         scrollPane.setFitToWidth(true);
         scrollPane.setContent(mainBox);
 
-        Scene infoScene = new Scene(scrollPane, 600, 450);
+        Scene infoScene = new Scene(scrollPane, 700, 550);
         infoScene.getStylesheets().add("BootlegElderScrolls/MainStyleSheet.css");
 
         return infoScene;
