@@ -152,7 +152,11 @@ public class MainMenu extends Application{
                 " for various effects (descriptions below). You may only use a hero's special once per game.");
         controlsInstructions.setWrapText(true);
 
-        controlsBox.getChildren().addAll(controlsTitleLabel, controlsInstructions);
+        Separator separator00 = new Separator(Orientation.HORIZONTAL);
+        separator00.setPadding(new Insets(5, 0, 5, 0));
+
+        controlsBox.getChildren().addAll(controlsTitleLabel, controlsInstructions, separator00);
+
 
 
         //hero descriptions:
@@ -174,6 +178,7 @@ public class MainMenu extends Application{
         archerView.setFitHeight(180);
         archerView.setFitWidth(170);
         HBox archerBox = new HBox(20);
+        archerBox.setPadding(new Insets(20, 0, 20, 0));
         archerBox.getChildren().addAll(archerInfoBox, archerView);
         //--------------------------------------------------------------------------------------------------------------
         //Assassin layout ------------------------------------------------------------------------------------------------
@@ -190,6 +195,7 @@ public class MainMenu extends Application{
         assassinView.setFitHeight(180);
         assassinView.setFitWidth(170);
         HBox assassinBox = new HBox(20);
+        assassinBox.setPadding(new Insets(20, 0, 20, 0));
         assassinBox.getChildren().addAll(assassinView, assassinInfoBox);
         //--------------------------------------------------------------------------------------------------------------
         //Healer layout ------------------------------------------------------------------------------------------------
@@ -207,6 +213,7 @@ public class MainMenu extends Application{
         healerView.setFitHeight(140);
         healerView.setFitWidth(150);
         HBox healerBox = new HBox(20);
+        healerBox.setPadding(new Insets(20, 0, 20, 0));
         healerBox.getChildren().addAll(healerInfoBox, healerView);
         //--------------------------------------------------------------------------------------------------------------
         //Knight layout ------------------------------------------------------------------------------------------------
@@ -223,6 +230,7 @@ public class MainMenu extends Application{
         knightView.setFitHeight(180);
         knightView.setFitWidth(170);
         HBox knightBox = new HBox(20);
+        knightBox.setPadding(new Insets(20, 0, 20, 0));
         knightBox.getChildren().addAll(knightView, knightInfoBox);
         //--------------------------------------------------------------------------------------------------------------
         //Wizard layout ------------------------------------------------------------------------------------------------
@@ -239,6 +247,7 @@ public class MainMenu extends Application{
         wizardView.setFitHeight(180);
         wizardView.setFitWidth(170);
         HBox wizardBox = new HBox(20);
+        wizardBox.setPadding(new Insets(20, 0, 20, 0));
         wizardBox.getChildren().addAll(wizardInfoBox, wizardView);
         //--------------------------------------------------------------------------------------------------------------
 
