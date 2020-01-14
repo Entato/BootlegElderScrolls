@@ -47,7 +47,7 @@
 #title-labels{
 
     -fx-font-weight: bold;
-    -fx-font-size: 25;
+    -fx-font-size: 28;
     -fx-text-fill: linear-gradient(coral, maroon);
 }
 
@@ -58,7 +58,7 @@
 #title-labels-light{
 
     -fx-font-weight: bold;
-    -fx-font-size: 25;
+    -fx-font-size: 28;
     -fx-text-fill: linear-gradient(lightyellow, khaki);
 }
 
@@ -66,4 +66,15 @@
     -fx-font-weight: bold;
     -fx-font-size: 16;
     -fx-text-fill: linear-gradient(mediumvioletred, black);
+}
+#subtitle{
+    -fx-font-weight: bold;
+    -fx-font-size: 20;
+    -fx-text-fill: linear-gradient(chocolate, black);
+}
+#how-to-play{
+    -fx-background-color: linear-gradient(burlywood, rgb(220, 100, 100));
+}
+.separator{
+    -fx-background-color: linear-gradient(brown, tomato);
 }

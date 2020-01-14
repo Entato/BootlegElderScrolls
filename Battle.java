@@ -143,6 +143,7 @@ public class Battle{
         return battleScene;
     }
 
+    //checks if a team is dead
     public static boolean checkTeamDead(ArrayList<Hero> team){
         boolean dead = true;
         for (int i = 0; i < team.size(); i++){
