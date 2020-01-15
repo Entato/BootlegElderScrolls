@@ -35,8 +35,14 @@ public class IO{
 
     }
 
-    public static void erase(){
-
+    public static void erase() throws IOException{
+        if (!file.createNewFile()){
+            PrintWriter writer = new PrintWriter(new FileWriter(file));
+            for (int i = 0; i < 13; i++){
+                writer.println("bruh");
+            }
+            writer.close();
+        }
     }
 
     public static int getHighScore() throws IOException{
@@ -47,6 +53,7 @@ public class IO{
 
             //if file hasnt been used before returns 0;
             if(!reader.hasNextLine()){
+                reader.close();
                 return 0;
             }
 
@@ -55,10 +62,10 @@ public class IO{
                 System.out.println(reader.nextLine());
             }
 
-
+            reader.close();
             return Integer.parseInt(reader.nextLine());
         }
-
+        reader.close();
         //if no high score exists
         return 0;
     }
