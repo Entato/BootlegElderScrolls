@@ -6,9 +6,15 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
+import java.io.*;
 
 class GameOver {
     public static Scene gameOverScene(){
+        try{
+            IO.erase();
+        } catch (IOException e){
+            System.err.println(e);
+        }
     
         VBox vbox = new VBox(20);
         vbox.setAlignment(Pos.CENTER);

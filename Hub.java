@@ -60,6 +60,7 @@ class Hub{
         saveButton.setOnAction(e -> {
             try{
                 IO.save();
+                MainMenu.getMainStage().close();
             } catch (IOException i){
                 System.err.println(i);
             }

@@ -32,7 +32,12 @@ public class IO{
 
     public static void load() throws IOException{
         Scanner reader = new Scanner(file);
-        Player.setBossCount(Integer.parseInt(reader.nextLine()));
+        try{
+            Player.setBossCount(Integer.parseInt(reader.nextLine()));
+        }catch(Exception i){
+            Popup.display("You do not have save data");
+            reader.close();
+        }
         Player.setKills(Integer.parseInt(reader.nextLine()));
         Player.scoreAdd(Integer.parseInt(reader.nextLine()));
         Player.totalDamageAdd(Integer.parseInt(reader.nextLine()));
@@ -65,6 +70,11 @@ public class IO{
                     break;
             }
         }
+
+        for(int i = 0; i < 3; i++){
+            Game.getTeam2().add(Battle.AIPickGrunt(i));
+        }
+
         reader.close();
     }
 
