@@ -248,10 +248,10 @@ public class Hero{
     public void specialAttack(Hero hero){
 
     }
-    public String getHeroName(){
+    public String getHero(){
         String name = this.getClass()+ "";
-        if(name.contains("BootlegElderScrolls.java")){
-            name.replace("BootlegElderScrolls.java", "");
+        if(name.contains("class BootlegElderScrolls")){
+            name.replace("class BootlegElderScrolls", "");
         }
         
         return name;
