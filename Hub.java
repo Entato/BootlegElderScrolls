@@ -1,5 +1,7 @@
 package BootlegElderScrolls;
 
+import java.io.IOException;
+
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -49,12 +51,21 @@ class Hub{
 
         //button to start battle
         Button startBattle = new Button("Battle");
+        Button saveButton = new Button("Save and Quit");
 
         startBattle.setOnAction(e -> {
             MainMenu.getMainStage().setScene(Battle.createBattleScene());
         });
-        partyList.getChildren().add(startBattle);
 
+        saveButton.setOnAction(e -> {
+            try{
+                IO.save();
+            } catch (IOException i){
+                System.err.println(i);
+            }
+        });
+        partyList.getChildren().addAll(startBattle, saveButton);
+        
         //adds everything to borderPane
         borderPane.setLeft(partyList);
         borderPane.setRight(statBox);

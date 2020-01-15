@@ -8,19 +8,20 @@ public class IO{
 
     public static void save() throws IOException{
         file.createNewFile();
-        FileWriter writer = new FileWriter(file);
-        writer.write(Player.getBossCount());
-        writer.write(Player.getKills());
-        writer.write(Player.getScore());
-        writer.write(Player.getTotalDamage());
+        PrintWriter writer = new PrintWriter(new FileWriter(file));
+        writer.println(Player.getBossCount());
+        writer.println(Player.getKills());
+        writer.println(Player.getScore());
+        writer.println(Player.getTotalDamage());
         for (int i = 0; i < Player.getPlayerTeam().size(); i++){
-            writer.write(Player.getPlayerTeam().get(i).getName());
+            writer.println(Player.getPlayerTeam().get(i).getName());
+            writer.println(Player.getPlayerTeam().get(i).getExp());
         }
         
         if (Player.getScore() > getHighScore()){
-            writer.write(Player.getScore());
+            writer.println(Player.getScore());
         }
-        
+        writer.close();
     }
 
     public static void load() throws IOException{
@@ -38,8 +39,8 @@ public class IO{
         //checks if there is a save file
         if (file.createNewFile()){
 
-            //skips 7 lines until high score
-            for (int i = 0; i < 7; i++){
+            //skips 10 lines until high score
+            for (int i = 0; i < 10; i++){
                 reader.nextLine();
             }
 
