@@ -70,7 +70,7 @@ class Hub{
         borderPane.setLeft(partyList);
         borderPane.setRight(statBox);
 
-        Scene hub = new Scene(borderPane, 500, 350);
+        Scene hub = new Scene(borderPane, 700, 550);
         hub.getStylesheets().add("BootlegElderScrolls/MainStyleSheet.css");
 
         return hub;

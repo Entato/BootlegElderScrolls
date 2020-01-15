@@ -250,11 +250,8 @@ public class Hero{
     }
     public String getHero(){
         String name = this.getClass()+ "";
-        if(name.contains("class BootlegElderScrolls")){
-            name.replace("class BootlegElderScrolls", "");
-        }
-        
-        return name;
+
+        return name.substring(26);
     }
 
 }

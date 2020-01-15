@@ -34,12 +34,20 @@ class Player {
         bossCount++;
     }
 
+    public static void setBossCount(int bossCount){
+        Player.bossCount = bossCount;
+    }
+
     public static void totalDamageAdd(int damage){
         totalDamage += damage;
     }
 
     public static void killsAdd(){
         kills++;
+    }
+
+    public static void setKills(int kills){
+        Player.kills = kills;
     }
 
     public static int getScore(){

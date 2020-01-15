@@ -32,6 +32,39 @@ public class IO{
 
     public static void load() throws IOException{
         Scanner reader = new Scanner(file);
+        Player.setBossCount(reader.nextInt());
+        Player.setKills(reader.nextInt());
+        Player.scoreAdd(reader.nextInt());
+        Player.totalDamageAdd(reader.nextInt());
+        for (int i = 0; i < 3; i++){
+            switch (reader.nextLine()) {
+                case "Wizard":
+                    Player.getPlayerTeam().add(new Wizard(reader.nextLine()));
+                    Player.getPlayerTeam().get(i).addExp(reader.nextInt());
+                    Visuals.getTeam1Sprites().add(Visuals.getSprites().get(4));
+                    break;
+                case "Archer":
+                    Player.getPlayerTeam().add(new Archer(reader.nextLine()));
+                    Player.getPlayerTeam().get(i).addExp(reader.nextInt());
+                    Visuals.getTeam1Sprites().add(Visuals.getSprites().get(0));
+                    break;
+                case "Knight":
+                    Player.getPlayerTeam().add(new Knight(reader.nextLine()));
+                    Player.getPlayerTeam().get(i).addExp(reader.nextInt());
+                    Visuals.getTeam1Sprites().add(Visuals.getSprites().get(3));
+                    break;
+                case "Assassin":
+                    Player.getPlayerTeam().add(new Assassin(reader.nextLine()));
+                    Player.getPlayerTeam().get(i).addExp(reader.nextInt());
+                    Visuals.getTeam1Sprites().add(Visuals.getSprites().get(1));
+                    break;
+                case "Healer":
+                    Player.getPlayerTeam().add(new Healer(reader.nextLine()));
+                    Player.getPlayerTeam().get(i).addExp(reader.nextInt());
+                    Visuals.getTeam1Sprites().add(Visuals.getSprites().get(2));
+                    break;
+            }
+        }
 
     }
 
@@ -62,8 +95,9 @@ public class IO{
                 System.out.println(reader.nextLine());
             }
 
+            int highScore = Integer.parseInt(reader.nextLine());
             reader.close();
-            return Integer.parseInt(reader.nextLine());
+            return highScore;
         }
         reader.close();
         //if no high score exists

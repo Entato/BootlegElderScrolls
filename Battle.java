@@ -380,7 +380,7 @@ public class Battle{
             hBox.getChildren().add(vBox);
         }
         //button to enter results
-        Button enterButton = new Button("Battle!");
+        Button enterButton = new Button("Ready");
         enterButton.setFont(new Font("Urdu Typesetting", 20));
         enterButton.setPrefSize(200, 20);
         VBox buttonBox = new VBox();
