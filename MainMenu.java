@@ -94,7 +94,15 @@ public class MainMenu extends Application{
         });
         //load game
         loadGameButton.setOnAction(e -> {
-            //placeholder for when we do IO
+            try{
+                IO.load();
+                mainMenu.close();
+                mainStage.setScene(Hub.hubScene());
+                mainStage.show();
+            } catch (IOException i){
+                System.err.println(i);
+                Popup.display("Error: Could not load file");
+            }
         });
         //quit
         quitButton.setOnAction(e -> {
