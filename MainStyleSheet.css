@@ -58,7 +58,7 @@
 #title-labels-light{
 
     -fx-font-weight: bold;
-    -fx-font-size: 28;
+    -fx-font-size: 24;
     -fx-text-fill: linear-gradient(lightyellow, khaki);
 }
 
