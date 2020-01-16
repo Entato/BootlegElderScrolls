@@ -74,8 +74,14 @@ class GameOver {
         Button exit = new Button("Exit");
 
         playAgain.setOnAction(e-> {
-            //DO IO STUFF HERE
+            //DO IO STUFF HERE to save highscore
+            MainMenu.getMainStage().close();
             MainMenu.display();
+        });
+
+        exit.setOnAction(e-> {
+            //IO STUFF to save highscore
+            MainMenu.getMainStage().close();
         });
 
         box.getChildren().addAll(statLabel, levelsLabel, killsLabel, scoreLabel, damageLabel, highScoreLabel);

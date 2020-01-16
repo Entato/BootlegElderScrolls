@@ -111,9 +111,11 @@ public class Visuals {
 
 
                 Tooltip tooltip = new Tooltip("Name : " + Player.getPlayerTeam().get(i).getName() +
-                        "\nStats:\nBase Health: " + Player.getPlayerTeam().get(i).getHealth() +
+                        "\nStats:\nStarting Health: " + Player.getPlayerTeam().get(i).getHealth() +
+                        "\nStarting Attack: " + Player.getPlayerTeam().get(i).getAttack() +
                         "\nSpeed: " + Player.getPlayerTeam().get(i).getSpeed() + "\nSpecial Available: " +
-                        Player.getPlayerTeam().get(i).getActiveSpecial());
+                        Player.getPlayerTeam().get(i).getActiveSpecial() + "\nEvasion: " + Game.getTeam2().get(i).getEvasion() +
+                        "\nLevel: " + Player.getPlayerTeam().get(i).getLevel());
                 Tooltip.install(Player.getPlayerTeam().get(i).getSpriteView(), tooltip);
             }
             else{
@@ -127,8 +129,9 @@ public class Visuals {
                 roots.get(i).getChildren().setAll(Game.getTeam2().get(i - 3).getSpriteView());
 
                 Tooltip tooltip = new Tooltip("Name : " + Game.getTeam2().get(i - 3).getName() +
-                        "\nStats:\nBase Health: " + Game.getTeam2().get(i - 3).getHealth() +
-                        "\nSpeed: " + Game.getTeam2().get(i - 3).getSpeed());
+                        "\nStats:\nStarting Health: " + Game.getTeam2().get(i - 3).getHealth() +
+                        "\nStarting Attack: " + Player.getPlayerTeam().get(i).getAttack() +
+                        "\nSpeed: " + Game.getTeam2().get(i - 3).getSpeed() + "\nEvasion: " + Game.getTeam2().get(i).getEvasion());
                 Tooltip.install(Game.getTeam2().get(i - 3).getSpriteView(), tooltip);
 
             }
