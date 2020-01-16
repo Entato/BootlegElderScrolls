@@ -6,9 +6,6 @@ class Boss extends Hero{
         super(attack, health, defence, evasion, speed, name);
     }
 
-    public String getSprite(){
-        return "no sprite";
-    }
     public void setName(String name){
         super.setName(name);
     }

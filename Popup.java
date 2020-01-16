@@ -1,6 +1,5 @@
 package BootlegElderScrolls;
 
-import javafx.geometry.*;
 import javafx.geometry.Pos;
 import javafx.scene.*;
 import javafx.scene.control.*;

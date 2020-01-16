@@ -1,6 +1,5 @@
 package BootlegElderScrolls;
 
-import javafx.animation.Animation;
 import javafx.scene.image.ImageView;
 
 public class Hero{
@@ -199,9 +198,6 @@ public class Hero{
                 Game.getBattleLog().getItems().add("A Potion was used on " + Game.getItemLastUsedOn().getName() +
                         " For 50 Attack");
                 break;
-
-
-                //mana case is dealt with in correct subclass via overriding
         }
     }
 

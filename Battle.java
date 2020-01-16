@@ -265,7 +265,7 @@ public class Battle{
 
 
         itemChoice.setMaxWidth(100);
-        itemChoice.getItems().addAll("Attack", "Defence", "Healing", "Mana");
+        itemChoice.getItems().addAll("Attack", "Defence", "Healing");
 
 
         itemChoice.setValue("Attack");
@@ -305,9 +305,6 @@ public class Battle{
                     case "Healing":
                         Player.getPlayerTeam().get(options.indexOf(finalButton)).useItem(new Item(Item.ItemType.HEALING));
                         break;
-                    case "Mana":
-                        Player.getPlayerTeam().get(options.indexOf(finalButton)).useItem(new Item(Item.ItemType.MANA));
-                        break;
                 }
                 //apply old layout back
                 hBox.getChildren().set(1, flowPane);
@@ -322,29 +319,6 @@ public class Battle{
                 }
             });
         }
-        //for preventing user from using mana potions on classes without mana, so I gray out those buttons
-        itemChoice.setOnAction(e -> {
-            if(itemChoice.getValue().equals("Mana")){
-                for(Button b : options){
-                    if(!(Player.getPlayerTeam().get(options.indexOf(b)) instanceof Wizard) &&
-                            !(Player.getPlayerTeam().get(options.indexOf(b)) instanceof Healer)){
-                        b.setDisable(true);
-                    }
-                    //also gray out button if hero has died
-                    if(Player.getPlayerTeam().get(options.indexOf(b)).getHealth() <= 0){
-                        b.setDisable(true);
-                    }
-                }
-            }
-            else{
-                for(Button b : options){
-                    //only set back to true if that hero is alive
-                    if(Player.getPlayerTeam().get(options.indexOf(b)).getHealth() > 0) {
-                        b.setDisable(false);
-                    }
-                }
-            }
-        });
         optionBox.getChildren().add(itemChoice);
         //apply new layout
         bigBox.getChildren().addAll(optionsLabel, optionBox);
@@ -673,46 +647,6 @@ public class Battle{
         }
 
     }
-    //Ai picks its team (to be edited)----------------------------------------------------------------------------------
-    public static Hero AIPick(int i, ArrayList<Integer> picks){
-
-        Random rand = new Random();
-        int r;
-        while(true) {
-            r = rand.nextInt(5);
-            if(!picks.contains(r)){
-                picks.add(r);
-                break;
-            }
-        }
-        Hero hero = null;
-        String name = "AI " + i;
-
-        switch(r){
-            case 0:
-                hero = new Archer(name);
-                break;
-            case 1:
-                hero = new Assassin(name);
-                break;
-            case 2:
-                hero = new Healer(name);
-                break;
-            case 3:
-                hero = new Knight(name);
-                break;
-            case 4:
-                hero = new Wizard(name);
-                break;
-        }
-
-        //adds sprite to list
-        System.out.println("r:" + r);
-        Image image = Visuals.getSprites().get(r);
-        Visuals.getTeam2Sprites().add(image);
-
-        return hero;
-    }
 
     public static Hero AIPickGrunt(int i){
         //determines what boss appears on what screen
@@ -793,12 +727,7 @@ public class Battle{
 
             battleOver();
             //AI creates team
-            //keep track of what AI has chosen
-            ArrayList<Integer> picks = new ArrayList<Integer>();
             for(int i = 0; i < 3; i++){
-                /*
-                Game.getTeam2().add(AIPick(i, picks));
-                */
                 Game.getTeam2().add(AIPickGrunt(i));
             }
 

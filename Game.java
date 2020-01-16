@@ -1,8 +1,6 @@
 package BootlegElderScrolls;
 
-import com.sun.corba.se.spi.ior.IdentifiableFactory;
 import javafx.scene.control.*;
-
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -34,6 +32,7 @@ public class Game {
     public static void setItemLastUsedOn(Hero itemLastUsedOn) {
         Game.itemLastUsedOn = itemLastUsedOn;
     }
+
     public static int getTurn() {
         return turn;
     }
@@ -41,6 +40,7 @@ public class Game {
     public static void setTurn(int turn) {
         Game.turn = turn;
     }
+    
     public static void setMidReset(boolean midReset){
         Game.midReset = midReset;
     }
