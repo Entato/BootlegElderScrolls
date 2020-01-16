@@ -6,11 +6,7 @@ import javafx.scene.image.*;
 import javafx.scene.layout.*;
 import javafx.animation.*;
 import javafx.geometry.Point2D;
-import javafx.scene.shape.Rectangle;
-import javafx.scene.text.Text;
 import javafx.util.Duration;
-import sun.security.krb5.internal.crypto.Aes128;
-
 import java.io.*;
 import java.util.*;
 

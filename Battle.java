@@ -1,6 +1,5 @@
 package BootlegElderScrolls;
 
-import javafx.application.*;
 import javafx.collections.*;
 import javafx.geometry.*;
 import javafx.geometry.Insets;
@@ -11,15 +10,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
 import javafx.scene.layout.*;
-import javafx.scene.shape.*;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
-import javafx.scene.text.TextAlignment;
-import javafx.stage.*;
-
 import java.io.IOException;
 import java.util.*;
 
@@ -429,12 +423,7 @@ public class Battle{
 
 
                 //AI creates team
-                //keep track of what AI has chosen
-                ArrayList<Integer> picks = new ArrayList<Integer>();
                 for(int i = 0; i < 3; i++){
-                    /*
-                    Game.getTeam2().add(AIPick(i, picks));
-                    */
                     Game.getTeam2().add(AIPickGrunt(i));
                 }
                 System.out.println(Game.getTeam2().toString());
