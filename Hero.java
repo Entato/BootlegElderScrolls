@@ -147,6 +147,9 @@ public class Hero{
     public int getExp(){
         return exp;
     }
+    public int getLevel(){
+        return this.level;
+    }
 
     //attack method
     public void attack(Hero hero){
