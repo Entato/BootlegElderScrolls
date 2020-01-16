@@ -35,7 +35,8 @@
 }
 #drop-downs{
     -fx-font-size: 14;
-    -fx-background-color: linear-gradient(white, #D65A31);
+    -fx-background-color: linear-gradient(darkgray, #D65A31);
+    -fx-text-fill: black;
 
 }
 .tooltip{

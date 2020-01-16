@@ -262,6 +262,7 @@ public class Battle{
 
 
         ChoiceBox itemChoice = new ChoiceBox();
+        itemChoice.setId("drop-downs");
 
 
         itemChoice.setMaxWidth(100);
