@@ -66,14 +66,20 @@ public class Battle{
         specialButton.setPrefSize(270, 60);
 
         //Tells user who is attacking
-        VBox nameBox = new VBox();
+        HBox nameBox = new HBox();
         nameBox.setAlignment(Pos.TOP_CENTER);
         nameBox.setPadding(new Insets(0, 0, 0, 0));
         Game.getNameLabel().setWrapText(true);
         Game.getNameLabel().setId("title-labels");
         Game.getNameLabel().setText("What Will " + Player.getPlayerTeam().get(0).getName() + " Do?");
+        Game.getNameLabel().setPadding(new Insets(0, 450, 0, 0));
 
-        nameBox.getChildren().addAll(Game.getNameLabel());
+        Label levelLabel = new Label("Level " + (Player.getBossCount() + 1));
+        levelLabel.setId("title-labels");
+        levelLabel.setAlignment(Pos.CENTER_LEFT);
+        levelLabel.setPadding(new Insets(0, 300, 0, 0));
+
+        nameBox.getChildren().addAll(levelLabel, Game.getNameLabel());
 
         //Health bars
         //team 1
