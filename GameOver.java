@@ -51,6 +51,15 @@ class GameOver {
         return gameOver;
     }
     public static Scene gameWonScene(){
+
+        //saves after winning
+        try{
+            IO.save();
+            IO.erase();
+        } catch (IOException i){
+            System.err.println(i);
+        }
+
         VBox box = new VBox();
 
         Label victoryLabel = new Label("Victory!");
@@ -74,13 +83,11 @@ class GameOver {
         Button exit = new Button("Exit");
 
         playAgain.setOnAction(e-> {
-            //DO IO STUFF HERE to save highscore
             MainMenu.getMainStage().close();
             MainMenu.display();
         });
 
         exit.setOnAction(e-> {
-            //IO STUFF to save highscore
             MainMenu.getMainStage().close();
         });
 

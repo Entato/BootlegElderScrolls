@@ -719,6 +719,12 @@ public class Battle{
             }
         }
 
+        try{
+            IO.save();
+        } catch (IOException i){
+            System.err.println(i);
+        }
+
         if(Player.getKills() < 30) {
             Player.bossCountAdd();
             MainMenu.getMainStage().setScene(Hub.hubScene());
