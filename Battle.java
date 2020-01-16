@@ -576,7 +576,7 @@ public class Battle{
                 Game.getBattleLog().getItems().add("Archer Used Trishot for 50 damage to Each Enemy!");
                 for(int i = 0 ; i < Game.getTeam2().size(); i++){
                     if(Game.getTeam2().get(i).getHealth() >= 50) {
-                        Game.getTeam2().get(i).setHealth(Game.getTeam2().get(i).getHealth() - 50);
+                        Game.getTeam2().get(i).setHealth(Game.getTeam2().get(i).getHealth() - (50 + (50 * Player.getPlayerTeam().get(i).getLevel())));
                         Player.totalDamageAdd(50);
                     }
                     else{
@@ -604,7 +604,7 @@ public class Battle{
             else if(Player.getPlayerTeam().get(Game.getTeamTurn()) instanceof Knight){
                 Game.getBattleLog().getItems().add("Knight used Tank Up to increase team's defence");
                 for(int i = 0 ; i < Player.getPlayerTeam().size(); i++){
-                    Player.getPlayerTeam().get(i).setDefence(Player.getPlayerTeam().get(i).getDefence() + 50);
+                    Player.getPlayerTeam().get(i).setDefence(Player.getPlayerTeam().get(i).getDefence() + 50 + (7 * Player.getPlayerTeam().get(i).getLevel()));
                 }
             }
 
@@ -617,7 +617,7 @@ public class Battle{
                     if(Player.getPlayerTeam().get(i).getHealth() > 0) {
                         //if player is down 75 or more hp, heal 75
                         if (Player.getPlayerTeam().get(i).getHealthBar().getMaxHealth() - Player.getPlayerTeam().get(i).getHealth() >= 75) {
-                            Player.getPlayerTeam().get(i).setHealth(Player.getPlayerTeam().get(i).getHealth() + 75);
+                            Player.getPlayerTeam().get(i).setHealth(Player.getPlayerTeam().get(i).getHealth() + 75 + (25 * Player.getPlayerTeam().get(i).getLevel()));
                         }
                         //otherwise just heal to full
                         else {
@@ -632,7 +632,7 @@ public class Battle{
             else if(Player.getPlayerTeam().get(Game.getTeamTurn()) instanceof Wizard){
                 Game.getBattleLog().getItems().add("Wizard Used Super Steroid Spell to boost\nHis teammate's attacks by 50");
                 for(int i = 0 ; i < Player.getPlayerTeam().size(); i++){
-                    Player.getPlayerTeam().get(i).setAttack(Player.getPlayerTeam().get(i).getAttack() + 50);
+                    Player.getPlayerTeam().get(i).setAttack(Player.getPlayerTeam().get(i).getAttack() + 50 + (10 * Player.getPlayerTeam().get(i).getLevel()));
                 }
             }
 
