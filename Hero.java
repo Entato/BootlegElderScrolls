@@ -123,9 +123,7 @@ public class Hero{
 
     public void addExp(int exp){
         this.exp += exp;
-        if (checkLevelUp()){
-            levelUp();
-        }
+        checkLevelUp();
     }
     public void setName(String name){
         this.name = name;
@@ -228,13 +226,14 @@ public class Hero{
     }
 
 
-    public boolean checkLevelUp(){
-        if (level < 2 && exp > 100){
-            return true;
-        } else if (level < 3 && exp > 300){
-            return true;
+    public void checkLevelUp(){
+        if (level == 1 && exp > 100){
+            levelUp();
+            checkLevelUp();
+        } else if (level == 2 && exp > 300){
+            levelUp();
+            checkLevelUp();
         }
-        return false;
     }
 
     public void levelUp(){
@@ -251,6 +250,7 @@ public class Hero{
     public void specialAttack(Hero hero){
 
     }
+
     public String getHero(){
         String name = this.getClass()+ "";
 
