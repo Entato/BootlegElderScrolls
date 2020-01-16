@@ -4,7 +4,7 @@ public class Assassin extends Hero{
     
     //constructor
     public Assassin(String name){
-        super(150, 100, 50, 30, 120, name);
+        super(130, 100, 50, 30, 120, name);
     }
 
     //useItem

@@ -4,7 +4,7 @@ public class Archer extends Hero{
     
     //constructor
     public Archer(String name){
-        super(120, 100, 60, 30, 100, name);
+        super(125, 100, 60, 30, 100, name);
     }
 
     //use item

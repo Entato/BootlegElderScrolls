@@ -3,7 +3,7 @@ package BootlegElderScrolls;
 public class Knight extends Hero{
     //constructor
     public Knight(String name){
-        super(120, 200, 120, 10, 70, name);
+        super(110, 200, 90, 10, 70, name);
     }
 
     //use item
@@ -14,12 +14,12 @@ public class Knight extends Hero{
     @Override
     public void levelUp(){
         this.addLevel();
-        this.setAttack(this.getAttack() + 10);
-        this.setRegAtk(this.getRegAtk() + 10);
-        this.setDefence(this.getDefence() + 25);
-        this.setRegDef(this.getRegDef() + 25);
-        this.setHealth(this.getHealth() + 50);
-        this.setMaxHealth(this.getMaxHealth() + 50);
+        this.setAttack(this.getAttack() + 8);
+        this.setRegAtk(this.getRegAtk() + 8);
+        this.setDefence(this.getDefence() + 20);
+        this.setRegDef(this.getRegDef() + 20);
+        this.setHealth(this.getHealth() + 35);
+        this.setMaxHealth(this.getMaxHealth() + 35);
         this.setSpeed(this.getSpeed() + 7);
         this.newHealthBar(this.getMaxHealth());
     }

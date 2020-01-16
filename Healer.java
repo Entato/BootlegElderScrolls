@@ -4,7 +4,7 @@ public class Healer extends Hero{
     
     //constructor
     public Healer(String name){
-        super(100, 175, 70, 10, 50, name);
+        super(100, 160, 70, 10, 50, name);
     }
 
     //get item
@@ -15,12 +15,12 @@ public class Healer extends Hero{
     @Override
     public void levelUp(){
         this.addLevel();
-        this.setAttack(this.getAttack() + 10);
-        this.setRegAtk(this.getRegAtk() + 10);
-        this.setDefence(this.getDefence() + 20);
-        this.setRegDef(this.getRegDef() + 20);
-        this.setHealth(this.getHealth() + 40);
-        this.setMaxHealth(this.getMaxHealth() + 40);
+        this.setAttack(this.getAttack() + 15);
+        this.setRegAtk(this.getRegAtk() + 15);
+        this.setDefence(this.getDefence() + 18);
+        this.setRegDef(this.getRegDef() + 18);
+        this.setHealth(this.getHealth() + 35);
+        this.setMaxHealth(this.getMaxHealth() + 35);
         this.setSpeed(this.getSpeed() + 10);
         this.newHealthBar(this.getMaxHealth());
     }

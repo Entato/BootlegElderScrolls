@@ -193,9 +193,9 @@ public class Hero{
         switch(item.getItemType()){
             case HEALING:
                 int healed;
-                //if there is more than 150 hp to heal, heal 150
-                if(this.healthBar.getMaxHealth() - this.health > 150) {
-                    healed = 150;
+                //if there is more than 75 hp to heal, heal 75
+                if(this.healthBar.getMaxHealth() - this.health > 75) {
+                    healed = 75;
                     this.health += healed;
                 }
                 //else just fill the health back to full

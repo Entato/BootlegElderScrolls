@@ -3,6 +3,6 @@ package BootlegElderScrolls;
 public class Reaper extends Boss{
     //constructor
     public Reaper (){
-        super(150, 120, 40, 40, 130, "Reaper");
+        super(350, 135, 40, 50, 300, "Reaper");
     }
 }

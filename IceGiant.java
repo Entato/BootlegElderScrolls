@@ -2,7 +2,7 @@ package BootlegElderScrolls;
 
 public class IceGiant extends Boss{
     public IceGiant (){
-        super(125, 350, 100, 5, 50, "Ice Giant");
+        super(160, 350, 100, 5, 50, "Ice Giant");
     }
 
     //if I want to increment name for multiple bosses

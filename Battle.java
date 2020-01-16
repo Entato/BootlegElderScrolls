@@ -563,20 +563,26 @@ public class Battle{
     }
     //special button method
     public static void specialButtonMethod(HBox hBox, FlowPane flowPane){
+
         if(!Player.getPlayerTeam().get(Game.getTeamTurn()).getActiveSpecial()){
             Game.getBattleLog().getItems().add(Player.getPlayerTeam().get(Game.getTeamTurn()).getName() +
                     " Has Already Used Their Special!");
         }
         else{
+            //removes guard if guard was used last turn
+            if (Guard.containsUnGuardable(Player.getPlayerTeam().get(Game.getTeamTurn()))){
+                Guard.removeUnGuardable(Player.getPlayerTeam().get(Game.getTeamTurn()));
+            }
+
             //sets their special to false so they can't use it again for the rest of the game
             Player.getPlayerTeam().get(Game.getTeamTurn()).setActiveSpecial(false);
 
             //Archer special
             if(Player.getPlayerTeam().get(Game.getTeamTurn()) instanceof Archer){
-                Game.getBattleLog().getItems().add("Archer Used Trishot for 50 damage to Each Enemy!");
+                Game.getBattleLog().getItems().add("Archer Used Trishot for " +  (50 + (20 * Player.getPlayerTeam().get(Game.getTeamTurn()).getLevel())) + " damage to Each Enemy!");
                 for(int i = 0 ; i < Game.getTeam2().size(); i++){
                     if(Game.getTeam2().get(i).getHealth() >= 50) {
-                        Game.getTeam2().get(i).setHealth(Game.getTeam2().get(i).getHealth() - (50 + (50 * Player.getPlayerTeam().get(i).getLevel())));
+                        Game.getTeam2().get(i).setHealth(Game.getTeam2().get(i).getHealth() - (50 + (20 * Player.getPlayerTeam().get(Game.getTeamTurn()).getLevel())));
                         Player.totalDamageAdd(50);
                     }
                     else{
@@ -588,6 +594,7 @@ public class Battle{
                     if(checkTeamDead(Game.getTeam2())){
                         Battle.nextTurn();
                         Battle.checkForEnd();
+                        return;
                     }
                 }
             }
@@ -604,20 +611,20 @@ public class Battle{
             else if(Player.getPlayerTeam().get(Game.getTeamTurn()) instanceof Knight){
                 Game.getBattleLog().getItems().add("Knight used Tank Up to increase team's defence");
                 for(int i = 0 ; i < Player.getPlayerTeam().size(); i++){
-                    Player.getPlayerTeam().get(i).setDefence(Player.getPlayerTeam().get(i).getDefence() + 50 + (7 * Player.getPlayerTeam().get(i).getLevel()));
+                    Player.getPlayerTeam().get(i).setDefence(Player.getPlayerTeam().get(i).getDefence() + 25 + (7 * Player.getPlayerTeam().get(Game.getTeamTurn()).getLevel()));
                 }
             }
 
             //Healer special
             else if(Player.getPlayerTeam().get(Game.getTeamTurn()) instanceof Healer){
-                Game.getBattleLog().getItems().add("Healer used Moonlight to heal your team by 75 health");
+                Game.getBattleLog().getItems().add("Healer used Moonlight to heal your team by " + (75 + (25 * Player.getPlayerTeam().get(Game.getTeamTurn()).getLevel())) + " health");
                 for(int i = 0 ; i < Player.getPlayerTeam().size(); i++){
 
                     //only apply special if teammate is alive
                     if(Player.getPlayerTeam().get(i).getHealth() > 0) {
                         //if player is down 75 or more hp, heal 75
-                        if (Player.getPlayerTeam().get(i).getHealthBar().getMaxHealth() - Player.getPlayerTeam().get(i).getHealth() >= 75) {
-                            Player.getPlayerTeam().get(i).setHealth(Player.getPlayerTeam().get(i).getHealth() + 75 + (25 * Player.getPlayerTeam().get(i).getLevel()));
+                        if (Player.getPlayerTeam().get(i).getHealthBar().getMaxHealth() - Player.getPlayerTeam().get(i).getHealth() >= (75 + (25 * Player.getPlayerTeam().get(Game.getTeamTurn()).getLevel()))) {
+                            Player.getPlayerTeam().get(i).setHealth(Player.getPlayerTeam().get(i).getHealth() + 75 + (25 * Player.getPlayerTeam().get(Game.getTeamTurn()).getLevel()));
                         }
                         //otherwise just heal to full
                         else {
@@ -630,15 +637,10 @@ public class Battle{
 
             //Wizard Special
             else if(Player.getPlayerTeam().get(Game.getTeamTurn()) instanceof Wizard){
-                Game.getBattleLog().getItems().add("Wizard Used Super Steroid Spell to boost\nHis teammate's attacks by 50");
+                Game.getBattleLog().getItems().add("Wizard Used Super Steroid Spell to boost\nHis teammate's attacks by " + (30 + (10 * Player.getPlayerTeam().get(Game.getTeamTurn()).getLevel())));
                 for(int i = 0 ; i < Player.getPlayerTeam().size(); i++){
-                    Player.getPlayerTeam().get(i).setAttack(Player.getPlayerTeam().get(i).getAttack() + 50 + (10 * Player.getPlayerTeam().get(i).getLevel()));
+                    Player.getPlayerTeam().get(i).setAttack(Player.getPlayerTeam().get(i).getAttack() + 30 + (10 * Player.getPlayerTeam().get(Game.getTeamTurn()).getLevel()));
                 }
-            }
-
-            //removes guard if guard was used last turn
-            if (Guard.containsUnGuardable(Player.getPlayerTeam().get(Game.getTeamTurn()))){
-                Guard.removeUnGuardable(Player.getPlayerTeam().get(Game.getTeamTurn()));
             }
 
             //if there are more actions left for the player
@@ -715,20 +717,20 @@ public class Battle{
         for(int i = 0; i < Player.getPlayerTeam().size(); i++){
             if(Player.getPlayerTeam().get(i).getHealth() > 0) {
                 Player.scoreAdd(250);
-                Player.getPlayerTeam().get(i).addExp(50 + 10 * Player.getBossCount());
+                Player.getPlayerTeam().get(i).addExp(20 + 40 * Player.getBossCount());
             }
-        }
-
-        try{
-            IO.save();
-        } catch (IOException i){
-            System.err.println(i);
         }
 
         if(Player.getKills() < 30) {
             Player.bossCountAdd();
             MainMenu.getMainStage().setScene(Hub.hubScene());
             Game.reset();
+
+            try{
+                IO.save();
+            } catch (IOException i){
+                System.err.println(i);
+            }
         }
         else{
 
