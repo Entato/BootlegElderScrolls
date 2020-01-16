@@ -7,7 +7,7 @@ public class Knight extends Hero{
     
     //constructor
     public Knight(String name){
-        super(100, 200, 100, 25, 10, 50, name);
+        super(100, 200, 100, 10, 50, name);
         this.armour = 50;
         this.honour = 0;
     }
