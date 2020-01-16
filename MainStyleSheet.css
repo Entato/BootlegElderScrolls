@@ -2,7 +2,7 @@
     -fx-font-family: "Traditional Arabic";
     -fx-border-color: rgb(100, 0, 23);
     -fx-border-width: 5;
-    -fx-background-color: linear-gradient(burlywood, rgb(220, 100, 100));
+    -fx-background-color: linear-gradient(dimgray, indianred);
     -fx-border-style: solid inside;
 
 
@@ -10,9 +10,9 @@
 }
 
 .button{
-    -fx-background-color: linear-gradient(wheat, tan);
-    -fx-text-fill: linear-gradient(coral, darkred);
-    -fx-border-color: rgb(100, 0, 23);
+    -fx-background-color: linear-gradient(gray, dimgray);
+    -fx-text-fill: linear-gradient(coral, crimson);
+    -fx-border-color: crimson;
     -fx-border-radius: 20;
     -fx-background-radius: 20;
     -fx-padding: 10 10 10 10;
@@ -48,18 +48,18 @@
 
     -fx-font-weight: bold;
     -fx-font-size: 28;
-    -fx-text-fill: linear-gradient(coral, maroon);
+    -fx-text-fill: linear-gradient(black, maroon);
 }
 
 #redder-layouts{
-    -fx-background-color: linear-gradient(brown, tomato);
+    -fx-background-color: linear-gradient(maroon, slategray);
 }
 
 #title-labels-light{
 
     -fx-font-weight: bold;
     -fx-font-size: 24;
-    -fx-text-fill: linear-gradient(lightyellow, khaki);
+    -fx-text-fill: linear-gradient(white, lavenderblush);
 }
 
 #hp-labels{

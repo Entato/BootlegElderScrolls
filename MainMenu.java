@@ -22,7 +22,7 @@ public class MainMenu extends Application{
     //start method -----------------------------------------------------------------------------------------------------
     public void start(Stage primaryStage) throws Exception{
         mainStage = primaryStage;
-        mainStage.setTitle("Fantasy Showdown");
+        mainStage.setTitle("Dungeon Crawler");
 
         boolean run = display();
 
@@ -50,11 +50,11 @@ public class MainMenu extends Application{
 
         //main menu window
         Stage mainMenu = new Stage();
-        mainMenu.setTitle("Fantasy Showdown");
+        mainMenu.setTitle("Dungeon Problem");
         mainMenu.initModality(Modality.APPLICATION_MODAL);
 
         //labels and buttons
-        Label title = new Label("Fantasy Showdown");
+        Label title = new Label("Dungeon Showdown");
         title.setId("title-labels");
         title.setPadding(new Insets(20, 20, 40, 20));
         Button newGameButton = new Button("New Game");
@@ -150,7 +150,7 @@ public class MainMenu extends Application{
         VBox controlsBox = new VBox(10);
         Label controlsTitleLabel = new Label("Instructions and Controls");
         controlsTitleLabel.setId("title-labels");
-        Label controlsInstructions = new Label("Fantasy Showdown is a turn based strategy game in which both" +
+        Label controlsInstructions = new Label("Dungeon Showdown is a turn based strategy game in which both" +
                 " players make their moves simultaneously and therefore an element of prediction and mind-games is" +
                 " involved.\nEach turn, both players can commit actions with each of their currently alive team members\n:" +
                 "\n1. Attack: Choose an enemy to attack. During the battle phase, your hero will attempt to attack the" +

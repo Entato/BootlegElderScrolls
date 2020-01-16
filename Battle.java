@@ -72,7 +72,7 @@ public class Battle{
         Game.getNameLabel().setWrapText(true);
         Game.getNameLabel().setId("title-labels");
         Game.getNameLabel().setText("What Will " + Player.getPlayerTeam().get(0).getName() + " Do?");
-        Game.getNameLabel().setPadding(new Insets(0, 450, 0, 0));
+        Game.getNameLabel().setPadding(new Insets(0, 350, 0, 0));
 
         Label levelLabel = new Label("Level " + (Player.getBossCount() + 1));
         levelLabel.setId("title-labels");
