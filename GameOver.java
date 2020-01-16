@@ -95,12 +95,16 @@ class GameOver {
             MainMenu.getMainStage().close();
         });
 
-        box.getChildren().addAll(statLabel, levelsLabel, killsLabel, scoreLabel, damageLabel, highScoreLabel, playAgain, exit);
+        box.getChildren().addAll(victoryLabel, messageLabel, statLabel, levelsLabel, killsLabel, scoreLabel, damageLabel, highScoreLabel, playAgain, exit);
         box.setAlignment(Pos.CENTER);
         box.setPadding(new Insets(20, 20, 20, 20));
 
         Scene winnerScene = new Scene(box, 550, 350);
         winnerScene.getStylesheets().add("BootlegElderScrolls/MainStyleSheet.css");
+
+        //clears old information for new game if player chooses new game
+        Game.reset();
+        Player.reset();
 
         return winnerScene;
     }

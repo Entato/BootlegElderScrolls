@@ -731,6 +731,7 @@ public class Battle{
             Game.reset();
         }
         else{
+
             MainMenu.getMainStage().setScene(GameOver.gameWonScene());
         }
     }
