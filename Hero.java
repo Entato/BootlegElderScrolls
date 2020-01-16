@@ -213,6 +213,7 @@ public class Hero{
         }
     }
 
+    //to string method, was used for testing information about the heroes in the text-based version
     public String toString(){
         return "Hero Type: " + this.getClass() + "\nHero Name: " + this.name + "\nHealth: " + this.health;
     }
@@ -227,7 +228,7 @@ public class Hero{
                 (int) this.healthBar.getMaxHealth());
     }
 
-
+    //checks if hero should be leveled up
     public boolean checkLevelUp(){
         if (level < 2 && exp > 100){
             return true;
@@ -237,6 +238,7 @@ public class Hero{
         return false;
     }
 
+    //adds stats to hero that has leveled up
     public void levelUp(){
         this.attack += 10;
         this.defence += 10;
@@ -245,12 +247,11 @@ public class Hero{
         this.speed += 50;
         this.regDef += 10;
         this.regAtk += 10;
+        //makes a new health bar so the green bar won't extend the boundaries
         this.healthBar = new HealthBar(this.maxHealth);
     }
 
-    public void specialAttack(Hero hero){
-
-    }
+    //returns the string value for the hero type, used to store in file IO
     public String getHero(){
         String name = this.getClass()+ "";
 
