@@ -3,7 +3,6 @@ package BootlegElderScrolls;
 public class Item{
     enum ItemType{
         HEALING,
-        MANA,
         ATTACK,
         DEFENCE;
     }

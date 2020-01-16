@@ -1,6 +1,5 @@
 package BootlegElderScrolls;
 
-import javafx.animation.Animation;
 import javafx.scene.image.ImageView;
 
 public class Hero{
@@ -199,9 +198,6 @@ public class Hero{
                 Game.getBattleLog().getItems().add("A Potion was used on " + Game.getItemLastUsedOn().getName() +
                         " For 50 Attack");
                 break;
-
-
-                //mana case is dealt with in correct subclass via overriding
         }
     }
 
@@ -235,6 +231,7 @@ public class Hero{
 
     //adds stats to hero that has leveled up
     public void levelUp(){
+        this.level++;
         this.attack += 10;
         this.defence += 10;
         this.health += 30;
