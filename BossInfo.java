@@ -34,8 +34,11 @@ public class BossInfo{
             case 8:
                 boss = new Colossus();
                 Visuals.getTeam2Sprites().add(Visuals.getSprites().get(12));
-
-
+                break;
+            case 9:
+                boss = new TimeLord();
+                Visuals.getTeam2Sprites().add(Visuals.getSprites().get(13));
+                break;
         }
 
         return boss;

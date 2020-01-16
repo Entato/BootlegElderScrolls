@@ -70,6 +70,14 @@ class GameOver {
             System.err.println("IO error: " + e);
         }
 
+        Button playAgain = new Button("Play Again");
+        Button exit = new Button("Exit");
+
+        playAgain.setOnAction(e-> {
+            //DO IO STUFF HERE
+            MainMenu.display();
+        });
+
         box.getChildren().addAll(statLabel, levelsLabel, killsLabel, scoreLabel, damageLabel, highScoreLabel);
         box.setAlignment(Pos.CENTER);
         box.setPadding(new Insets(20, 20, 20, 20));

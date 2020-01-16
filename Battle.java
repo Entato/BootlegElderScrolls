@@ -719,9 +719,14 @@ public class Battle{
             }
         }
 
-        Player.bossCountAdd();
-        MainMenu.getMainStage().setScene(Hub.hubScene());
-        Game.reset();
+        if(Player.getKills() < 30) {
+            Player.bossCountAdd();
+            MainMenu.getMainStage().setScene(Hub.hubScene());
+            Game.reset();
+        }
+        else{
+            MainMenu.getMainStage().setScene(GameOver.gameWonScene());
+        }
     }
     //check if battle is over ------------------------------------------------------------------------------------------
     public static void checkForEnd(){
