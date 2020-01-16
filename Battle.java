@@ -607,11 +607,47 @@ public class Battle{
                     }
                 }
             }
+
             //Assassin Special
-            if(Player.getPlayerTeam().get(Game.getTeamTurn()) instanceof Assassin){
-                Game.getBattleLog().getItems().add("Assassin Used Hidden Mist to give immunity to your team!");
+            else if(Player.getPlayerTeam().get(Game.getTeamTurn()) instanceof Assassin){
+                Game.getBattleLog().getItems().add("Assassin Used Hidden Mist to guard your team!");
                 for(int i = 0 ; i < Player.getPlayerTeam().size(); i++){
                     Guard.addImmune(Player.getPlayerTeam().get(i));
+                }
+            }
+
+            //Knight special
+            else if(Player.getPlayerTeam().get(Game.getTeamTurn()) instanceof Knight){
+                Game.getBattleLog().getItems().add("Knight used Tank Up to increase team's defence");
+                for(int i = 0 ; i < Player.getPlayerTeam().size(); i++){
+                    Player.getPlayerTeam().get(i).setDefence(Player.getPlayerTeam().get(i).getDefence() + 50);
+                }
+            }
+
+            //Healer special
+            else if(Player.getPlayerTeam().get(Game.getTeamTurn()) instanceof Healer){
+                Game.getBattleLog().getItems().add("Healer used Moonlight to heal your team by 75 health");
+                for(int i = 0 ; i < Player.getPlayerTeam().size(); i++){
+
+                    //only apply special if teammate is alive
+                    if(Player.getPlayerTeam().get(i).getHealth() > 0) {
+                        //if player is down 75 or more hp, heal 75
+                        if (Player.getPlayerTeam().get(i).getHealthBar().getMaxHealth() - Player.getPlayerTeam().get(i).getHealth() >= 75) {
+                            Player.getPlayerTeam().get(i).setHealth(Player.getPlayerTeam().get(i).getHealth() + 75);
+                        }
+                        //otherwise just heal to full
+                        else {
+                            Player.getPlayerTeam().get(i).setHealth((int)Player.getPlayerTeam().get(i).getHealthBar().getMaxHealth());
+                        }
+                    }
+                }
+            }
+
+            //Wizard Special
+            else if(Player.getPlayerTeam().get(Game.getTeamTurn()) instanceof Wizard){
+                Game.getBattleLog().getItems().add("Wizard Used Super Steroid Spell to boost\nHis teammate's attacks by 50");
+                for(int i = 0 ; i < Player.getPlayerTeam().size(); i++){
+                    Player.getPlayerTeam().get(i).setAttack(Player.getPlayerTeam().get(i).getAttack() + 50);
                 }
             }
 
