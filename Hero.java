@@ -9,7 +9,6 @@ public class Hero{
     private int maxHealth;
     private int health;
     private int defence;
-    private int magicResist;
     private int evasion;
     private int speed;
     private String name;
@@ -22,12 +21,11 @@ public class Hero{
     private ImageView spriteView;
     
     //Hero constructor
-    public Hero(int attack, int health, int defence, int magicResist, int evasion, int speed, String name){
+    public Hero(int attack, int health, int defence, int evasion, int speed, String name){
         this.attack = attack;
         this.maxHealth = health;
         this.health = health;
         this.defence = defence;
-        this.magicResist = magicResist;
         this.evasion = evasion;
         this.speed = speed;
         this.name = name;
@@ -71,10 +69,6 @@ public class Hero{
 
     public String getName(){
         return this.name;
-    }
-
-    public int getMagicResist() {
-        return this.magicResist;
     }
 
     public int getSpeed(){
