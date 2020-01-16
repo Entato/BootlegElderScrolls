@@ -3,6 +3,6 @@ package BootlegElderScrolls;
 public class Haunted extends Boss {
 
     public Haunted (){
-        super(275, 200, 100, 50, 125, "Haunted");
+        super(150, 850, 150, 50, 125, "Haunted");
     }
 }

@@ -247,7 +247,18 @@ public class Hero{
         } else if (level == 2 && exp > 300){
             levelUp();
             checkLevelUp();
-
+        } else if (level == 3 && exp > 600){
+            levelUp();
+            checkLevelUp();
+        } else if (level == 4 && exp > 1000){
+            levelUp();
+            checkLevelUp();
+        } else if (level == 5 && exp > 1500){
+            levelUp();
+            checkLevelUp();
+        } else if (level == 6 && exp > 2100){
+            levelUp();
+            checkLevelUp();
         }
     }
 
