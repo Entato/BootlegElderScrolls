@@ -231,6 +231,7 @@ public class Hero{
 
     //adds stats to hero that has leveled up
     public void levelUp(){
+        this.level++;
         this.attack += 10;
         this.defence += 10;
         this.health += 30;
