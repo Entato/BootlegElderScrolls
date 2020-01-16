@@ -123,9 +123,7 @@ public class Hero{
 
     public void addExp(int exp){
         this.exp += exp;
-        if (checkLevelUp()){
-            levelUp();
-        }
+        checkLevelUp();
     }
     public void setName(String name){
         this.name = name;
@@ -228,14 +226,17 @@ public class Hero{
                 (int) this.healthBar.getMaxHealth());
     }
 
+
     //checks if hero should be leveled up
-    public boolean checkLevelUp(){
-        if (level < 2 && exp > 100){
-            return true;
-        } else if (level < 3 && exp > 300){
-            return true;
+    public void checkLevelUp(){
+        if (level == 1 && exp > 100){
+            levelUp();
+            checkLevelUp();
+        } else if (level == 2 && exp > 300){
+            levelUp();
+            checkLevelUp();
+
         }
-        return false;
     }
 
     //adds stats to hero that has leveled up
@@ -250,8 +251,7 @@ public class Hero{
         //makes a new health bar so the green bar won't extend the boundaries
         this.healthBar = new HealthBar(this.maxHealth);
     }
-
-    //returns the string value for the hero type, used to store in file IO
+    
     public String getHero(){
         String name = this.getClass()+ "";
 

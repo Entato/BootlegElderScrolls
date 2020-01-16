@@ -645,6 +645,7 @@ public class Battle{
                         else {
                             Player.getPlayerTeam().get(i).setHealth((int)Player.getPlayerTeam().get(i).getHealthBar().getMaxHealth());
                         }
+                        Player.getPlayerTeam().get(i).updateHealthBar();
                     }
                 }
             }
