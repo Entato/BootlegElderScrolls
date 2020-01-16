@@ -91,7 +91,7 @@ class GameOver {
             MainMenu.getMainStage().close();
         });
 
-        box.getChildren().addAll(statLabel, levelsLabel, killsLabel, scoreLabel, damageLabel, highScoreLabel);
+        box.getChildren().addAll(statLabel, levelsLabel, killsLabel, scoreLabel, damageLabel, highScoreLabel, playAgain, exit);
         box.setAlignment(Pos.CENTER);
         box.setPadding(new Insets(20, 20, 20, 20));
 
