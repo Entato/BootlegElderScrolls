@@ -351,7 +351,7 @@ public class Battle{
             Player.getHeroNames().add(nameField);
 
             Label namePrompt = new Label("Hero Name:");
-            namePrompt.setId("title-labels-light");
+            namePrompt.setId("name-labels");
             namePrompt.setFont(new Font("Traditional Arabic", 20));
 
             //compile in a layout

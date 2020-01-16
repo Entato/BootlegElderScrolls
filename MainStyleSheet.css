@@ -2,7 +2,7 @@
     -fx-font-family: "Traditional Arabic";
     -fx-border-color: rgb(100, 0, 23);
     -fx-border-width: 5;
-    -fx-background-color: linear-gradient(dimgray, indianred);
+    -fx-background-color: linear-gradient(#555555, #222222);
     -fx-border-style: solid inside;
 
 
@@ -10,9 +10,9 @@
 }
 
 .button{
-    -fx-background-color: linear-gradient(gray, dimgray);
-    -fx-text-fill: linear-gradient(coral, crimson);
-    -fx-border-color: crimson;
+    -fx-background-color: #222222;
+    -fx-text-fill: #D65A31;
+    -fx-border-color: #D65A31;
     -fx-border-radius: 20;
     -fx-background-radius: 20;
     -fx-padding: 10 10 10 10;
@@ -23,23 +23,29 @@
 .label{
     -fx-font-size: 14;
     -fx-font-weight: bold;
+    -fx-text-fill: linear-gradient(#EEEEEE, orange);
 
 
 }
 #battle-log{
     -fx-background-color: rgb(250, 250, 210);
-    -fx-border-color: linear-gradient(wheat, burlywood);
+    -fx-border-color: linear-gradient(black, dimgray);
     -fx-border-width: 5;
     -fx-font-weight: bold;
 }
 #drop-downs{
     -fx-font-size: 14;
-    -fx-background-color: rgb(250,250,210);
+    -fx-background-color: linear-gradient(white, #D65A31);
+
 }
 .tooltip{
     -fx-font-size: 14;
 }
-
+#name-labels{
+     -fx-font-weight: bold;
+     -fx-font-size: 24;
+     -fx-text-fill: black;
+}
 
 
 
@@ -48,11 +54,11 @@
 
     -fx-font-weight: bold;
     -fx-font-size: 28;
-    -fx-text-fill: linear-gradient(black, maroon);
+    -fx-text-fill: linear-gradient(dimgray, #D65A31);
 }
 
 #redder-layouts{
-    -fx-background-color: linear-gradient(maroon, slategray);
+    -fx-background-color: #D65A31;
 }
 
 #title-labels-light{
@@ -65,7 +71,7 @@
 #hp-labels{
     -fx-font-weight: bold;
     -fx-font-size: 16;
-    -fx-text-fill: linear-gradient(mediumvioletred, black);
+    -fx-text-fill: linear-gradient(#EEEEEE, orange);
 }
 #subtitle{
     -fx-font-weight: bold;
