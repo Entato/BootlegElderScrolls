@@ -662,7 +662,7 @@ public class Battle{
         }
         else if(Player.getBossCount() == 4){
             Boss iceGiant = BossInfo.getBoss();
-            iceGiant.setName("Ice Giant" + (i+1));
+            iceGiant.setName("Ice King " + (i+1));
             return iceGiant;
         }
         else if(Player.getBossCount() == 5 && (i == 0 || i == 2)){
