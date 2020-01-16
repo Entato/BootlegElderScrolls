@@ -30,13 +30,14 @@ public class IO{
         writer.close();
     }
 
-    public static void load() throws IOException{
+    public static boolean load() throws IOException{
         Scanner reader = new Scanner(file);
         try{
             Player.setBossCount(Integer.parseInt(reader.nextLine()));
         }catch(Exception i){
             Popup.display("You do not have save data");
             reader.close();
+            return false;
         }
         Player.setKills(Integer.parseInt(reader.nextLine()));
         Player.scoreAdd(Integer.parseInt(reader.nextLine()));
@@ -76,14 +77,17 @@ public class IO{
         }
 
         reader.close();
+        return true;
     }
 
     public static void erase() throws IOException{
         if (!file.createNewFile()){
+            int highScore = getHighScore();
             PrintWriter writer = new PrintWriter(new FileWriter(file));
             for (int i = 0; i < 13; i++){
                 writer.println("bruh");
             }
+            writer.println(highScore);
             writer.close();
         }
     }
@@ -105,9 +109,15 @@ public class IO{
                 System.out.println(reader.nextLine());
             }
 
-            int highScore = Integer.parseInt(reader.nextLine());
+            String highScore = reader.nextLine();
             reader.close();
-            return highScore;
+
+            if(highScore.equals("bruh")){
+                reader.close();
+                return 0;
+            }
+            
+            return Integer.parseInt(highScore);
         }
         reader.close();
         //if no high score exists

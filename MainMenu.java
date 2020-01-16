@@ -95,10 +95,11 @@ public class MainMenu extends Application{
         //load game
         loadGameButton.setOnAction(e -> {
             try{
-                IO.load();
-                mainMenu.close();
-                mainStage.setScene(Hub.hubScene());
-                mainStage.show();
+                if (IO.load()){
+                    mainMenu.close();
+                    mainStage.setScene(Hub.hubScene());
+                    mainStage.show();
+                }
             } catch (IOException i){
                 System.err.println(i);
                 Popup.display("Error: Could not load file");
