@@ -149,7 +149,7 @@ public class MainMenu extends Application{
         controlsTitleLabel.setId("title-labels");
         Label controlsInstructions = new Label("Dungeon Showdown is a turn based strategy game in which both" +
                 " players make their moves simultaneously and therefore an element of prediction and mind-games is" +
-                " involved.\nEach turn, both players can commit actions with each of their currently alive team members\n:" +
+                " involved.\nEach turn, both players can commit actions with each of their currently alive team members:\n" +
                 "\n1. Attack: Choose an enemy to attack. During the battle phase, your hero will attempt to attack the" +
                 " selected enemy.\n\n2. Guard: Guarding makes a hero immune to damage for a turn, but it consumes a turn." +
                 " You cannot guard twice in a row with the same hero.\n\n3. Use Item: You may use your choice of item and" +
@@ -290,7 +290,7 @@ public class MainMenu extends Application{
         scrollPane.setFitToWidth(true);
         scrollPane.setContent(mainBox);
 
-        Scene infoScene = new Scene(scrollPane, 700, 550);
+        Scene infoScene = new Scene(scrollPane, 750, 550);
         infoScene.getStylesheets().add("BootlegElderScrolls/MainStyleSheet.css");
 
         return infoScene;

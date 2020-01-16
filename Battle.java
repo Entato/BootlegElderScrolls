@@ -576,9 +576,12 @@ public class Battle{
                 for(int i = 0 ; i < Game.getTeam2().size(); i++){
                     if(Game.getTeam2().get(i).getHealth() >= 50) {
                         Game.getTeam2().get(i).setHealth(Game.getTeam2().get(i).getHealth() - 50);
+                        Player.totalDamageAdd(50);
                     }
                     else{
+                        Player.totalDamageAdd(Game.getTeam2().get(i).getHealth());
                         Game.getTeam2().get(i).setHealth(0);
+
                     }
                     Game.getTeam2().get(i).updateHealthBar();
                     if(checkTeamDead(Game.getTeam2())){

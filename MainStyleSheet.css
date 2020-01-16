@@ -54,7 +54,7 @@
 
     -fx-font-weight: bold;
     -fx-font-size: 28;
-    -fx-text-fill: linear-gradient(dimgray, #D65A31);
+    -fx-text-fill: linear-gradient(snow, white);
 }
 
 #redder-layouts{
@@ -76,10 +76,10 @@
 #subtitle{
     -fx-font-weight: bold;
     -fx-font-size: 20;
-    -fx-text-fill: linear-gradient(chocolate, black);
+    -fx-text-fill: linear-gradient(white, orange);
 }
 #how-to-play{
-    -fx-background-color: linear-gradient(burlywood, rgb(220, 100, 100));
+    -fx-background-color: linear-gradient(#9d5600, #111111);
 }
 .separator{
     -fx-background-color: linear-gradient(brown, tomato);
