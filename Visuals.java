@@ -63,25 +63,25 @@ public class Visuals {
     //initialize sprites
     public static void initializeSprites() throws IOException {
         for(int i = 0; i < 5; i++){
-            sprites.add(new Image(new FileInputStream("src/BootlegElderScrolls/Assets/sprite_" + i + ".png")));
+            sprites.add(new Image(new FileInputStream("BootlegElderScrolls/Assets/sprite_" + i + ".png")));
         }
-        sprites.add(new Image(new FileInputStream("src/BootlegElderScrolls/Assets/sprite_grunt.png")));
+        sprites.add(new Image(new FileInputStream("BootlegElderScrolls/Assets/sprite_grunt.png")));
 
-        sprites.add(new Image(new FileInputStream("src/BootlegElderScrolls/Assets/sprite_baron.png")));
+        sprites.add(new Image(new FileInputStream("BootlegElderScrolls/Assets/sprite_baron.png")));
 
-        sprites.add(new Image(new FileInputStream("src/BootlegElderScrolls/Assets/sprite_reaper.png")));
+        sprites.add(new Image(new FileInputStream("BootlegElderScrolls/Assets/sprite_reaper.png")));
 
-        sprites.add(new Image(new FileInputStream("src/BootlegElderScrolls/Assets/sprite_icegiant.png")));
+        sprites.add(new Image(new FileInputStream("BootlegElderScrolls/Assets/sprite_icegiant.png")));
 
-        sprites.add(new Image(new FileInputStream("src/BootlegElderScrolls/Assets/sprite_ogre.png")));
+        sprites.add(new Image(new FileInputStream("BootlegElderScrolls/Assets/sprite_ogre.png")));
 
-        sprites.add(new Image(new FileInputStream("src/BootlegElderScrolls/Assets/sprite_keeper.png")));
+        sprites.add(new Image(new FileInputStream("BootlegElderScrolls/Assets/sprite_keeper.png")));
 
-        sprites.add(new Image(new FileInputStream("src/BootlegElderScrolls/Assets/sprite_haunted.png")));
+        sprites.add(new Image(new FileInputStream("BootlegElderScrolls/Assets/sprite_haunted.png")));
 
-        sprites.add(new Image(new FileInputStream("src/BootlegElderScrolls/Assets/sprite_colossus.png")));
+        sprites.add(new Image(new FileInputStream("BootlegElderScrolls/Assets/sprite_colossus.png")));
 
-        sprites.add(new Image(new FileInputStream("src/BootlegElderScrolls/Assets/sprite_timelord.png")));
+        sprites.add(new Image(new FileInputStream("BootlegElderScrolls/Assets/sprite_timelord.png")));
 
 
 
@@ -130,8 +130,8 @@ public class Visuals {
 
                 Tooltip tooltip = new Tooltip("Name : " + Game.getTeam2().get(i - 3).getName() +
                         "\nStats:\nStarting Health: " + Game.getTeam2().get(i - 3).getHealth() +
-                        "\nStarting Attack: " + Player.getPlayerTeam().get(i).getAttack() +
-                        "\nSpeed: " + Game.getTeam2().get(i - 3).getSpeed() + "\nEvasion: " + Game.getTeam2().get(i).getEvasion());
+                        "\nStarting Attack: " + Player.getPlayerTeam().get(i - 3).getAttack() +
+                        "\nSpeed: " + Game.getTeam2().get(i - 3).getSpeed() + "\nEvasion: " + Game.getTeam2().get(i - 3).getEvasion());
                 Tooltip.install(Game.getTeam2().get(i - 3).getSpriteView(), tooltip);
 
             }
