@@ -509,7 +509,7 @@ public class Battle{
             //for second team
             else{
                 Game.getTeam2().get(i).getHealthBar().getHealthInfo().setWrapText(true);
-                box.setPadding(new Insets(0, 100, 0, 0));
+                box.setPadding(new Insets(0, 150, 0, 0));
                 box.setAlignment(Pos.CENTER_LEFT);
                 //css id
                 Game.getTeam2().get(i).getHealthBar().getHealthInfo().setId("hp-labels");
@@ -708,6 +708,7 @@ public class Battle{
     }
 
     public static Hero AIPickGrunt(int i){
+        //determines what boss appears on what screen
         if(i == 1 && Player.getBossCount() == 2){
             return BossInfo.getBoss();
         }
@@ -715,6 +716,37 @@ public class Battle{
             return BossInfo.getBoss();
         }
         else if(Player.getBossCount() == 4){
+            Boss iceGiant = BossInfo.getBoss();
+            iceGiant.setName("Ice Giant" + (i+1));
+            return iceGiant;
+        }
+        else if(Player.getBossCount() == 5 && (i == 0 || i == 2)){
+            //ice giants are from level 4 so I need to call the add sprites
+            Boss iceGiant = new IceGiant();
+            Visuals.getTeam2Sprites().add(Visuals.getSprites().get(8));
+            iceGiant.setName("Ice King " + (i+1));
+            return iceGiant;
+        }
+        else if(Player.getBossCount() == 5 && i == 1){
+            return BossInfo.getBoss();
+        }
+        else if(Player.getBossCount() == 6 && i == 1){
+            return BossInfo.getBoss();
+        }
+        else if(Player.getBossCount() == 7 && i == 1){
+            return BossInfo.getBoss();
+        }
+        else if(Player.getBossCount() == 8 && i == 1){
+            return BossInfo.getBoss();
+        }
+        else if(Player.getBossCount() == 9 && (i == 0 || i == 2)){
+            //ice giants are from level 4 so I need to call the add sprites
+            Boss iceGiant = new IceGiant();
+            Visuals.getTeam2Sprites().add(Visuals.getSprites().get(8));
+            iceGiant.setName("Ice King " + (i+1));
+            return iceGiant;
+        }
+        else if(Player.getBossCount() == 9 && i == 1){
             return BossInfo.getBoss();
         }
 

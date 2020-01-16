@@ -19,7 +19,23 @@ public class BossInfo{
                 boss = new IceGiant();
                 Visuals.getTeam2Sprites().add(Visuals.getSprites().get(8));
                 break;
-                
+            case 5:
+                boss = new OgreLord();
+                Visuals.getTeam2Sprites().add(Visuals.getSprites().get(9));
+                break;
+            case 6:
+                boss = new DungeonKeeper();
+                Visuals.getTeam2Sprites().add(Visuals.getSprites().get(10));
+                break;
+            case 7:
+                boss = new Haunted();
+                Visuals.getTeam2Sprites().add(Visuals.getSprites().get(11));
+                break;
+            case 8:
+                boss = new Colossus();
+                Visuals.getTeam2Sprites().add(Visuals.getSprites().get(12));
+
+
         }
 
         return boss;

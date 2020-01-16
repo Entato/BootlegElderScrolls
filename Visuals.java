@@ -73,6 +73,16 @@ public class Visuals {
 
         sprites.add(new Image(new FileInputStream("src/BootlegElderScrolls/Assets/sprite_icegiant.png")));
 
+        sprites.add(new Image(new FileInputStream("src/BootlegElderScrolls/Assets/sprite_ogre.png")));
+
+        sprites.add(new Image(new FileInputStream("src/BootlegElderScrolls/Assets/sprite_keeper.png")));
+
+        sprites.add(new Image(new FileInputStream("src/BootlegElderScrolls/Assets/sprite_haunted.png")));
+
+        sprites.add(new Image(new FileInputStream("src/BootlegElderScrolls/Assets/sprite_colossus.png")));
+
+        sprites.add(new Image(new FileInputStream("src/BootlegElderScrolls/Assets/sprite_timelord.png")));
+
 
 
     }
