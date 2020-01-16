@@ -126,6 +126,7 @@ public class Game {
 
     //reset method
     public static void reset(){
+        //reset enemy team, battle log, layouts, enemy team sprites, and some misc. variables
         midReset = true;
         attackList.clear();
         team2.clear();
@@ -148,6 +149,9 @@ public class Game {
             h.setDefence(h.getRegDef());
             h.setAttack(h.getRegAtk());
         }
+
+        //resets player specials to active
+        Player.resetSpecials();
 
     }
 

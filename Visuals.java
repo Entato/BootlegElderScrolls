@@ -180,6 +180,13 @@ public class Visuals {
     //plays animations
     public static void playAnimationSet() {
         //disable buttons
+
+        //if no animations to play, check for end/go to next turn
+        if(sequences.size() < 1){
+            Battle.nextTurn();
+            Battle.checkForEnd();
+            return;
+        }
         Battle.disableInteractions();
 
         SequentialTransition attackTransition = new SequentialTransition();

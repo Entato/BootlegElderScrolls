@@ -196,7 +196,7 @@ public class MainMenu extends Application{
         assassinLabel.setId("subtitle");
         Label assassinInfo = new Label("The Assassin is a high risk high reward hero with extremely high speed and attack.\n" +
                 "Pros:\n    -Great Attack\n    -Good Evasion\n    -Great Speed\nCons:\n   -Poor Defence\n "+
-                "   -Poor Health\nSpecial:\n    -Assassinate: Deal 150 damage to an enemy");
+                "   -Poor Health\nSpecial:\n    -Hidden Mist: Your team is immune to damage for one turn");
         assassinInfo.setWrapText(true);
         assassinInfoBox.getChildren().addAll(assassinLabel, assassinInfo);
         ImageView assassinView = new ImageView(Visuals.getSprites().get(1));

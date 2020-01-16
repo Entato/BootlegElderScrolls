@@ -96,7 +96,7 @@ public class Battle{
         Label logLabel = new Label("Battle Log:");
         //scroll pane used for when battle log gets longer
         ScrollPane scroller = new ScrollPane();
-        Game.getBattleLog().setPrefWidth(300);
+        Game.getBattleLog().setPrefWidth(320);
 
         scroller.setFitToWidth(true);
         scroller.setMaxHeight(200);
@@ -534,6 +534,7 @@ public class Battle{
     public static void AI(){
         Random random = new Random();
         int rand;
+
         //randomly picks hero to attack
         for(int i = 0; i < Game.getTeam2().size(); i++){
             if (Game.getTeam2().get(i).getHealth() <= 0){
@@ -583,84 +584,51 @@ public class Battle{
     public static void specialButtonMethod(HBox hBox, FlowPane flowPane){
         if(!Player.getPlayerTeam().get(Game.getTeamTurn()).getActiveSpecial()){
             Game.getBattleLog().getItems().add(Player.getPlayerTeam().get(Game.getTeamTurn()).getName() +
-                    " Has Already Used Their Special");
+                    " Has Already Used Their Special!");
         }
         else{
-            //SPECIAL MOVE HERE
-            if (Player.getPlayerTeam().get(Game.getTeamTurn()) instanceof Assassin ||
-            Player.getPlayerTeam().get(Game.getTeamTurn()) instanceof Archer){
-                //layout
-                VBox bigBox = new VBox(20);
-                bigBox.setPadding(new Insets(20, 20, 20, 20));
-                HBox optionBox = new HBox(20);
-                optionBox.setPadding(new Insets(10, 10, 10, 10));
-                optionBox.setAlignment(Pos.CENTER);
-                optionBox.setStyle("-fx-border-color: black");
+            //sets their special to false so they can't use it again for the rest of the game
+            Player.getPlayerTeam().get(Game.getTeamTurn()).setActiveSpecial(false);
 
-                //label
-                Label optionsLabel = new Label("Who Will " + Player.getPlayerTeam().get(Game.getTeamTurn()).getName() + " Attack?");
-
-                //back button
-                Button backButton = new Button("<");
-                backButton.setPrefSize(40, 40);
-                optionBox.getChildren().add(backButton);
-                backButton.setOnAction(e -> {
-                    hBox.getChildren().set(1, flowPane);
-                });
-
-                //storing buttons so I can reference them later
-                ArrayList<Button> options = new ArrayList<Button>();
-                Button button;
-
-                for(Hero h : Game.getTeam2()){
-
-                    button = new Button(h.getName());
-                    button.setPrefSize(150, 40);
-                    options.add(button);
-                    Button finalButton = button;
-                    optionBox.getChildren().add(button);
-                    
-                    //disables button if AI is dead
-                    if (h.getHealth() <= 0){
-                        button.setDisable(true);
+            //Archer special
+            if(Player.getPlayerTeam().get(Game.getTeamTurn()) instanceof Archer){
+                Game.getBattleLog().getItems().add("Archer Used Trishot for 50 damage to Each Enemy!");
+                for(int i = 0 ; i < Game.getTeam2().size(); i++){
+                    if(Game.getTeam2().get(i).getHealth() >= 50) {
+                        Game.getTeam2().get(i).setHealth(Game.getTeam2().get(i).getHealth() - 50);
                     }
-                    
-                    button.setOnAction(e -> {
-
-                        Player.getPlayerTeam().get(Game.getTeamTurn()).specialAttack(Game.getTeam2().get(options.indexOf(finalButton)));
-
-                        //apply old layout back
-                        hBox.getChildren().set(1, flowPane);
-
-                        //removes guard if guard was used last turn
-                        if (Guard.containsUnGuardable(Player.getPlayerTeam().get(Game.getTeamTurn()))){
-                            Guard.removeUnGuardable(Player.getPlayerTeam().get(Game.getTeamTurn()));
-                        }
-
-                        //if there are more actions left for the player
-                        if(team1Alive()) {
-                            //new name label
-                            Game.getNameLabel().setText("What Will " + Player.getPlayerTeam().get(Game.getTeamTurn()).getName() + " Do?");
-                        } else {
-                            AI();
-                        }
-                    });
+                    else{
+                        Game.getTeam2().get(i).setHealth(0);
+                    }
+                    Game.getTeam2().get(i).updateHealthBar();
+                    if(checkTeamDead(Game.getTeam2())){
+                        Battle.nextTurn();
+                        Battle.checkForEnd();
+                    }
                 }
-                //apply new layout
-                bigBox.getChildren().addAll(optionsLabel, optionBox);
-                hBox.getChildren().set(1, bigBox);
+            }
+            //Assassin Special
+            if(Player.getPlayerTeam().get(Game.getTeamTurn()) instanceof Assassin){
+                Game.getBattleLog().getItems().add("Assassin Used Hidden Mist to give immunity to your team!");
+                for(int i = 0 ; i < Player.getPlayerTeam().size(); i++){
+                    Guard.addImmune(Player.getPlayerTeam().get(i));
+                }
+            }
 
+            //removes guard if guard was used last turn
+            if (Guard.containsUnGuardable(Player.getPlayerTeam().get(Game.getTeamTurn()))){
+                Guard.removeUnGuardable(Player.getPlayerTeam().get(Game.getTeamTurn()));
             }
 
             //if there are more actions left for the player
             if(team1Alive()) {
                 //new name label
                 Game.getNameLabel().setText("What Will " + Player.getPlayerTeam().get(Game.getTeamTurn()).getName() + " Do?");
-            }
-            else {
+            } else {
                 AI();
             }
         }
+
     }
     //Ai picks its team (to be edited)----------------------------------------------------------------------------------
     public static Hero AIPick(int i, ArrayList<Integer> picks){
@@ -739,7 +707,7 @@ public class Battle{
         MainMenu.getMainStage().setScene(Hub.hubScene());
         Game.reset();
     }
-
+    //check if battle is over ------------------------------------------------------------------------------------------
     public static void checkForEnd(){
         //checks if battle is over
         //both cases have a return so the rest of the method is not used
