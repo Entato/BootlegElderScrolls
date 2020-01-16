@@ -251,7 +251,7 @@ public class Hero{
         //makes a new health bar so the green bar won't extend the boundaries
         this.healthBar = new HealthBar(this.maxHealth);
     }
-    
+
     public String getHero(){
         String name = this.getClass()+ "";
 
