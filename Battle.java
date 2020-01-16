@@ -714,6 +714,9 @@ public class Battle{
         else if(i == 1 && Player.getBossCount() == 3){
             return BossInfo.getBoss();
         }
+        else if(Player.getBossCount() == 4){
+            return BossInfo.getBoss();
+        }
 
         String name = "Grunt " + (i + 1);
 

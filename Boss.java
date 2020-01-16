@@ -9,4 +9,7 @@ class Boss extends Hero{
     public String getSprite(){
         return "no sprite";
     }
+    public void setName(String name){
+        super.setName(name);
+    }
 }

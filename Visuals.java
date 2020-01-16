@@ -71,6 +71,8 @@ public class Visuals {
 
         sprites.add(new Image(new FileInputStream("src/BootlegElderScrolls/Assets/sprite_reaper.png")));
 
+        sprites.add(new Image(new FileInputStream("src/BootlegElderScrolls/Assets/sprite_icegiant.png")));
+
 
 
     }

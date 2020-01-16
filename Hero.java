@@ -127,6 +127,9 @@ public class Hero{
             levelUp();
         }
     }
+    public void setName(String name){
+        this.name = name;
+    }
 
     public int getExp(){
         return exp;

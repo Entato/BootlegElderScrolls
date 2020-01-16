@@ -14,6 +14,12 @@ public class BossInfo{
             case 3:
                 boss = new Reaper();
                 Visuals.getTeam2Sprites().add(Visuals.getSprites().get(7));
+                break;
+            case 4:
+                boss = new IceGiant();
+                Visuals.getTeam2Sprites().add(Visuals.getSprites().get(8));
+                break;
+                
         }
 
         return boss;
