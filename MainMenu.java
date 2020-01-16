@@ -58,6 +58,13 @@ public class MainMenu extends Application{
         Button loadGameButton = new Button("Load Game");
         Button quitButton = new Button("Quit");
         Button infoButton = new Button("How To Play");
+        Label highScore = new Label("Highscore: N/A");
+        try {
+            highScore = new Label("Highscore: " + IO.getHighScore());
+        }
+        catch(IOException e){
+            System.err.println(e);
+        }
 
         //main menu layouts
         HBox newOrOldLayout = new HBox(10);
@@ -70,7 +77,7 @@ public class MainMenu extends Application{
 
         //add labels and buttons to layout
         newOrOldLayout.getChildren().addAll(newGameButton, loadGameButton);
-        menuLayout.getChildren().addAll(title, newOrOldLayout, quitButton, infoButton);
+        menuLayout.getChildren().addAll(title, newOrOldLayout, quitButton, infoButton, highScore);
         //creates scene
         Scene menuScene = new Scene(menuLayout, 500, 400);
         menuScene.getStylesheets().add("BootlegElderScrolls/MainStyleSheet.css");

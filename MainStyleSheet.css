@@ -1,6 +1,6 @@
 .root{
     -fx-font-family: "Traditional Arabic";
-    -fx-border-color: rgb(100, 0, 23);
+    -fx-border-color: #D65A31;
     -fx-border-width: 5;
     -fx-background-color: linear-gradient(#555555, #222222);
     -fx-border-style: solid inside;

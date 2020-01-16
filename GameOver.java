@@ -50,4 +50,33 @@ class GameOver {
         Game.reset();
         return gameOver;
     }
+    public static Scene gameWonScene(){
+        VBox box = new VBox();
+
+        Label victoryLabel = new Label("Victory!");
+        victoryLabel.setId("title-labels");
+        Label messageLabel = new Label("Your team of heroes has made it out of the dungeon. Congratulations!");
+        Label statLabel = new Label("Stats");
+
+        Label levelsLabel = new Label("Levels Cleared: " + Player.getBossCount());
+        Label killsLabel = new Label("Total Kills: " + Player.getKills());
+        Label scoreLabel = new Label("Score: " + Player.getScore());
+        Label damageLabel = new Label("Total Damage: " + Player.getTotalDamage());
+        Label highScoreLabel = new Label("Previous Highscore: N/A");
+        try {
+            highScoreLabel = new Label("Previous Highscore: " + IO.getHighScore());
+        }
+        catch(IOException e){
+            System.err.println("IO error: " + e);
+        }
+
+        box.getChildren().addAll(statLabel, levelsLabel, killsLabel, scoreLabel, damageLabel, highScoreLabel);
+        box.setAlignment(Pos.CENTER);
+        box.setPadding(new Insets(20, 20, 20, 20));
+
+        Scene winnerScene = new Scene(box, 550, 350);
+        winnerScene.getStylesheets().add("BootlegElderScrolls/MainStyleSheet.css");
+
+        return winnerScene;
+    }
 }
