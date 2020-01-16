@@ -58,6 +58,11 @@ public class Hero{
     public void setHealth(int health){
         this.health = health;
     }
+
+    public void setMaxHealth(int health){
+        this.maxHealth = health;
+    }
+
     public int getAttack(){
         return this.attack;
     }
@@ -74,8 +79,16 @@ public class Hero{
         return this.speed;
     }
 
+    public void setSpeed(int speed){
+        this.speed = speed;
+    }
+
     public int getEvasion(){
         return this.evasion;
+    }
+
+    public void setEvasion(int evasion){
+        this.evasion = evasion;
     }
 
     public HealthBar getHealthBar() {
@@ -114,12 +127,21 @@ public class Hero{
         this.regDef = regDef;
     }
 
+    public void addLevel(){
+        this.level++;
+    }
+
     public void addExp(int exp){
         this.exp += exp;
         checkLevelUp();
     }
+
     public void setName(String name){
         this.name = name;
+    }
+
+    public void newHealthBar(int maxHp){
+        this.healthBar = new HealthBar(maxHp);
     }
 
     public int getExp(){
@@ -231,7 +253,7 @@ public class Hero{
 
     //adds stats to hero that has leveled up
     public void levelUp(){
-        this.level++;
+        addLevel();
         this.attack += 10;
         this.defence += 10;
         this.health += 30;
@@ -242,7 +264,7 @@ public class Hero{
         //makes a new health bar so the green bar won't extend the boundaries
         this.healthBar = new HealthBar(this.maxHealth);
     }
-
+    
     public String getHero(){
         String name = this.getClass()+ "";
 
