@@ -19,7 +19,7 @@ public class MainMenu extends Application{
     //start method -----------------------------------------------------------------------------------------------------
     public void start(Stage primaryStage) throws Exception{
         mainStage = primaryStage;
-        mainStage.setTitle("Dungeon Crawler");
+        mainStage.setTitle("Dungeon Showdown");
 
         boolean run = display();
 
@@ -47,7 +47,7 @@ public class MainMenu extends Application{
 
         //main menu window
         Stage mainMenu = new Stage();
-        mainMenu.setTitle("Dungeon Problem");
+        mainMenu.setTitle("Dungeon Showdown");
         mainMenu.initModality(Modality.APPLICATION_MODAL);
 
         //labels and buttons
