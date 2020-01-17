@@ -479,7 +479,7 @@ public class Battle{
             //for second team
             else{
                 Game.getTeam2().get(i).getHealthBar().getHealthInfo().setWrapText(true);
-                box.setPadding(new Insets(0, 150, 0, 0));
+                box.setPadding(new Insets(0, 200, 0, 0));
                 box.setAlignment(Pos.CENTER_LEFT);
                 //css id
                 Game.getTeam2().get(i).getHealthBar().getHealthInfo().setId("hp-labels");
