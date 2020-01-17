@@ -567,7 +567,7 @@ public class Battle{
             if(Player.getPlayerTeam().get(Game.getTeamTurn()) instanceof Archer){
                 Game.getBattleLog().getItems().add("Archer Used Trishot for " +  (50 + (20 * Player.getPlayerTeam().get(Game.getTeamTurn()).getLevel())) + " damage to Each Enemy!");
                 for(int i = 0 ; i < Game.getTeam2().size(); i++){
-                    if(Game.getTeam2().get(i).getHealth() >= 50) {
+                    if(Game.getTeam2().get(i).getHealth() >= 50 + (20 * Player.getPlayerTeam().get(Game.getTeamTurn()).getLevel())) {
                         Game.getTeam2().get(i).setHealth(Game.getTeam2().get(i).getHealth() - (50 + (20 * Player.getPlayerTeam().get(Game.getTeamTurn()).getLevel())));
                         Player.totalDamageAdd(50);
                     }
