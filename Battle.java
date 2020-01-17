@@ -569,7 +569,7 @@ public class Battle{
                 for(int i = 0 ; i < Game.getTeam2().size(); i++){
                     if(Game.getTeam2().get(i).getHealth() >= 50 + (20 * Player.getPlayerTeam().get(Game.getTeamTurn()).getLevel())) {
                         Game.getTeam2().get(i).setHealth(Game.getTeam2().get(i).getHealth() - (50 + (20 * Player.getPlayerTeam().get(Game.getTeamTurn()).getLevel())));
-                        Player.totalDamageAdd(50);
+                        Player.totalDamageAdd(50 + (20 * Player.getPlayerTeam().get(Game.getTeamTurn()).getLevel()));
                     }
                     else{
                         Player.totalDamageAdd(Game.getTeam2().get(i).getHealth());
