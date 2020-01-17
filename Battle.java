@@ -115,7 +115,6 @@ public class Battle{
         Visuals.getSprite1Box().setAlignment(Pos.CENTER_LEFT);
         Visuals.getSprite2Box().setAlignment(Pos.CENTER_RIGHT);
         spriteBox.getChildren().addAll(Visuals.getSprite1Box(), Visuals.getSprite2Box());
-        System.out.println(Visuals.getTeam1Sprites().toString());
         Visuals.placeSprites();
 
         //BUTTON ACTIONS
@@ -426,11 +425,9 @@ public class Battle{
                 for(int i = 0; i < 3; i++){
                     Game.getTeam2().add(AIPickGrunt(i));
                 }
-                System.out.println(Game.getTeam2().toString());
 
                 //makes window show the hub scene
                 MainMenu.getMainStage().setScene(Hub.hubScene());
-                System.out.println(Game.getTeam2().toString());
             }
         });
 
@@ -697,7 +694,6 @@ public class Battle{
 
     //gets called when battle finishes
     public static void battleOver(){
-        System.out.println("Battle over called");
         //adds 3 kills
         Player.killsAdd();
         Player.killsAdd();

@@ -165,11 +165,7 @@ public class Hero{
 
         }
         if(!Guard.containsImmune(hero)) {
-            System.out.println(this.name + " did " + trueDamage + " damage to " + hero.getName());
-
             Visuals.attackAnimation(this, hero, trueDamage);
-
-
         }
         else{
             Game.getBattleLog().getItems().add(hero.name + " is guarding and is immune to damage!");
@@ -204,7 +200,6 @@ public class Hero{
                     this.health += healed;
                 }
                 //battle log message
-                System.out.println();
                 Game.getBattleLog().getItems().add("A Potion was used on " + Game.getItemLastUsedOn().getName() +
                         " For " + healed + " Health");
                 //update health
@@ -233,7 +228,6 @@ public class Hero{
 
     //update individual health bars, doing this individually to allow for animations to happen
     public void updateHealthBar(){
-        System.out.println("Update health bar reached");
         //for the green bar
         this.healthBar.adjustGreenBar(this.health);
         //for the label

@@ -96,7 +96,6 @@ public class Visuals {
 
         //3 has to be changed back to 6 after grunt sprites is finished
         for(int i = 0; i < 6; i++){
-            System.out.println(Game.getTeam2().size());
             if(i < 3){
                 Image image = team1Sprites.get(i);
                 Player.getPlayerTeam().get(i).getSpriteView().setImage(image);
@@ -161,7 +160,6 @@ public class Visuals {
         Point2D points2 = defender.getSpriteView().localToScene(nodeMinX2, nodeMinY2);
 
         TranslateTransition attack1 = new TranslateTransition(Duration.millis(400), attacker.getSpriteView().getParent());
-        System.out.println("Distance x: " + (points2.getX() - points1.getX()) + "distance y: " + (points2.getY() - points1.getY()));
         //attack1.setFromX(minX1);
         //attack1.setFromY(minY1);
         attack1.setToX(points2.getX() - points1.getX());
@@ -215,7 +213,6 @@ public class Visuals {
                 if(problem[0]){
                     return;
                 }
-                System.out.println("ANIMATION ENTERED________________");
                 try {
 
 
@@ -251,8 +248,6 @@ public class Visuals {
                         recipients.get(counter[0]).get(1).updateHealthBar();
                     }
 
-
-                    System.out.println("Counter:" + counter[0]);
                     counter[0]++;
 
                     //only check for end after all animations
@@ -267,7 +262,6 @@ public class Visuals {
 
                 }
                 catch(Exception error) {
-                    System.err.println(error);
                     problem[0] = true;
                 }
 

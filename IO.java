@@ -96,7 +96,7 @@ public class IO{
         Scanner reader = new Scanner(file);
 
         //checks if there is a save file
-        if (!file.createNewFile()){
+        if (file.exists()){
 
             //if file hasnt been used before returns 0;
             if(!reader.hasNextLine()){
@@ -106,7 +106,7 @@ public class IO{
 
             //skips 13 lines until high score
             for (int i = 0; i < 13; i++){
-                System.out.println(reader.nextLine());
+                reader.nextLine();
             }
 
             String highScore = reader.nextLine();
