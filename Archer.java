@@ -4,7 +4,7 @@ public class Archer extends Hero{
     
     //constructor
     public Archer(String name){
-        super(125, 100, 60, 25, 100, name);
+        super(125, 100, 60, 10, 100, name);
     }
 
     //use item
@@ -22,7 +22,7 @@ public class Archer extends Hero{
         this.setHealth(this.getHealth() + 25);
         this.setMaxHealth(this.getMaxHealth() + 25);
         this.setSpeed(this.getSpeed() + 15);
-        this.setEvasion(this.getEvasion() + 5);
+        this.setEvasion(this.getEvasion() + 3);
         this.newHealthBar(this.getMaxHealth());
     }
 }

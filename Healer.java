@@ -4,7 +4,7 @@ public class Healer extends Hero{
     
     //constructor
     public Healer(String name){
-        super(100, 160, 70, 10, 50, name);
+        super(100, 160, 70, 5, 50, name);
     }
 
     //get item

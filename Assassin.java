@@ -4,7 +4,7 @@ public class Assassin extends Hero{
     
     //constructor
     public Assassin(String name){
-        super(130, 100, 50, 25, 120, name);
+        super(130, 100, 50, 10, 120, name);
     }
 
     //useItem
@@ -22,7 +22,7 @@ public class Assassin extends Hero{
         this.setHealth(this.getHealth() + 30);
         this.setMaxHealth(this.getMaxHealth() + 30);
         this.setSpeed(this.getSpeed() + 17);
-        this.setEvasion(this.getEvasion() + 5);
+        this.setEvasion(this.getEvasion() + 3);
         this.newHealthBar(this.getMaxHealth());
     }
 }

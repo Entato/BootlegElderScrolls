@@ -3,7 +3,7 @@ package BootlegElderScrolls;
 public class Knight extends Hero{
     //constructor
     public Knight(String name){
-        super(110, 200, 90, 10, 70, name);
+        super(110, 200, 90, 5, 70, name);
     }
 
     //use item
