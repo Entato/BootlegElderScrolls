@@ -59,25 +59,25 @@ public class Visuals {
     //initialize sprites
     public static void initializeSprites() throws IOException {
         for(int i = 0; i < 5; i++){
-            sprites.add(new Image(new FileInputStream("BootlegElderScrolls/Assets/sprite_" + i + ".png")));
+            sprites.add(new Image(Visuals.class.getResourceAsStream("Assets/sprite_" + i + ".png")));
         }
-        sprites.add(new Image(new FileInputStream("BootlegElderScrolls/Assets/sprite_grunt.png")));
+        sprites.add(new Image(Visuals.class.getResourceAsStream("Assets/sprite_grunt.png")));
 
-        sprites.add(new Image(new FileInputStream("BootlegElderScrolls/Assets/sprite_baron.png")));
+        sprites.add(new Image(Visuals.class.getResourceAsStream("Assets/sprite_baron.png")));
 
-        sprites.add(new Image(new FileInputStream("BootlegElderScrolls/Assets/sprite_reaper.png")));
+        sprites.add(new Image(Visuals.class.getResourceAsStream("Assets/sprite_reaper.png")));
 
-        sprites.add(new Image(new FileInputStream("BootlegElderScrolls/Assets/sprite_icegiant.png")));
+        sprites.add(new Image(Visuals.class.getResourceAsStream("Assets/sprite_icegiant.png")));
 
-        sprites.add(new Image(new FileInputStream("BootlegElderScrolls/Assets/sprite_ogre.png")));
+        sprites.add(new Image(Visuals.class.getResourceAsStream("Assets/sprite_ogre.png")));
 
-        sprites.add(new Image(new FileInputStream("BootlegElderScrolls/Assets/sprite_keeper.png")));
+        sprites.add(new Image(Visuals.class.getResourceAsStream("Assets/sprite_keeper.png")));
 
-        sprites.add(new Image(new FileInputStream("BootlegElderScrolls/Assets/sprite_haunted.png")));
+        sprites.add(new Image(Visuals.class.getResourceAsStream("Assets/sprite_haunted.png")));
 
-        sprites.add(new Image(new FileInputStream("BootlegElderScrolls/Assets/sprite_colossus.png")));
+        sprites.add(new Image(Visuals.class.getResourceAsStream("Assets/sprite_colossus.png")));
 
-        sprites.add(new Image(new FileInputStream("BootlegElderScrolls/Assets/sprite_timelord.png")));
+        sprites.add(new Image(Visuals.class.getResourceAsStream("Assets/sprite_timelord.png")));
 
 
 
